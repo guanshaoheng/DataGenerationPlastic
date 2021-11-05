@@ -14,4 +14,5 @@
 
 <img src="figSav/MCCmodel-1.png" alt="MCC loading display" height="200" title="MCC loading display">
 <img src="figSav/MCCmodel-2.png" alt="MCC loading display" height="200" title="MCC loading display">
+<img src="figSav/YieldSurface.svg" alt="MCC loading display" height="200" title="MCC loading display">
 
