@@ -9,7 +9,7 @@
 <img src="Equation/InitialVolum.gif" alt="" height="50" title="">
 
 ## Elastic modulus
-<img src="Equation/elasticModulus.gif" alt="" height="50" title="">
+<img src="Equation/elasticModulus.gif" alt="" height="100" title="">
 
 
 <img src="figSav/MCCmodel-1.png" alt="MCC loading display" height="200" title="MCC loading display">
