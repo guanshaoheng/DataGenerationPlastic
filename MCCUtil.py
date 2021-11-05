@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -46,11 +48,12 @@ class ModifiedCamClay:
         # output list
         self.loadHistoryList = [np.array(list(self.sig) + list(self.eps) + [self.e, self.epsVol, self.epsDev, self.pc])]
 
-    def forward(self):
+    def forward(self, path=None):
         """
 
         :return:
         """
+        
         for step in range(self.interNum):
             # elastic matrix construction
             K, G = self.getKandG(self.vol, self.p)
@@ -260,7 +263,7 @@ class ModifiedCamClay:
 
 
 def plotSubFigures(ax, x, y, label, xlabel, ylabel, num=None):
-    if num and num>=2:
+    if num and num >= 2:
         for i in range(num):
             ax.plot(x[i], y[i], label=label[i])
     else:
@@ -268,3 +271,13 @@ def plotSubFigures(ax, x, y, label, xlabel, ylabel, num=None):
     plt.legend()
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+
+
+def loadingPathReader():
+    path = 'MCCData'
+    fileList = [os.path.join(path, i) for i in os.listdir(path) if '.dat' in i]
+    loadPathList = []
+    for i in fileList:
+        pathTemp = np.loadtxt(fname=i, delimiter=',', skiprows=1)
+        loadPathList.append(pathTemp)
+    return loadPathList

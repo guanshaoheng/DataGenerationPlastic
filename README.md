@@ -1,5 +1,6 @@
 # MCCDataGeneration
 - This repository is used to generate the training data for our upcoming physics-constrained neural network training.
+- The code is based on the modified Cam-Clay model.
 
 ## Yield function
 <img src="doc/Equation/yieldfunc.gif" alt="" height="50" title="">

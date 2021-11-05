@@ -13,7 +13,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import os
 import math
-from MCCUtil import ModifiedCamClay
+from MCCUtil import ModifiedCamClay, loadingPathReader
 
 
 # initiation
@@ -32,10 +32,17 @@ poisn: the poisn ratio
 # initial state
 pc = 400.  # consolidation pressure 前期固结压力
 p0 = 200.  # confining pressure 围压
-# e0 = 0.68
-# N = e0+l*np.log(pc_origin)+1.0
-drainedFlag = True
+
+# --------------------------------------------------
+# Debug && baseline
+# drainedFlag = True
+# driver = ModifiedCamClay(N=N, lambda_e=l, pc=pc,
+#          kappa_e=k, p0=p0, poisn=poisn, drainedFlag=drainedFlag, M=M)
+# driver.forward()
+
+# --------------------------------------------------
+# Application
+loadPathList = loadingPathReader()
 driver = ModifiedCamClay(N=N, lambda_e=l, pc=pc,
          kappa_e=k, p0=p0, poisn=poisn, drainedFlag=drainedFlag, M=M)
-driver.forward()
-
+driver.forward(path)
