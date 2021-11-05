@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\begin{document}
+	\begin{algorithm}
+		\caption{NorSand model algorithm}
+		\begin{algorithmic}[1]
+			\State Assembling the tangent matrix $ D_{ijkl}$
+			\State $ \delta\sigma_{ij} = D_{ijkl} \delta\epsilon_{kl}$
+			\State $\sigma_{trial}=\sigma+\delta\sigma$ 
+			\State $J_2=\frac{1}{6}((\sigma_{11}-\sigma_{22})^2+(\sigma_{11}-\sigma_{33})^2+(\sigma_{33}-\sigma_{22})^2+6(\sigma_{12}^{2}+\sigma_{23}^{2}+\sigma_{33}^{2}))$
+			\State $p_{trial} = \sigma_ij\delta_{ij}/3, \ q_{trial}=\sqrt{3J_2}$
+			\State Then we going to calculating the yield surface
+			\State $M_i=M_{tc}\cdot(1-\frac{\chi N | \psi |}{M_{tc}})$
+			\State $ p_{max}=p_i\exp{(\frac{\chi\psi}{M_{tc}})}$
+			\State $F=q_{trial}-p_{trial}M_i(1-\ln(\frac{p_{trial}}{p_{i}})), 
+					\ F_2=p_{trial}-p_{max}$
+			
+			
+		\end{algorithmic}
+	\end{algorithm}
+\end{document}
