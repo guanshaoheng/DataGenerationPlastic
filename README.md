@@ -8,9 +8,6 @@
 ## Initial volum 
 <img src="Equation/InitialVolum.gif" alt="" height="50" title="">
 
-## Initial volum 
-<img src="Equation/InitialVolum.gif" alt="" height="50" title="">
-
 ## Elastic modulus
 <img src="Equation/elasticModulus.gif" alt="" height="50" title="">
 
