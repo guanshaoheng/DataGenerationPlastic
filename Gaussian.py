@@ -27,7 +27,7 @@ class GuanssianRandomPath:
 
     def CovarienceMatrix(self, x, y):
         """
-            Use the kernel fucntion: $K(x_i, x_j)=\mathrm{exp}(-\sum_{k=1}^{m}\theta_k(x_i^k-x_j^k)^2))$
+            Use the kernel fucntion: $\kappa(x_i, x_j)=\mathrm{exp}(-\sum_{k=1}^{m}\theta_k(x_i^k-x_j^k)^2))$
                 where the dimensional number is 1 in this project.
         :param x:
         :param y:
