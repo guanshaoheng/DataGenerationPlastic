@@ -15,6 +15,10 @@
 <img src="doc/Equation/kernelFunction.gif" alt="" height="50" title="">
 - Gaussian function
 <img src="doc/Equation/gaussianFunction.gif" alt="" height="50" title="">
+- Covariance Matrix
+<img src="doc/Equation/CovariabceHeatMap_curl2.pang" alt="" height="50" title="">
+- Gaussian random loading path
+<img src="doc/Equation/ConfiningPressureGP_curl2.pang" alt="" height="50" title="">
 
 ## Results of the simulation
 Assuming that the loading will end up in the critical state.

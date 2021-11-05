@@ -1,14 +1,14 @@
 import numpy as np
-import scipy.spatial as T
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 
 class GuanssianRandomPath:
-    def __init__(self, curlDegree, amplitudeValue):
-        self.seed = 10001
+    def __init__(self, curlDegree, amplitudeValue, seed=10001, showFlag=False):
+        self.seed = seed
         np.random.seed(self.seed)
 
+        self.showFlag = showFlag
         self.numberOfPoints = 1000
         self.numberOfFuncutions = 3
 
@@ -18,12 +18,14 @@ class GuanssianRandomPath:
         self.x = self.curlDegree*np.linspace(0, 1., self.numberOfPoints)[:, np.newaxis]
         self.meanValue = -0.
         self.cov = self.CovarienceMatrix(self.x, self.x)*self.amplitude
-        self.plotCovarianceMatrix(kernel=self.cov, curl=self.curlDegree)
 
         self.y = np.random.multivariate_normal(mean=np.ones(self.numberOfPoints)*self.meanValue,
                                                cov=self.cov,
                                                size=self.numberOfFuncutions)
-        self.plotPaths()
+        if self.showFlag:
+            self.plotPaths()
+            self.plotCovarianceMatrix(kernel=self.cov, curl=self.curlDegree)
+        self.writeDownPaths()
 
     def CovarienceMatrix(self, x, y):
         """
@@ -65,5 +67,14 @@ class GuanssianRandomPath:
         plt.legend()
         plt.savefig('./figSav/ConfiningPressureGP_curl%d.png' % self.curlDegree, dpi=200)
 
+    def writeDownPaths(self):
+        filePath = './MCCData/path_%d.dat' % self.seed
+        np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header='epsilon_xx, epsilon_yy, epsilon_xy')
 
-gaussian = GuanssianRandomPath(curlDegree=5, amplitudeValue=0.25)  # generally 1~5, 0.25
+
+# gaussian = GuanssianRandomPath(curlDegree=5, amplitudeValue=0.25)  # generally 1~5, 0.25
+
+for i in range(100):
+    gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.25)
+
+
