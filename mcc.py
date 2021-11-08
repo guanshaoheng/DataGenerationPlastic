@@ -30,19 +30,21 @@ poisn: the poisn ratio
 [l, k, M, poisn, N] = [0.077, 0.01, 1.2, 0.3, 1.788]
 
 # initial state
-pc = 400.  # consolidation pressure 前期固结压力
-p0 = 200.  # confining pressure 围压
+pc = 200  # consolidation pressure 前期固结压力
+p0 = 201.  # confining pressure 围压
 
 # --------------------------------------------------
 # Debug && baseline
-# drainedFlag = True
+# loadMode = 'drained'  # 'drained' 'undrained'
 # driver = ModifiedCamClay(N=N, lambda_e=l, pc=pc,
-#          kappa_e=k, p0=p0, poisn=poisn, drainedFlag=drainedFlag, M=M)
+#          kappa_e=k, p0=p0, poisn=poisn, loadMode=loadMode, M=M, dimensionNum=2)
 # driver.forward()
 
 # --------------------------------------------------
 # Application
 loadPathList = loadingPathReader()
-driver = ModifiedCamClay(N=N, lambda_e=l, pc=pc,
-         kappa_e=k, p0=p0, poisn=poisn, drainedFlag=drainedFlag, M=M)
-driver.forward(path)
+loadMode = 'random'
+for i, path in enumerate(loadPathList):
+    driver = ModifiedCamClay(N=N, lambda_e=l, pc=pc,
+                             kappa_e=k, p0=p0, poisn=poisn, loadMode=loadMode, M=M, dimensionNum=2)
+    driver.forward(numIndex=i, path=path)
