@@ -16,8 +16,56 @@
 			\State $ p_{max}=p_i\exp{(\frac{\chi\psi}{M_{tc}})}$
 			\State $F=q_{trial}-p_{trial}M_i(1-\ln(\frac{p_{trial}}{p_{i}})), 
 					\ F_2=p_{trial}-p_{max}$
-			
-			
+		\end{algorithmic}
+
+	\end{algorithm}
+	
+	\begin{algorithm}	
+		\begin{algorithmic}[1]
+			\caption{Summary of the procedure used to calculate the total stress with regard to the give strain increment}
+			\Require Given: the total stress $\sigma$ and the total strain $\epsilon$ at current step, $\Delta \epsilon$ is to be applied to the configuration; Yield function $F$
+			\Ensure $F(\sigma) \leq 0$
+			\State $\Delta \hat{\sigma} = C_{E}\cdot\Delta\epsilon$ \Comment{Calculate the stress increment assuming elastic behavior}
+			\State $\hat{\sigma}=\sigma+\Delta \hat{\sigma}$ \Comment{Calculate the trial stress}
+			\State $F(\hat{\sigma})$ \Comment{Calculate the value of the yield function, with $\hat{\sigma}$ as the state of stress,  }
+			\If{$F(\hat{\sigma}) \leq 0$}
+				\State $\sigma=\hat{\sigma}$ \Comment{The strain increment is elastic. In this case, the trial stress is correct; we return.}
+				\State \Return $\sigma$
+			\Else
+				\If{The previous stress is plastic}
+					\State $r=0$ \Comment{$r$ is the portion of incremental strain taken elastically.}
+				\Else \Comment{There is a transition from elstic to plastic}
+					\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
+					\State $\sigma = C_E \cdot r \Delta \epsilon$
+					\State $\Delta \epsilon^p = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^p$ is the elastoplastic strain increment}
+					\State $\sigma\gets \sigma + C_{EP} \cdot \Delta \epsilon^p_{i}$ \Comment{Divide $\Delta \epsilon^p$ into $\Delta \epsilon^p_{0\sim i}$ subincrements and iterate}
+				\EndIf
+			\EndIf
+			\State \Return $\sigma$
+		\end{algorithmic}
+	\end{algorithm}
+
+	
+	\begin{algorithm}	
+		\begin{algorithmic}[1]
+			\caption{Procesures to generate the random loading path via gaussian process and principal rotation}
+			\Require Given: The ampltitude for principle strains 
+			\Ensure $F(\sigma) \leq 0$
+			\State $\Delta \hat{\sigma} = C_{E}\cdot\Delta\epsilon$ \Comment{Calculate the stress increment assuming elastic behavior}
+			\State $\hat{\sigma}=\sigma+\Delta \hat{\sigma}$ \Comment{Calculate the trial stress}
+			\State $F(\hat{\sigma})$ \Comment{Calculate the value of the yield function, with $\hat{\sigma}$ as the state of stress,  }
+			\If{$F(\hat{\sigma}) \leq 0$}
+			\State $\sigma=\hat{\sigma}$ \Comment{The strain increment is elastic. In this case, the trial stress is correct; we return.}
+			\Else
+			\If{The previous stress is plastic}
+			\State $r=0$ \Comment{$r$ is the portion of incremental strain taken elastically.}
+			\Else \Comment{There is a transition from elstic to plastic}
+			\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
+			\State $\sigma = C_E \cdot r \Delta \epsilon$
+			\State $\Delta \epsilon^p = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^p$ is the elastoplastic strain increment}
+			\State $\sigma\gets \sigma + C_{EP} \cdot \Delta \epsilon^p_{i}$ \Comment{Divide $\Delta \epsilon^p$ into $\Delta \epsilon^p_{0\sim i}$ subincrements and iterate}
+			\EndIf
+			\EndIf
 		\end{algorithmic}
 	\end{algorithm}
 \end{document}

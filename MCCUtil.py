@@ -67,8 +67,8 @@ class ModifiedCamClay:
             self.interNum = len(path)
         for step in range(self.interNum):
             # elastic matrix construction
-            lam, G, E = self.getKandG(self.vol, self.p)
-            De = self.ElasticTangentOperator(lam, G, E)
+            lam, G = self.getKandG(self.vol, self.p)
+            De = self.ElasticTangentOperator(lam, G)
 
             # check if this is sensible in this mode, and how to end up in the predetermined strain
             if 'random' in self.loadMode:
@@ -76,33 +76,37 @@ class ModifiedCamClay:
                     deps = path[0]
                 else:
                     deps = (path[step]-path[step-1])*0.1
+                depsAxial = deps[0]
+                deps = self.getdEps(depsAxial, De)
             else:
                 deps = self.getdEps(self.depsAxial, De)
             self.sig_ = np.dot(De, deps) + self.sig
             self.p, self.q, self.eta = self.getPandQ(self.sig_)
 
-            # f_yield = self.getYieldValue(self.pc)
+            f_yield = self.getYieldValue(self.pc)
 
-            # if f_yield < 0.:  # elastic
-            #     self.sig = self.sig_
-            # iterOutYieldSurface = 1
-            # while f_yield > 0 and iterOutYieldSurface<=100:  # plastic
-            #     self.pc = max((self.q ** 2 / self.M ** 2 + self.p ** 2) / self.p, self.pc)  # renew the item of pc
-            #     # Calculate the derives of dfds dfdep
-            #     self.dFdS, self.dFdEps_p = self.getDiffVectorOfYieldFunction(self.pc)
-            #     dfds_mat = self.dFdS.reshape([self.vectorLen, 1])
-            #     dfdep_mat = self.dFdEps_p.reshape([self.vectorLen, 1])
-            #     De = De - (De @ dfds_mat) @ (dfds_mat.T @ De) / (-dfdep_mat.T @ dfds_mat + dfds_mat.T @ De @ dfds_mat)
-            #     # iteration to make sure the stress state inner the yield surface
-            #     if 'random' in self.loadMode:
-            #         self.sig_ = self.sig+np.dot(De, deps)
-            #         if iterOutYieldSurface % 20==0 and iterOutYieldSurface>0:
-            #             print('\t Step #%d Iter #%d YielfValue: %.2f' % (step, iterOutYieldSurface, f_yield))
-            #         f_yield = self.getYieldValue(self.pc)
-            #         iterOutYieldSurface += 1
-            #     else:
-            #         deps = self.getdEps(self.depsAxial, De)
-            #         break
+            if f_yield < 0.:  # elastic
+                self.sig = self.sig_
+            iterOutYieldSurface = 1
+            while f_yield > 0 and iterOutYieldSurface <= 100:  # plastic
+                self.pc = np.average([max((self.q ** 2 / self.M ** 2 + self.p ** 2) / self.p, self.pc), self.pc])  # renew the item of pc
+                # Calculate the derives of dfds dfdep
+                self.dFdS, self.dFdEps_p = self.getDiffVectorOfYieldFunction(self.pc)
+                dfds_mat = self.dFdS.reshape([self.vectorLen, 1])
+                dfdep_mat = self.dFdEps_p.reshape([self.vectorLen, 1])
+                De = De - (De @ dfds_mat) @ (dfds_mat.T @ De) / (-dfdep_mat.T @ dfds_mat + dfds_mat.T @ De @ dfds_mat)
+                # iteration to make sure the stress state inner the yield surface
+                # if 'random' in self.loadMode:
+                #     self.sig_ = self.sig+np.dot(De, deps)
+                #     if iterOutYieldSurface % 20 == 0 and iterOutYieldSurface>0:
+                #         print('\t Step #%d Iter #%d YielfValue: %.2f' % (step, iterOutYieldSurface, f_yield))
+                #     f_yield = self.getYieldValue(self.pc)
+                #     iterOutYieldSurface += 1
+                # else:
+                #     deps = self.getdEps(self.depsAxial, De)
+                #     break
+                deps = self.getdEps(depsAxial, De)
+                break
             self.sig += np.dot(De, deps)
 
             # update
@@ -177,7 +181,7 @@ class ModifiedCamClay:
         return f_yield
 
     def getdEps(self, depsAxial, De):
-        if self.loadMode == 'drained':
+        if self.loadMode == 'drained' or self.loadMode=='random':
             if self.dim == 3:
                 # drained
                 dEps = np.array(
@@ -197,7 +201,7 @@ class ModifiedCamClay:
                 dEps = np.array([depsAxial, -depsAxial, 0.])
         return dEps
 
-    def ElasticTangentOperator(self, lam, G, E):
+    def ElasticTangentOperator(self, lam, G):
         """
                 Assembling the elastic tangent operator
             :param K:
@@ -218,11 +222,12 @@ class ModifiedCamClay:
             De = np.zeros([3, 3])
             for i in range(3):
                 if i < 2:
-                    De[i, i] = E/(1-self.poisn**2)
+                    De[i, i] = 2*G
                 else:
                     De[i, i] = G
-            De[1, 0] = E/(1-self.poisn**2)*self.poisn
-            De[0, 1] = E/(1-self.poisn**2)*self.poisn
+            for i in range(2):
+                for j in range(2):
+                    De[i, j] += lam
         return De
 
     def getKandG(self, vol, p):
@@ -240,7 +245,7 @@ class ModifiedCamClay:
             E = 2*K*(1-self.poisn)
         G = E / (2 * (1 + self.poisn))
         lam = E*self.poisn/(1+self.poisn)/(1-2*self.poisn)
-        return lam, G, E
+        return lam, G
 
     def getDevVolStrain(self, eps):
         """
@@ -329,9 +334,9 @@ class ModifiedCamClay:
         ax = plt.subplot(248)
         plt.plot(p, q, label='q-p')
         plt.plot(np.linspace(0, 1.5 * (max(p))), M * np.linspace(0, 1.5 * (max(p))), label='p*Mf')
-        p_yield_1 = np.linspace(0, pc[0])
+        p_yield_1 = np.linspace(0, pc[0], 100)
         q_yield_1 = M * np.sqrt((p_yield_1 * pc[0] - p_yield_1 * p_yield_1))
-        p_yield_2 = np.linspace(0, pc[-1])
+        p_yield_2 = np.linspace(0, pc[-1], 100)
         q_yield_2 = M * np.sqrt((p_yield_2 * pc[-1] - p_yield_2 * p_yield_2))
         plt.plot(p_yield_1, q_yield_1, label='yield surface 1')
         plt.plot(p_yield_2, q_yield_2, label='yield surface 2')

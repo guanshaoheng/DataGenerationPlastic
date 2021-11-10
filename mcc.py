@@ -27,7 +27,7 @@ poisn: the poisn ratio
 '''
 
 # [l, k, M, poisn, N] = [0.2, 0.04, 0.95, 0.15, 2.5]
-[l, k, M, poisn, N] = [0.077, 0.01, 1.2, 0.3, 1.788]
+[l, k, M, poisn, N] = [0.077, 0.04, 1.2, 0.3, 1.788]
 
 # initial state
 pc = 200  # consolidation pressure 前期固结压力
