@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from MCCUtil import plotSubFigures
+from plotConfiguration2D import plotConfiguration2D
 
 
 class MisesAssociateFlowIsoHarden:
     def __init__(self):
-
         #----------------------------------------------------
         # material parameters
         self.youngsModulus = 200e9
@@ -21,17 +21,20 @@ class MisesAssociateFlowIsoHarden:
         # ---------------------------------------------------
         # state variables [stress and strain vector in voigt notion]
         self.sig = np.zeros(3)
-        self.vonMises = .0
+        self.vonMises = self.getVonMises(self.sig)
         self.eps = np.zeros(3)
         self.epsPlastic = 0.
         self.epsPlasticVector = np.zeros(3)
         self.sigTrial = np.zeros(3)
         self.lastYield = -1
-        self.loadHistoryList = [np.array(list(self.sig)+list(self.eps)+[self.vonMises, self.epsPlastic, self.hardening]+list(self.epsPlasticVector))]
+        self.yieldValue = self.yieldFunction(self.sig)
+        self.loadHistoryList = [np.array(list(self.sig)+list(self.eps)+
+                                         [self.vonMises, self.epsPlastic, self.hardening]+
+                                         list(self.epsPlasticVector)+[self.yieldValue, 0])]
 
         # ---------------------------------------------------
         # load configuration
-        self.epsAxialObject = 0.01
+        self.epsAxialObject = 0.03
         self.iterationNum = int(1e4)
         self.depsAxial = self.epsAxialObject/self.iterationNum
 
@@ -42,12 +45,13 @@ class MisesAssociateFlowIsoHarden:
             self.vonMises = self.getVonMises(self.sigTrial)
             self.hardening = self.getHardening(self.epsPlastic)
             yieldValue = self.yieldFunction(self.sigTrial)
+            iteration = 0
 
             if yieldValue <= 0:
                 self.sig = self.sigTrial
                 self.lastYield = yieldValue
                 deps_plastic = np.zeros(3)
-                print('elastic')
+                # print('elastic')
             elif abs(self.lastYield) > 1.:  # last step is elastic
                 r_min, r_max = 1e-32, 1.0
                 r_mid = 0.5*(r_min+r_max)
@@ -62,7 +66,10 @@ class MisesAssociateFlowIsoHarden:
                 self.sig = self.sig+np.dot(self.D, r_mid * deps)
                 self.vonMises = self.getVonMises(self.sig)
                 self.eps += r_mid*deps
-                self.loadHistoryList.append(np.array(list(self.sig)+list(self.eps)+[self.vonMises, self.epsPlastic, self.hardening]+list(self.epsPlasticVector)))
+                self.yieldValue = yield_mid
+                self.loadHistoryList.append(np.array(list(self.sig)+list(self.eps)+
+                                                     [self.vonMises, self.epsPlastic, self.hardening]+
+                                                     list(self.epsPlasticVector)+[self.yieldValue, iteration]))
                 deps = (1-r_mid)*deps
                 self.lastYield = yield_mid
                 # update the trial stress
@@ -74,29 +81,29 @@ class MisesAssociateFlowIsoHarden:
                 pass
             else:               # last step is plastic
                 # print('plastic')
-                iteration = 0
-                while yieldValue > 0 and iteration < 100:
+                while yieldValue > 0:
                     self.dFdS, self.dFdEps_p = self.getDiffVectorOfYieldFunction()
                     dfds_mat = self.dFdS.reshape([3, 1])
                     h = -self.dFdEps_p*np.sqrt(2/3*(dfds_mat.T @ dfds_mat))[0, 0]
-                    # Dep = self.D - (self.D @ dfds_mat) @ (dfds_mat.T @ self.D) / \
-                    #       (h+ dfds_mat.T @ self.D @ dfds_mat)
                     H = (h+dfds_mat.T@self.D@dfds_mat)[0, 0]
                     dLambda = (dfds_mat.T@self.D@deps.reshape([-1, 1])/H)[0, 0]
                     deps_plastic = dLambda*dfds_mat
-                    epsPlasticTrial = self.epsPlastic + np.sqrt(deps_plastic.T@deps_plastic)[0, 0]
-                    self.hardening = self.getHardening(epsPlasticTrial)
-                    dsig = np.dot(self.D, (deps.reshape([-1, 1])-deps_plastic))
-                    self.sigTrial = self.sig+dsig.reshape(-1)
+                    self.epsPlastic = self.epsPlastic + np.sqrt(deps_plastic.T@deps_plastic)[0, 0]
+                    self.hardening = self.getHardening(self.epsPlastic)
+                    self.sigTrial = self.sigTrial-np.dot(self.D, deps_plastic).reshape(-1)
                     self.vonMises = self.getVonMises(self.sigTrial)
                     yieldValue = self.yieldFunction(self.sigTrial)
+                    self.epsPlasticVector += deps_plastic.reshape(-1)
                     iteration += 1
-
                 self.sig = self.sigTrial
+
             self.eps = self.eps + deps
-            self.epsPlasticVector += deps_plastic.reshape(-1)
-            self.loadHistoryList.append(np.array(list(self.sig)+list(self.eps)+[self.vonMises, self.epsPlastic, self.hardening]+list(self.epsPlasticVector)))
+            self.yieldValue = yieldValue
+            self.loadHistoryList.append(np.array(list(self.sig)+list(self.eps)+
+                                                 [self.vonMises, self.epsPlastic, self.hardening]+
+                                                 list(self.epsPlasticVector)+[self.yieldValue, iteration]))
         plotHistory(loadHistory=self.loadHistoryList)
+        plotConfiguration2D(epsList=np.array(self.loadHistoryList)[:, 3:6])
 
     def yieldFunction(self, sig):
         yieldValue = self.getVonMises(sig)-self.hardening-self.yieldStress
@@ -140,20 +147,16 @@ def plotHistory(loadHistory, dim=2, vectorLen=3):
     load_history = np.array(loadHistory)
     sig = load_history[..., :vectorLen]
     eps = load_history[..., vectorLen:vectorLen * 2]
-    epsPlastic = load_history[..., (vectorLen * 2+3):]
+    epsPlastic = load_history[..., (vectorLen * 2+3):(vectorLen * 2+6)]
     misesStress = load_history[..., vectorLen * 2]
     strainPlastic = load_history[..., vectorLen * 2 + 1]
     hardening = load_history[..., vectorLen * 2 + 2]
-    # vr = load_history[..., vectorLen * 2]
-    # vr_final = vr[-1]
-    # axialEps = load_history[:, vectorLen]
-    # epsVol = np.average(sig[:, :2], axis=1)
-    # eps2 = load_history[:, vectorLen + 1]
-    # loadStepX = range(len(load_history))
+    yieldVlue = load_history[..., (vectorLen * 3+3):(vectorLen * 3+4)]
+    iteration = load_history[..., (vectorLen * 3+4):(vectorLen * 3+5)]
 
     plt.figure(figsize=(16, 7))
     # sigma_1-epsilon_1
-    ax = plt.subplot(121)
+    ax = plt.subplot(221)
     epsLabel = ['$\epsilon_{xx}$', '$\epsilon_{yy}$', '$\epsilon_{xy}$'] if dim == 2 else \
         ['$\epsilon_{xx}$', '$\epsilon_{yy}$', '$\epsilon_{zz}$', '$\epsilon_{xy}$', '$\epsilon_{yz}$',
          '$\epsilon_{xz}$']
@@ -168,7 +171,7 @@ def plotHistory(loadHistory, dim=2, vectorLen=3):
                    xlabel='Load step', ylabel='$\epsilon$', num=vectorLen)
 
     # sigma_3-epsilon_1
-    ax = plt.subplot(122)
+    ax = plt.subplot(222)
     sigLabel = ['$\sigma_{xx}$', '$\sigma_{yy}$', '$\sigma_{xy}$'] if dim == 2 else \
         ['$\sigma_{xx}$', '$\sigma_{yy}$', '$\sigma_{zz}$', '$\sigma_{xy}$', '$\sigma_{yz}$',
          '$\sigma_{xz}$']
@@ -176,8 +179,17 @@ def plotHistory(loadHistory, dim=2, vectorLen=3):
                    label=sigLabel,
                    xlabel='Load step', ylabel='$\sigma$', num=vectorLen)
 
-    plt.savefig('./figSav/Mises.png', dps=200)
+    #
+    ax = plt.subplot(223)
+    plotSubFigures(ax=ax, x=range(len(sig)), y=yieldVlue, label='yieldValue', xlabel='Load step', ylabel='yieldValue')
+    plt.xlim([0, 2000])
+    plt.ylim([-0.5e7, 1e2])
+    ax2 = ax.twinx()
+    ax2.plot(range(len(sig)), iteration, label='iterationNum', color='r', marker='o')
+    plt.ylabel('iterationNum')
+    # plt.xlim([1300, 1312])
 
+    plt.savefig('./figSav/Mises.png', dpi=200)
 
 mises = MisesAssociateFlowIsoHarden()
 mises.forward()

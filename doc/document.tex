@@ -15,9 +15,9 @@
 			\State $M_i=M_{tc}\cdot(1-\frac{\chi N | \psi |}{M_{tc}})$
 			\State $ p_{max}=p_i\exp{(\frac{\chi\psi}{M_{tc}})}$
 			\State $F=q_{trial}-p_{trial}M_i(1-\ln(\frac{p_{trial}}{p_{i}})), 
-					\ F_2=p_{trial}-p_{max}$
+			\ F_2=p_{trial}-p_{max}$
 		\end{algorithmic}
-
+		
 	\end{algorithm}
 	
 	\begin{algorithm}	
@@ -29,22 +29,22 @@
 			\State $\hat{\sigma}=\sigma+\Delta \hat{\sigma}$ \Comment{Calculate the trial stress}
 			\State $F(\hat{\sigma})$ \Comment{Calculate the value of the yield function, with $\hat{\sigma}$ as the state of stress,  }
 			\If{$F(\hat{\sigma}) \leq 0$}
-				\State $\sigma=\hat{\sigma}$ \Comment{The strain increment is elastic. In this case, the trial stress is correct; we return.}
-				\State \Return $\sigma$
+			\State $\sigma=\hat{\sigma}$ \Comment{The strain increment is elastic. In this case, the trial stress is correct; we return.}
+			\State \Return $\sigma$
 			\Else
-				\If{The previous stress is plastic}
-					\State $r=0$ \Comment{$r$ is the portion of incremental strain taken elastically.}
-				\Else \Comment{There is a transition from elstic to plastic}
-					\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
-					\State $\sigma = C_E \cdot r \Delta \epsilon$
-					\State $\Delta \epsilon^p = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^p$ is the elastoplastic strain increment}
-					\State $\sigma\gets \sigma + C_{EP} \cdot \Delta \epsilon^p_{i}$ \Comment{Divide $\Delta \epsilon^p$ into $\Delta \epsilon^p_{0\sim i}$ subincrements and iterate}
-				\EndIf
+			\If{The previous stress is plastic}
+			\State $r=0$ \Comment{$r$ is the portion of incremental strain taken elastically.}
+			\Else \Comment{There is a transition from elstic to plastic}
+			\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
+			\State $\sigma = C_E \cdot r \Delta \epsilon$
+			\State $\Delta \epsilon^p = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^p$ is the elastoplastic strain increment}
+			\State $\sigma\gets \sigma + C_{EP} \cdot \Delta \epsilon^p_{i}$ \Comment{Divide $\Delta \epsilon^p$ into $\Delta \epsilon^p_{0\sim i}$ subincrements and iterate}
+			\EndIf
 			\EndIf
 			\State \Return $\sigma$
 		\end{algorithmic}
 	\end{algorithm}
-
+	
 	
 	\begin{algorithm}	
 		\begin{algorithmic}[1]
@@ -62,10 +62,29 @@
 			\Else \Comment{There is a transition from elstic to plastic}
 			\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
 			\State $\sigma = C_E \cdot r \Delta \epsilon$
-			\State $\Delta \epsilon^p = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^p$ is the elastoplastic strain increment}
-			\State $\sigma\gets \sigma + C_{EP} \cdot \Delta \epsilon^p_{i}$ \Comment{Divide $\Delta \epsilon^p$ into $\Delta \epsilon^p_{0\sim i}$ subincrements and iterate}
+			\State $\Delta \epsilon^{ep} = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^{ep}$ is the elastoplastic strain increment}
+			\State Call \Call{Algorithm for elastoplastic remapping}{$\Delta \epsilon^{ep}$}
 			\EndIf
 			\EndIf
 		\end{algorithmic}
 	\end{algorithm}
+
+	\begin{algorithm}	
+	\begin{algorithmic}[1]
+		\caption{Elastoplastic return mapping (Convergence of this algorithm needs verification)}
+		\Require Given: $\mathrm{d} \epsilon$, $H(\bar{\epsilon^{p}})$, and $f(\sigma, H) = 0$
+		\State  $k=1$, $\sigma^{(n+1, k)}=\sigma^{(n)}+D\mathrm{d}\epsilon$ \Comment{Calculate the trial stress as the begining of the return mapping iteration}
+		\While{$f(\sigma^{(n+1, k)}, H(\bar{\epsilon^{p}}^{(k)})) > 0$}  \Comment{$f=g$ in Association Flow assumption}
+		\State $h=-(\frac{\partial f}{\partial \int |\mathrm{d} \bar{\epsilon^{p}}|}\| \frac{\partial f}{\partial \sigma}\|)^{(k)}$
+		\State $\mathrm{d}\epsilon^p = (\frac{\frac{\partial f}{\partial \sigma}D \frac{\partial g}{\partial \sigma}}{h+\frac{\partial f}{\partial \sigma}D\frac{\partial g}{\partial \sigma}})^{(k)}\mathrm{d}\epsilon$
+		\State $\mathrm{d}\epsilon^p = \mathrm{d}\lambda \frac{\partial g}{\partial \sigma}^{(k)} $
+		\State $\bar{\epsilon^{p}}^{(n+1, k)} = \bar{\epsilon^{p}}^{(n+1, k-1)} + \| \mathrm{d}\epsilon^p \| $
+		\State $\sigma^{(n+1, k)}= \sigma^{(n+1, k-1)} - D\mathrm{d}\epsilon^p$
+		\State $k++$
+		\EndWhile
+		
+		
+	\end{algorithmic}
+\end{algorithm}
+
 \end{document}
