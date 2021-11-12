@@ -255,6 +255,7 @@ def plotHistory(loadHistory, dim=2, vectorLen=3, figTitle=None, savePath='./figS
 
     plt.tight_layout()
     plt.savefig('./%s/%s.png' % (savePath, figTitle if figTitle else 'Mises'), dpi=200)
+    plt.close()
     return
 
 
@@ -280,6 +281,10 @@ def writeDownPaths(path, sampleIndex, data):
 # load path reader
 if __name__ == '__main__':
     loadPathList = loadingPathReader()
+    print()
+    print('=' * 80)
+    print('\t Path loading ...')
     for i in range(len(loadPathList)):
+        print('\t\tPath %d' % i)
         mises = MisesAssociateFlowIsoHarden()
         mises.forward(path=loadPathList[i], sampleIndex=i)

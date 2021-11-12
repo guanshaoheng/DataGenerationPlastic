@@ -32,12 +32,17 @@ class GuanssianRandomPath:
             self.plotPaths()
             self.plotCovarianceMatrix(kernel=self.cov, curl=self.curlDegree)
 
-        if self.generatingNum>0:
+        if self.generatingNum > 0:
             self.generation()
 
     def generation(self):
+        print()
+        print('='*80)
+        print('\t Loading path generation ...')
         i = 0
-        while i < self.generatingNum:
+        numSample = 0
+        while numSample < self.generatingNum:
+            print('\t\tPath random % d seed %d' % (numSample, i))
             self.seed = i
             np.random.seed(self.seed)
             self.y = np.random.multivariate_normal(mean=np.ones(self.numberOfPoints)*self.meanValue,
@@ -45,11 +50,13 @@ class GuanssianRandomPath:
                                                size=self.numberOfFuncutions)
             maxEpsilon = np.max(np.abs(self.y))
             if maxEpsilon > self.maxEpsilonLimitation:
+                i += 1
                 continue
             else:
-                self.plotPaths(path='MCCData')
-                self.writeDownPaths()
+                # self.plotPaths(path='MCCData')
+                self.writeDownPaths(numSample)
                 i += 1
+                numSample += 1
 
     def CovarienceMatrix(self, x, y):
         """
@@ -90,8 +97,8 @@ class GuanssianRandomPath:
         plt.savefig(os.path.join(path, figName), dpi=200)
         plt.close()
 
-    def writeDownPaths(self):
-        filePath = './MCCData/path_%d.dat' % self.seed
+    def writeDownPaths(self, numSample):
+        filePath = './MCCData/path_%d.dat' % numSample
         np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header='epsilon_xx, epsilon_yy, epsilon_xy')
 
 
