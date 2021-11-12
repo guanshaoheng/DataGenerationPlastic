@@ -377,9 +377,9 @@ class ModifiedCamClay:
 def plotSubFigures(ax, x, y, label, xlabel, ylabel, num=None):
     if num and num >= 2:
         for i in range(num):
-            ax.plot(x[i], y[i], label=label[i])
+            ax.plot(x[i], y[i], label=label[i], lw=3)
     else:
-        ax.plot(x, y, label=label)
+        ax.plot(x, y, label=label, lw=3)
     plt.legend()
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)

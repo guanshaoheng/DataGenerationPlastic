@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 
+
 def plotConfiguration2D(epsList):
     """
 
@@ -25,7 +26,7 @@ def plotConfiguration2D(epsList):
     nodeCoordinate[4, 0] = -lx*0.5-xtemp
     nodeCoordinate[4, 1] = -ytemp
 
-    indexList = range(0, n, n//200)
+    indexList = range(0, n, n//200 if n>200 else 1)
     nodeCoordinateShort = nodeCoordinate[..., indexList]
     # plot
     fig = plt.figure()
@@ -40,7 +41,7 @@ def plotConfiguration2D(epsList):
         y = nodeCoordinateShort[:, 1, i]
         line.set_data(x, y)
         return line,
-    anim = FuncAnimation(fig=fig, func=animate, init_func=init, frames=200, interval=5, blit=True)
+    anim = FuncAnimation(fig=fig, func=animate, init_func=init, frames=len(indexList), interval=5, blit=True)
     anim.save('./figSav/deformation.gif')
     return
 
