@@ -114,30 +114,30 @@ class MisesAssociateFlowIsoHarden:
                     self.vonMises = self.getVonMises(sigTrial)
                     yieldValue = self.yieldFunction(sigTrial)
                     iteration += 1
-                    if yieldValue < -self.yieldTolerance:
-                        epsPlastic = epsPlastic - np.sqrt(deps_plastic.T @ deps_plastic)[0, 0]
-                        self.hardening = self.getHardening(epsPlastic)
-                        sigTrial = sigTrial + np.dot(self.D, deps_plastic).reshape(-1)
-                        self.vonMises = self.getVonMises(sigTrial)
-                        yieldValue = self.yieldFunction(sigTrial)
-                        r_min, r_max = 0, 1.
-                        while yieldValue < -self.yieldTolerance or yieldValue > 0:
-                            r_mid = (r_min + r_max) / 2.
-                            deps_plastic = r_mid * dLambda * dfds_mat
-                            epsPlastic_mid = epsPlastic + np.sqrt(deps_plastic.T @ deps_plastic)[0, 0]
-                            hardening = self.getHardening(epsPlastic_mid)
-                            sigTrial_mid = sigTrial - np.dot(self.D, deps_plastic).reshape(-1)
-                            self.vonMises = self.getVonMises(sigTrial_mid)
-                            yieldValue = self.yieldFunction(sigTrial_mid, hardening=hardening)
-                            if yieldValue > 0:
-                                r_min = r_mid
-                            else:
-                                r_max = r_mid
-                        self.sigTrial = sigTrial_mid
-                        epsPlastic = epsPlastic_mid
-                        self.hardening = hardening
-                    self.epsPlasticVector += deps_plastic.reshape(-1)
-                    self.epsPlastic = epsPlastic
+                if yieldValue < -self.yieldTolerance:
+                    epsPlastic = epsPlastic - np.sqrt(deps_plastic.T @ deps_plastic)[0, 0]
+                    self.hardening = self.getHardening(epsPlastic)
+                    sigTrial = sigTrial + np.dot(self.D, deps_plastic).reshape(-1)
+                    self.vonMises = self.getVonMises(sigTrial)
+                    yieldValue = self.yieldFunction(sigTrial)
+                    r_min, r_max = 0, 1.
+                    while yieldValue < -self.yieldTolerance or yieldValue > 0:
+                        r_mid = (r_min + r_max) / 2.
+                        deps_plastic = r_mid * dLambda * dfds_mat
+                        epsPlastic_mid = epsPlastic + np.sqrt(deps_plastic.T @ deps_plastic)[0, 0]
+                        hardening = self.getHardening(epsPlastic_mid)
+                        sigTrial_mid = sigTrial - np.dot(self.D, deps_plastic).reshape(-1)
+                        self.vonMises = self.getVonMises(sigTrial_mid)
+                        yieldValue = self.yieldFunction(sigTrial_mid, hardening=hardening)
+                        if yieldValue > 0:
+                            r_min = r_mid
+                        else:
+                            r_max = r_mid
+                    self.sigTrial = sigTrial_mid
+                    epsPlastic = epsPlastic_mid
+                    self.hardening = hardening
+                self.epsPlasticVector += deps_plastic.reshape(-1)
+                self.epsPlastic = epsPlastic
 
                 self.sig = self.sigTrial
 
@@ -280,7 +280,7 @@ def writeDownPaths(path, sampleIndex, data):
 # main
 # load path reader
 if __name__ == '__main__':
-    loadPathList = loadingPathReader()
+    loadPathList = loadingPathReader()[:1]
     print()
     print('=' * 80)
     print('\t Path loading ...')
