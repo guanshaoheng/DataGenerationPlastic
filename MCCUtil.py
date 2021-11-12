@@ -75,7 +75,7 @@ class ModifiedCamClay:
                 if step == 0:
                     deps = path[0]
                 else:
-                    deps = (path[step]-path[step-1])*0.1
+                    deps = (path[step] - path[step - 1]) * 0.1
                 depsAxial = deps[0]
                 deps = self.getdEps(depsAxial, De)
             else:
@@ -374,15 +374,20 @@ class ModifiedCamClay:
             plt.savefig('./figSav/MCCmodel-2_%dD.png' % self.dim, dpi=200)
 
 
-def plotSubFigures(ax, x, y, label, xlabel, ylabel, num=None):
+def plotSubFigures(ax, x, y, label, xlabel, ylabel, num=None, color=None):
     if num and num >= 2:
         for i in range(num):
             ax.plot(x[i], y[i], label=label[i], lw=3)
     else:
-        ax.plot(x, y, label=label, lw=3)
-    plt.legend()
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+        if color:
+            ax.plot(x, y, label=label, lw=3, color=color)
+        else:
+            ax.plot(x, y, label=label, lw=3)
+    plt.legend(fontsize=15)
+    plt.xlabel(xlabel, fontsize=12)
+    plt.ylabel(ylabel, fontsize=12)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
 
 
 def loadingPathReader():
