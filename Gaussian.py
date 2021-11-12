@@ -95,7 +95,7 @@ class GuanssianRandomPath:
         np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header='epsilon_xx, epsilon_yy, epsilon_xy')
 
 
-gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.15, generatingNum=10)  # generally 1~5, 0.25
+gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.15, generatingNum=50)  # generally 1~5, 0.25
 
 
 
