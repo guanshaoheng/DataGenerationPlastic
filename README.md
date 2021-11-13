@@ -20,7 +20,7 @@
 
 - Covariance Matrix
 <img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" alt="" height="150" title="">
-![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png |width=100px)
+![width=100px](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)
 
 - Gaussian random loading path
 Gaussian random loading path          |  Deformation of the configuration
