@@ -63,7 +63,7 @@
 			\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
 			\State $\sigma = C_E \cdot r \Delta \epsilon$
 			\State $\Delta \epsilon^{ep} = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^{ep}$ is the elastoplastic strain increment}
-			\State Call \Call{Algorithm for elastoplastic remapping}{$\Delta \epsilon^{ep}$}
+			\State Call \Call{Elastoplastic return mapping}{$\Delta \epsilon^{ep}$}
 			\EndIf
 			\EndIf
 		\end{algorithmic}
@@ -72,19 +72,53 @@
 	\begin{algorithm}	
 	\begin{algorithmic}[1]
 		\caption{Elastoplastic return mapping (Convergence of this algorithm needs verification)}
-		\Require Given: $\mathrm{d} \epsilon$, $H(\bar{\epsilon^{p}})$, and $f(\sigma, H) = 0$
+		\Require Given: $\mathrm{d} \epsilon$, $H(\bar{\epsilon^{p}})$
+		\Ensure  $f(\sigma, H) = 0$		
 		\State  $k=1$, $\sigma^{(n+1, k)}=\sigma^{(n)}+D\mathrm{d}\epsilon$ \Comment{Calculate the trial stress as the begining of the return mapping iteration}
 		\While{$f(\sigma^{(n+1, k)}, H(\bar{\epsilon^{p}}^{(k)})) > 0$}  \Comment{$f=g$ in Association Flow assumption}
 		\State $h=-(\frac{\partial f}{\partial \int |\mathrm{d} \bar{\epsilon^{p}}|}\| \frac{\partial f}{\partial \sigma}\|)^{(k)}$
-		\State $\mathrm{d}\epsilon^p = (\frac{\frac{\partial f}{\partial \sigma}D \frac{\partial g}{\partial \sigma}}{h+\frac{\partial f}{\partial \sigma}D\frac{\partial g}{\partial \sigma}})^{(k)}\mathrm{d}\epsilon$
 		\State $\mathrm{d}\epsilon^p = \mathrm{d}\lambda \frac{\partial g}{\partial \sigma}^{(k)} $
 		\State $\bar{\epsilon^{p}}^{(n+1, k)} = \bar{\epsilon^{p}}^{(n+1, k-1)} + \| \mathrm{d}\epsilon^p \| $
 		\State $\sigma^{(n+1, k)}= \sigma^{(n+1, k-1)} - D\mathrm{d}\epsilon^p$
 		\State $k++$
 		\EndWhile
-		
-		
+		\If{$f(\sigma^{(n+1, k)}, H(\bar{\epsilon^{p}}^{(k)})) < -f_{tolerance}$} \Comment{Avoiding overestimating plasticity}
+		\State \Call{Searching for the right scalar of plastic strain via dichotomy}{$\mathrm{d}\lambda$}
+		\EndIf
+		\State $\mathrm{d}\epsilon^{p} = \mathrm{d} \lambda \cdot \frac{\partial g}{\partial \sigma}^{(k)} $
+		\State $\bar{\epsilon^{p}} = \bar{\epsilon^{p}} + \| \mathrm{d}\epsilon^{p} \| $
+		\State $\sigma = \sigma + D \cdot(\mathrm{d}\epsilon - \mathrm{d}\epsilon^{p} )$
+		\State \Return{$\sigma$} 
+	\end{algorithmic}
+\end{algorithm}
+
+	\begin{algorithm}	
+	\begin{algorithmic}[1]
+		\caption{Searching for the right scalar of plastic strain via dichotomy}
+		\Require $\mathrm{d}\lambda$
+		\Ensure  $f_{tolerance} < f(\sigma, H) < 0$		
+		\State $r_{min}=0,\  r_{max}=1$
+		\While{ $f(\sigma, H)< -f_{tolerance}\  \mathbf{or}\  f(\sigma, H)> 0$		}
+		\State $r_{mid}=(r_{min}+r_{max})/2$
+		\State $ \mathrm{d}\epsilon^p_{mid} = r_{mid} \mathrm{d}\epsilon^p$
+		\State $\bar{\epsilon^{p}}_{mid} = \bar{\epsilon^{p}} + \| \mathrm{d}\epsilon^p_{mid} \|$
+		\State $H_{mid} = \hat{H}(\bar{\epsilon^{p}}_{mid})$
+		\State $\sigma_{mid}= \sigma_{trial} - D  \mathrm{d}\epsilon^p_{mid}$
+		\State $f_{mid}=\hat{f}(\sigma_{mid}, H_{mid})$
+		\If{$f_{mid}>0$}
+		\State $r_{min} = r_{mid}$
+		\Else
+		 \State $r_{min} = r_{mid}$
+		\EndIf
+		\EndWhile
+		\State \Return{$ \mathrm{d}\epsilon^p_{mid}$} 
 	\end{algorithmic}
 \end{algorithm}
 
 \end{document}
+
+
+
+
+
+
