@@ -19,11 +19,16 @@
 <img src="doc/Equation/gaussianFunction.gif" alt="" height="50" title="">
 
 - Covariance Matrix
-<img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" alt="" height="150" title="">
+<img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" height="150">
 
-![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png | width=150px)
+![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)
 
 - Gaussian random loading path
+
+Gaussian random loading path          |  Deformation of the configuration
+:-------------------------:|:------------------------------------:
+<img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" height="150">  |  <img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" height="150">
+
 
 Gaussian random loading path          |  Deformation of the configuration
 :-------------------------:|:------------------------------------:
