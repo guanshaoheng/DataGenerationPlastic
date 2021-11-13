@@ -25,6 +25,10 @@
 <img src="figSav/curlCoefComparation/ConfiningPressureGP_curl2.png" alt="" height="150" title="">
 <img src="MCCData/animation/deformation_0.gif" alt="" height="200" title="">
 
+<p float="left">
+  <img src="figSav/curlCoefComparation/ConfiningPressureGP_curl2.png" height="150" />
+  <img src="MCCData/animation/deformation_0.gif" height="150" /> 
+</p>
 Gaussian random loading path          |  Deformation of the configuration
 :-------------------------:|:------------------------------------:
 ![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  |  ![](MCCData/animation/deformation_0.gif)
