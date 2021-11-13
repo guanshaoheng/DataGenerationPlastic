@@ -6,33 +6,29 @@
 <img src="doc/Equation/yieldfunc.gif" alt="" height="50" title="">
 
 ## Initial volum 
-<img src="doc/Equation/InitialVolum.gif" alt="" height="50" title="">
+<img src="doc/Equation/InitialVolum.gif" height="50">
 
 ## Elastic modulus
-<img src="doc/Equation/elasticModulus.gif" alt="" height="120" title="">
+<img src="doc/Equation/elasticModulus.gif" height="120">
 
 ## Gaussian process
 - kernel function
-<img src="doc/Equation/kernelFunction.gif" alt="" height="50" title="">
+<img src="doc/Equation/kernelFunction.gif" height="50">
 
 - Gaussian function
-<img src="doc/Equation/gaussianFunction.gif" alt="" height="50" title="">
+<img src="doc/Equation/gaussianFunction.gif" height="50">
 
 - Covariance Matrix
 <img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" height="150">
 
-![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)
 
 - Gaussian random loading path
 
 Gaussian random loading path          |  Deformation of the configuration
 :-------------------------:|:------------------------------------:
-<img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" height="150">  |  <img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" height="150">
+<img src="figSav/curlCoefComparation/ConfiningPressureGP_curl2.png" height="200">  |  <img src="MCCData/animation/deformation_0.gif" height="200">
 
 
-Gaussian random loading path          |  Deformation of the configuration
-:-------------------------:|:------------------------------------:
-![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  |  ![](MCCData/animation/deformation_0.gif)
 
 ## Results of the simulation
 Assuming that the loading will end up in the critical state.
