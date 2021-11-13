@@ -30,7 +30,7 @@ Gaussian random loading path          |  Deformation of the configuration
 
 
 
-## Results of the simulation
+## Results of the Modified CamClay
 Assuming that the loading will end up in the critical state.
 
 <img src="figSav/MCCmodel-1.png" alt="MCC loading display" height="200" title="MCC loading display"> | <img src="figSav/MCCmodel-2.png" alt="MCC loading display" height="200" title="MCC loading display">
