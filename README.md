@@ -22,8 +22,12 @@
 <img src="figSav/curlCoefComparation/CovariabceHeatMap_curl2.png" alt="" height="150" title="">
 
 - Gaussian random loading path
-<img src="figSav/curlCoefComparation/ConfiningPressureGP_curl2.png;MCCData/animation/deformation_0.gif" alt="" height="150" title="">
+<img src="figSav/curlCoefComparation/ConfiningPressureGP_curl2.png" alt="" height="150" title="">
 <img src="MCCData/animation/deformation_0.gif" alt="" height="200" title="">
+
+Gaussian random loading path          |  Deformation of the configuration
+:-------------------------:|:------------------------------------:
+![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  |  ![](MCCData/animation/deformation_0.gif)
 
 ## Results of the simulation
 Assuming that the loading will end up in the critical state.
