@@ -38,7 +38,8 @@ class MisesAssociateFlowIsoHarden:
         # ---------------------------------------------------
         # load configuration
         self.loadMode = 'random'  # 'axial' or 'random'
-        self.epsAxialObject = 0.004
+        # self.epsAxialObject = 0.004
+        self.epsAxialObject = 0.2
         self.iterationNum = int(1e4)
         self.depsAxial = self.epsAxialObject / self.iterationNum
 
@@ -69,8 +70,6 @@ class MisesAssociateFlowIsoHarden:
                 self.sig = self.sigTrial
                 self.lastYield = yieldValue
                 deps_plastic = np.zeros(3)
-                epsPlastic = self.epsPlastic
-                # print('elastic')
             elif self.lastYield < -self.yieldTolerance:  # plastic and last step is elastic
                 r_min, r_max = 1e-64, 1.0
                 r_mid = 0.5 * (r_min + r_max)
@@ -91,18 +90,20 @@ class MisesAssociateFlowIsoHarden:
                                                      list(self.epsPlasticVector) + [self.yieldValue, iteration]))
                 deps = (1 - r_mid) * deps
                 self.lastYield = yield_mid
+                yieldValue = yield_mid
                 # update the trial stress
                 self.sigTrial = self.sig + np.dot(self.D, deps)
                 self.vonMises = self.getVonMises(self.sigTrial)
-                epsPlastic = self.epsPlastic
-                yieldValue = self.yieldFunction(self.sigTrial)
 
             if yieldValue <= 0:
                 pass
             else:  # last step is plastic
                 # print('plastic')
+                sigTrial = self.sigTrial
+                mises = self.getVonMises(sigTrial)
+                epsPlastic = self.epsPlastic
                 while yieldValue > 0:
-                    self.dFdS, self.dFdEps_p = self.getDiffVectorOfYieldFunction()
+                    self.dFdS, self.dFdEps_p = self.getDiffVectorOfYieldFunction(sig=sigTrial, mises=mises, epsPlastic=epsPlastic)
                     dfds_mat = self.dFdS.reshape([3, 1])
                     h = -self.dFdEps_p * np.sqrt(2 / 3 * (dfds_mat.T @ dfds_mat))[0, 0]
                     H = (h + dfds_mat.T @ self.D @ dfds_mat)[0, 0]
@@ -111,7 +112,7 @@ class MisesAssociateFlowIsoHarden:
                     epsPlastic = self.epsPlastic + np.sqrt(deps_plastic.T @ deps_plastic)[0, 0]
                     self.hardening = self.getHardening(epsPlastic)
                     sigTrial = self.sigTrial - np.dot(self.D, deps_plastic).reshape(-1)
-                    self.vonMises = self.getVonMises(sigTrial)
+                    mises = self.getVonMises(sigTrial)
                     yieldValue = self.yieldFunction(sigTrial)
                     iteration += 1
                 if yieldValue < -self.yieldTolerance:
@@ -124,6 +125,7 @@ class MisesAssociateFlowIsoHarden:
                     while yieldValue < -self.yieldTolerance or yieldValue > 0:
                         r_mid = (r_min + r_max) / 2.
                         deps_plastic = r_mid * dLambda * dfds_mat
+                        # deps_plastic = r_mid * deps_plastic
                         epsPlastic_mid = epsPlastic + np.sqrt(deps_plastic.T @ deps_plastic)[0, 0]
                         hardening = self.getHardening(epsPlastic_mid)
                         sigTrial_mid = sigTrial - np.dot(self.D, deps_plastic).reshape(-1)
@@ -157,7 +159,7 @@ class MisesAssociateFlowIsoHarden:
         plotHistory(loadHistory=self.loadHistoryList,
                     figTitle=figTitle, savePath=savePath)
         writeDownPaths(path='./MCCData/results', data=np.array(self.loadHistoryList), sampleIndex=sampleIndex)
-        # plotConfiguration2D(epsList=np.array(self.loadHistoryList)[:, 3:6])
+        # plotConfiguration2D(epsList=np.array(self.loadHistoryList)[:, 3:6], scaleFactor=75, sampleIndex=sampleIndex)
 
     def yieldFunction(self, sig, hardening=None):
         if hardening:
@@ -189,13 +191,13 @@ class MisesAssociateFlowIsoHarden:
             [self.depsAxial, -self.D[1, 0] / self.D[1, 1] * self.depsAxial, 0.])
         return dEps
 
-    def getDiffVectorOfYieldFunction(self):
-        if self.vonMises == 0:
+    def getDiffVectorOfYieldFunction(self, sig, mises, epsPlastic):
+        if mises == 0:
             dfds = np.array([1, 1, np.sqrt(3)])
         else:
-            dfds = np.array([(2 * self.sigTrial[0] - self.sigTrial[1]) / 2 / self.vonMises,
-                             (2 * self.sigTrial[1] - self.sigTrial[0]) / 2 / self.vonMises,
-                             3 * self.sigTrial[2] / self.vonMises])
+            dfds = np.array([(2 * sig[0] - sig[1]) / 2 / mises,
+                             (2 * sig[1] - sig[0]) / 2 / mises,
+                             3 * sig[2] / mises])
         dfdEps_p = -self.A * self.n * (self.epsilon0 + abs(self.epsPlastic)) ** (self.n - 1)
         return dfds, dfdEps_p
 

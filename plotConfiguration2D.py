@@ -3,12 +3,13 @@ from matplotlib.animation import FuncAnimation
 import numpy as np
 
 
-def plotConfiguration2D(epsList):
+def plotConfiguration2D(epsList, scaleFactor=1., sampleIndex=None):
     """
 
     :param epsList: List of the strain [00, 11, 01]
     :return:
     """
+    epsList *= scaleFactor
     n = len(epsList)
     nodeCoordinate = np.zeros([5, 2, n])
     lx, ly, theta = 1*(1+epsList[:, 0]), 1*(1+epsList[:, 1]), np.pi/2.*(1-epsList[:, 2])
@@ -26,7 +27,7 @@ def plotConfiguration2D(epsList):
     nodeCoordinate[4, 0] = -lx*0.5-xtemp
     nodeCoordinate[4, 1] = -ytemp
 
-    indexList = range(0, n, n//200 if n>200 else 1)
+    indexList = range(0, n, n//100 if n > 100 else 1)
     nodeCoordinateShort = nodeCoordinate[..., indexList]
     # plot
     fig = plt.figure()
@@ -41,8 +42,8 @@ def plotConfiguration2D(epsList):
         y = nodeCoordinateShort[:, 1, i]
         line.set_data(x, y)
         return line,
-    anim = FuncAnimation(fig=fig, func=animate, init_func=init, frames=len(indexList), interval=5, blit=True)
-    anim.save('./figSav/deformation.gif')
+    anim = FuncAnimation(fig=fig, func=animate, init_func=init, frames=len(indexList), interval=1, blit=True)
+    anim.save('./figSav/deformation_%d.gif' % sampleIndex)
     return
 
 
