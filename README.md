@@ -32,7 +32,7 @@
 
 Gaussian random loading path          |  Deformation of the configuration
 :-------------------------:|:------------------------------------:
-![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  |  ![](MCCData/animation/deformation_0.gif)
+![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png | height=150)  |  ![](MCCData/animation/deformation_0.gif | height=150)
 
 ![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  ![](MCCData/animation/deformation_0.gif)
 ## Results of the simulation
