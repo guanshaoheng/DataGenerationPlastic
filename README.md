@@ -29,10 +29,12 @@
   <img src="figSav/curlCoefComparation/ConfiningPressureGP_curl2.png" height="150" />
   <img src="MCCData/animation/deformation_0.gif" height="150" /> 
 </p>
+
 Gaussian random loading path          |  Deformation of the configuration
 :-------------------------:|:------------------------------------:
 ![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  |  ![](MCCData/animation/deformation_0.gif)
 
+![](figSav/curlCoefComparation/ConfiningPressureGP_curl2.png)  ![](MCCData/animation/deformation_0.gif)
 ## Results of the simulation
 Assuming that the loading will end up in the critical state.
 <img src="figSav/MCCmodel-1.png" alt="MCC loading display" height="200" title="MCC loading display">
