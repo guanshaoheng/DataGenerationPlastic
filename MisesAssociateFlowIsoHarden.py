@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 import matplotlib.pyplot as plt
 from MCCUtil import plotSubFigures, loadingPathReader
@@ -7,7 +6,7 @@ from plotConfiguration2D import plotConfiguration2D
 
 
 class MisesAssociateFlowIsoHarden:
-    def __init__(self):
+    def __init__(self, loadMode='axial'):
         # ---------------------------------------------------
         # material parameters
         self.youngsModulus = 200e9
@@ -37,10 +36,12 @@ class MisesAssociateFlowIsoHarden:
 
         # ---------------------------------------------------
         # load configuration
-        self.loadMode = 'random'  # 'axial' or 'random'
-        # self.epsAxialObject = 0.004
-        self.epsAxialObject = 0.2
-        self.iterationNum = int(1e4)
+        self.loadMode = loadMode  # 'axial' or 'random'
+        if self.loadMode == 'random':
+            self.epsAxialObject = 0.004  # random laoding
+        else:
+            self.epsAxialObject = 0.01
+        self.iterationNum = int(1e2)
         self.depsAxial = self.epsAxialObject / self.iterationNum
 
         # ---------------------------------------------------
@@ -153,12 +154,12 @@ class MisesAssociateFlowIsoHarden:
         if 'random' in self.loadMode:
             savePath = 'MCCData'
             figTitle = os.path.join('results', figTitle)
+            writeDownPaths(path='./MCCData/results', data=np.array(self.loadHistoryList), sampleIndex=sampleIndex)
         else:
             savePath = 'figSav'
             figTitle = os.path.join('MisesBaseline', figTitle)
         plotHistory(loadHistory=self.loadHistoryList,
                     figTitle=figTitle, savePath=savePath)
-        writeDownPaths(path='./MCCData/results', data=np.array(self.loadHistoryList), sampleIndex=sampleIndex)
         # plotConfiguration2D(epsList=np.array(self.loadHistoryList)[:, 3:6], scaleFactor=75, sampleIndex=sampleIndex)
 
     def yieldFunction(self, sig, hardening=None):
@@ -174,6 +175,7 @@ class MisesAssociateFlowIsoHarden:
 
     def getVonMises(self, sig):
         vonMises = np.sqrt(sig[0] ** 2 - sig[0] * sig[1] + sig[1] ** 2 + 3. * sig[2] ** 2)
+        # vonMises = np.sqrt((sig[0] - sig[1])**2 + 4. * sig[2] ** 2)
         return vonMises
 
     def tangentAssemble(self, lam, G):
@@ -194,10 +196,14 @@ class MisesAssociateFlowIsoHarden:
     def getDiffVectorOfYieldFunction(self, sig, mises, epsPlastic):
         if mises == 0:
             dfds = np.array([1, 1, np.sqrt(3)])
+            # dfds = np.array([1, 1, 2])
         else:
             dfds = np.array([(2 * sig[0] - sig[1]) / 2 / mises,
                              (2 * sig[1] - sig[0]) / 2 / mises,
                              3 * sig[2] / mises])
+            # dfds = np.array([(sig[0] - sig[1]) / mises,
+            #                  (sig[1] - sig[0]) / mises,
+            #                  4 * sig[2] / mises])
         dfdEps_p = -self.A * self.n * (self.epsilon0 + abs(self.epsPlastic)) ** (self.n - 1)
         return dfds, dfdEps_p
 
@@ -282,11 +288,20 @@ def writeDownPaths(path, sampleIndex, data):
 # main
 # load path reader
 if __name__ == '__main__':
-    loadPathList = loadingPathReader()[:1]
-    print()
-    print('=' * 80)
-    print('\t Path loading ...')
-    for i in range(len(loadPathList)):
-        print('\t\tPath %d' % i)
-        mises = MisesAssociateFlowIsoHarden()
-        mises.forward(path=loadPathList[i], sampleIndex=i)
+    baselineFlag = True
+    if not baselineFlag:
+        # ----------------------------------------
+        # training data generation
+        loadPathList = loadingPathReader()[:2]
+        print()
+        print('=' * 80)
+        print('\t Path loading ...')
+        for i in range(len(loadPathList)):
+            print('\t\tPath %d' % i)
+            mises = MisesAssociateFlowIsoHarden(loadMode='random')
+            mises.forward(path=loadPathList[i], sampleIndex=i)
+    else:
+        # ----------------------------------------
+        # training data generation
+        mises = MisesAssociateFlowIsoHarden(loadMode='axial')
+        mises.forward()
