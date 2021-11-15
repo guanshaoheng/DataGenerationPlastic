@@ -4,6 +4,24 @@ import matplotlib.pyplot as plt
 from MCCUtil import plotSubFigures, loadingPathReader
 from plotConfiguration2D import plotConfiguration2D
 
+"""
+        The constitutive model is under the elastoplastic 
+        framework of Mises yield function, associated-flow 
+        rule, and iso-hardening.
+        
+        Gaussian process engaged for random loading path 
+        generation.
+        
+        This script is used to generate datasets for phys-
+        ics-constrained constitutive network training.
+         
+        Author: Shaoheng Guan
+        Email:  shaohengguan@gmail.com
+
+        Reference:
+            [1] 
+"""
+
 
 class MisesAssociateFlowIsoHarden:
     def __init__(self, loadMode='axial'):
@@ -38,7 +56,7 @@ class MisesAssociateFlowIsoHarden:
         # load configuration
         self.loadMode = loadMode  # 'axial' or 'random'
         if self.loadMode == 'random':
-            self.epsAxialObject = 0.004  # random laoding
+            self.epsAxialObject = 0.004  # random loading
         else:
             self.epsAxialObject = 0.01
         self.iterationNum = int(1e2)
@@ -72,16 +90,7 @@ class MisesAssociateFlowIsoHarden:
                 self.lastYield = yieldValue
                 deps_plastic = np.zeros(3)
             elif self.lastYield < -self.yieldTolerance:  # plastic and last step is elastic
-                r_min, r_max = 1e-64, 1.0
-                r_mid = 0.5 * (r_min + r_max)
-                yield_mid = self.yieldFunction(self.sig + np.dot(self.D, r_mid * deps))
-                while yield_mid < -self.yieldTolerance or yield_mid > 0.:
-                    yield_mid = self.yieldFunction(self.sig + np.dot(self.D, r_mid * deps))
-                    if yield_mid < 0:
-                        r_min = r_mid
-                    else:
-                        r_max = r_mid
-                    r_mid = 0.5 * (r_min + r_max)
+                r_mid, yield_mid = self.transiformationSplit(deps)
                 self.sig = self.sig + np.dot(self.D, r_mid * deps)
                 self.vonMises = self.getVonMises(self.sig)
                 self.eps += r_mid * deps
@@ -206,6 +215,27 @@ class MisesAssociateFlowIsoHarden:
             #                  4 * sig[2] / mises])
         dfdEps_p = -self.A * self.n * (self.epsilon0 + abs(self.epsPlastic)) ** (self.n - 1)
         return dfds, dfdEps_p
+
+    def transiformationSplit(self, deps):
+        """
+                Used to search the point where the loading
+                transform into the plasticity from the ela-
+                sticity.
+
+        :return:
+        """
+        r_min, r_max = 1e-64, 1.0
+        r_mid = 0.5 * (r_min + r_max)
+        yield_mid = self.yieldFunction(self.sig + np.dot(self.D, r_mid * deps))
+        while yield_mid < -self.yieldTolerance or yield_mid > 0.:
+            yield_mid = self.yieldFunction(self.sig + np.dot(self.D, r_mid * deps))
+            if yield_mid < 0:
+                r_min = r_mid
+            else:
+                r_max = r_mid
+            r_mid = 0.5 * (r_min + r_max)
+
+        return r_mid, yield_mid
 
 
 def plotHistory(loadHistory, dim=2, vectorLen=3, figTitle=None, savePath='./figSav'):
