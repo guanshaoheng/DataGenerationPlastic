@@ -62,6 +62,9 @@ class GuanssianRandomPath:
         """
             Use the kernel fucntion: $\kappa(x_i, x_j)=\mathrm{exp}(-\sum_{k=1}^{m}\theta_k(x_i^k-x_j^k)^2))$
                 where the dimensional number is 1 in this project.
+
+            Reference:
+                [1] https://blog.dominodatalab.com/fitting-gaussian-process-models-python
         :param x:
         :param y:
         :return:
