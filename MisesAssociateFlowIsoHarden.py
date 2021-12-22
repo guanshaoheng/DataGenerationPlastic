@@ -19,7 +19,8 @@ from plotConfiguration2D import plotConfiguration2D
         Email:  shaohengguan@gmail.com
 
         Reference:
-            [1] 
+            [1] Bonatti C, Mohr D (2021) One for all: Universal material model based on minimal 
+                state-space neural networks. Sci Adv 7:1–9. https://doi.org/10.1126/sciadv.abf3658
 """
 
 
@@ -100,12 +101,13 @@ class MisesAssociateFlowIsoHarden:
                                                      list(self.epsPlasticVector) + [self.yieldValue, iteration]))
                 deps = (1 - r_mid) * deps
                 self.lastYield = yield_mid
-                yieldValue = yield_mid
                 # update the trial stress
                 self.sigTrial = self.sig + np.dot(self.D, deps)
                 self.vonMises = self.getVonMises(self.sigTrial)
+                yieldValue = self.yieldFunction(sig=self.sigTrial)
+                iteration = self.plasticReturnMapping(yieldValue=yieldValue, deps=deps)
 
-            if yieldValue > 0:  # last step is plastic
+            else:  # last step is plastic
                 iteration = self.plasticReturnMapping(yieldValue=yieldValue, deps=deps)
 
             self.eps = self.eps + deps
@@ -189,7 +191,6 @@ class MisesAssociateFlowIsoHarden:
             else:
                 r_max = r_mid
             r_mid = 0.5 * (r_min + r_max)
-
         return r_mid, yield_mid
 
     def plasticReturnMapping(self, yieldValue, deps):
@@ -294,8 +295,10 @@ def plotHistory(loadHistory, dim=2, vectorLen=3, figTitle=None, savePath='./figS
                    xlabel='Load step', ylabel='$\epsilon$', color='r')
 
     plt.tight_layout()
-    plt.savefig('./%s/%s.png' % (savePath, figTitle if figTitle else 'Mises'), dpi=200)
+    fname = './%s/%s.png' % (savePath, figTitle if figTitle else 'Mises')
+    plt.savefig(fname, dpi=200)
     plt.close()
+    print('Figrue save as %s' % fname)
     return
 
 
@@ -324,7 +327,7 @@ if __name__ == '__main__':
     if not baselineFlag:
         # ----------------------------------------
         # training data generation
-        loadPathList = loadingPathReader()[:2]
+        loadPathList = loadingPathReader()[:3]
         print()
         print('=' * 80)
         print('\t Path loading ...')
