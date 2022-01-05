@@ -18,6 +18,7 @@ from torch.autograd.functional import jacobian
             [1]
 """
 
+
 class Net(nn.Module):
     def __init__(self, inputNum=4, outputNum=1, layerList='dmmd', node=30):
         super(Net, self).__init__()
@@ -43,9 +44,9 @@ class Net(nn.Module):
         num_layers = len(self.layers)
         for i, key in enumerate(self.layerList[:-1]):
             if key == 'd':
-                x = torch.sigmoid(self.layers[i](x))
+                x = torch.relu(self.layers[i](x))
             else:
-                x = torch.sigmoid(self.layers[i](x*x))
+                x = torch.relu(self.layers[i](x*x))
         x = self.layers[num_layers - 1](x)
         return x
 
@@ -104,6 +105,18 @@ class ConstitutiveNetwork:
 
     def lossFunction(self):
         return
+
+
+class NetTf:
+    def __init__(self, inputNum=4, outputNum=1, layerList='dmmd', node=30):
+        self.inputNum = inputNum
+        self.outputNum = outputNum
+        self.node = node
+        self.layerList = layerList
+        self.layers = torch.nn.ModuleList(self.getInitLayers())
+
+
+
 
 
 if __name__ == "__main__":
