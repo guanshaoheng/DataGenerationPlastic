@@ -9,7 +9,6 @@ class MyModel(Model):
         super(MyModel, self).__init__()
         self.Layers = self.layersInit(inputNum, outputNum, layerInfo, nodeNum=20)
         self.d1 = Dense(units=inputNum, activation='relu')
-        # self.flatten = Flatten()
         self.d1 = Dense(128, activation='relu')
         self.d2 = Dense(outputNum)
 
