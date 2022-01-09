@@ -6,15 +6,17 @@ import torch
 from torch.autograd.functional import jacobian
 import scipy.interpolate
 
-
+print()
+print('-'*80)
 useGPU = True
 if useGPU and torch.cuda.is_available():
     device = torch.device('cuda')
-    print('%s' % torch.cuda.get_device_name(0))
+    print('\t%s is used in this calculation' % torch.cuda.get_device_name(0))
 else:
     device = torch.device('cpu')
+    print('\tOnly CPU is used in this calculation')
 
-net = Net(inputNum=2, outputNum=1, layerList='ddmd').to(device)
+net = Net(inputNum=2, outputNum=1, layerList='dmdd').to(device)
 n = 201
 mesh = np.meshgrid(np.linspace(-1, 1, n), np.linspace(-1, 1, n))
 x = np.concatenate((mesh[0].reshape(-1, 1), mesh[1].reshape(-1, 1)), axis=1)
@@ -30,15 +32,12 @@ plt.tight_layout()
 plt.savefig(os.path.join('test', '0dataset.png'), dpi=200)
 plt.close()
 
-index_random = np.random.permutation(range(len(x)))[:100000]
+index_random = np.random.permutation(range(len(x)))[:10000]
 x, y = x[index_random], y[index_random]
 x_tensor = torch.tensor(x, dtype=torch.float, requires_grad=True).to(device)
 y_tensor = torch.tensor(y, dtype=torch.float, requires_grad=True).to(device)
-
-# x_tensor.requires_grad_()
-# y_tensor.requires_grad_()
-# dvaluedx_tensor = torch.tensor(dvaluedx, dtype=torch.float, requires_grad=True).to(device)
 ones = torch.ones([len(x_tensor)]).to(device)
+
 
 def plotfigure(net, num):
     nPlotPonits = 1000
@@ -61,6 +60,10 @@ def plotfigure(net, num):
 
 # network training
 # optimizer = torch.optim.Adam(net.parameters(), )
+print()
+print('='*80)
+print('\tTraining ....')
+print()
 optimizer = torch.optim.LBFGS(net.parameters(), )
 lossCalculator = torch.nn.MSELoss()
 epochTrain = 200
@@ -71,19 +74,9 @@ for epoch in range(epochTrain):
         yPrediction = net(x_tensor)
         dyPrediction_dx = torch.autograd.grad(outputs=yPrediction,
                                               inputs=x_tensor,
-                                              grad_outputs=torch.ones(yPrediction.size()).to(device),
+                                              grad_outputs=torch.ones_like(yPrediction).to(device),
                                               retain_graph=True,
-                                              create_graph=True,
-                                              only_inputs=True)[0]
-        # two_order_gradients = torch.autograd.grad(outputs=dyPrediction_dx, inputs=x_temp,
-        #                                           grad_outputs=torch.ones(dyPrediction_dx.size()),
-        #                                           only_inputs=True)[0]
-        # loss = torch.square(torch.linalg.norm(yPrediction-y_temp)) + \
-        #        torch.square(torch.linalg.norm(dyPrediction_dx) - 1.)
-        # loss = torch.square(dyPrediction_dx[:, 0]) + torch.square(dyPrediction_dx[:, 1])-torch.ones(size=(len(dyPrediction_dx), ))
-        # loss = lossCalculator(dyPrediction_dx[:, 0:1]**2+dyPrediction_dx[:, 1:2]**2,
-        #                       torch.ones(size=(len(dyPrediction_dx), 1)))
-        # loss = lossCalculator(dyPrediction_dx, x_tensor)
+                                              create_graph=True)[0]
         norm = torch.linalg.norm(dyPrediction_dx, dim=1)
         loss = lossCalculator(norm, ones)
         loss.backward()
@@ -99,7 +92,6 @@ for epoch in range(epochTrain):
         loss0 = lossCalculator(norm, ones).item()
         # loss0 = lossCalculator(dyPrediction_dx, x_tensor).item()
         # loss1 = torch.square(torch.linalg.norm(dyPrediction_dx) - 1.).item()
-        print()
         print("Epoch: %d \t Error: %.3e \t" % (epoch, loss0))
         plotfigure(net, epoch)
 plotfigure(net, epochTrain)

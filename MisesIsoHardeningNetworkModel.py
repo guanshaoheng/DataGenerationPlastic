@@ -20,7 +20,7 @@ from torch.autograd.functional import jacobian
 
 
 class Net(nn.Module):
-    def __init__(self, inputNum=4, outputNum=1, layerList='dmmd', node=30):
+    def __init__(self, inputNum=4, outputNum=1, layerList='dmmd', node=10):
         super(Net, self).__init__()
         self.inputNum = inputNum
         self.outputNum = outputNum
@@ -62,24 +62,35 @@ class ConstitutiveNetwork:
         self.n = 0.2
         self.epsilon0 = 0.05
         self.yieldStress = 200e6
-        self.hardening = self.getHardening(epsPlastic=0.)
         self.D = self.tangentAssemble(
             lam=self.youngsModulus * self.poisson / (1 + self.poisson) / (1 - 2 * self.poisson),
             G=self.youngsModulus / 2 / (1 + self.poisson))
 
         # ----------------------------------
         # net initialization
-        self.yieldFunction = Net()
+        self.yieldFunction = Net(inputNum=4, outputNum=1, layerList='ddmd')
+
+        # ----------------------------------
+        # state
+        self.sigma = 0.
+        self.epsPlasticVector = np.zeros(3, dtype=float)
+        self.epsPlastic = np.linalg.norm(self.epsPlasticVector)
+        self.hardening = self.getHardening(epsPlastic=0.)
 
     def diffOFyieldFunction(self, x):  # x should be a 1-d torch.FloatTensor
-        temp = jacobian(self.yieldFunction, x)
+        SingedDistance = self.yieldFunction(x)
+        temp = torch.autograd.grad(outputs=SingedDistance, inputs=x, retain_graph=True, create_graph=True,
+                                   grad_outputs=SingedDistance.size())
         dfds = temp[:, :3]
         dfdep = temp[:, 3:]
         return dfds, dfdep
 
-    def getHardening(self, epsPlastic):
-        hardingValue = self.A * (self.epsilon0 + abs(epsPlastic)) ** self.n
-        return hardingValue
+    def getHardening(self, epsPlastic=None):
+        if epsPlastic:
+            hardeningValue = self.A * (self.epsilon0 + abs(epsPlastic)) ** self.n
+        else:
+            hardeningValue = self.A * (self.epsilon0 + self.epsPlastic) ** self.n
+        return hardeningValue
 
     def tangentAssemble(self, lam, G):
         D = np.zeros([3, 3])
@@ -96,7 +107,40 @@ class ConstitutiveNetwork:
 
     def getStress(self, deps):
         dsig = self.D@deps.reshape(-1, 1)
-        
+        trialStress = self.sigma + dsig
+        yieldValue = self.yieldFunction(torch.concat((trialStress, self.hardening), ))
+        if yieldValue<0:  # elastic
+            return trialStress
+        else:  # plastic
+            # bi-section to find the value on the yield function
+            mid = self.bisectionDeps(dsig)
+            self.plasticReturnMapping(deps=(1-mid)*deps)
+        return
+
+    def bisectionDeps(self, dsig):
+        r0, mid, r1 = 0., 0.5, 1.0
+        distance = self.yieldFunction(torch.concat((self.sigma+dsig*mid, self.hardening), ))
+        while distance > 0. or distance < -10:
+            if distance > 0.:
+                r1 = mid
+            else:
+                r0 = mid
+            mid = (r0 + r1)*.5
+            distance = self.yieldFunction(torch.concat((self.sigma+dsig * mid, self.hardening), ))
+        self.sigma += dsig*mid
+        return mid
+
+    def plasticReturnMapping(self, deps):
+        dfds, dfdep = self.diffOFyieldFunction(x=torch.concat((deps, self.hardening), ))
+        h = - dfdep*torch.linalg.norm(dfds)
+        H = (h + dfds @ self.D @ dfds)[0, 0]
+        dLambda = (dfds @ self.D @ deps / H)[0, 0]
+        deps_plastic = dLambda * dfds
+        epsPlastic = self.epsPlastic + np.sqrt(2/3*deps_plastic.T @ deps_plastic)[0, 0]
+        return
+
+    def getShearStrain(self, epsilon):
+
         return
 
     def getTangent(self):
