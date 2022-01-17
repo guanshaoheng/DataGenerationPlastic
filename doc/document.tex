@@ -1,6 +1,9 @@
 \documentclass{article}
-\usepackage{algpseudocode}
-\usepackage{algorithm}
+\usepackage{algpseudocode}     % for algorithm 
+\usepackage{algorithm} 
+\usepackage{amsmath}        % for algorithm, both of them are necessary
+\usepackage{array}
+\renewcommand{\algorithmicrequire}{\textbf{Given:}} % change the "Require:" in the algorithm to "Given:"
 
 \begin{document}
 	\begin{algorithm}
@@ -30,75 +33,78 @@
 	\begin{algorithm}	
 		\begin{algorithmic}[1]
 			\caption{Summary of the procedure used to calculate the total stress with regard to the give strain increment}
-			\Require Given: the total stress $\sigma$ and the total strain $\epsilon$ at current step, $\Delta \epsilon$ is to be applied to the configuration; Yield function $F$
-			\Ensure $F(\sigma) \leq 0$
-			\State $\Delta \hat{\sigma} = C_{E}\cdot\Delta\epsilon$ \Comment{Calculate the stress increment assuming elastic behavior}
-			\State $\hat{\sigma}=\sigma+\Delta \hat{\sigma}$ \Comment{Calculate the trial stress}
-			\State $F(\hat{\sigma})$ \Comment{Calculate the value of the yield function, with $\hat{\sigma}$ as the state of stress,  }
-			\If{$F(\hat{\sigma}) \leq 0$}
-			\State $\sigma=\hat{\sigma}$ \Comment{The strain increment is elastic. In this case, the trial stress is correct; we return.}
-			\State \Return $\sigma$
+			\Require The total stress $\boldsymbol{\sigma}$, the total strain $\boldsymbol{\epsilon}$ at current step, and the accumulated plastic strain $\epsilon$ (used as the internal variable), $\Delta \boldsymbol{\epsilon}$ is to be applied to the configuration; Yield function $f$
+			\Ensure $f(\boldsymbol{\sigma}, H) \leq 0$
+			\State $\Delta \hat{\boldsymbol{\sigma}} = \mathbf{D}_{\mathrm{e}}\cdot\Delta\boldsymbol{\epsilon}$ \Comment{Calculate the stress increment assuming elastic behavior}
+			\State $\hat{\boldsymbol{\sigma}}=\boldsymbol{\sigma}+\Delta \hat{\sigma}$ \Comment{Calculate the trial stress}
+			\State $f(\hat{\boldsymbol{\sigma}})$ \Comment{Calculate the value of the yield function, with $\hat{\sigma}$ as the state of stress,  }
+			\If{$f(\hat{\boldsymbol{\sigma}}) \leq 0$}
+			\State $\boldsymbol{\sigma}=\hat{\boldsymbol{\sigma}}$ \Comment{The strain increment is elastic. In this case, the trial stress is correct; we return.}
+			\State \Return $\boldsymbol{\sigma}$
 			\Else
 			\If{The previous stress is plastic}
 			\State $r=0$ \Comment{$r$ is the portion of incremental strain taken elastically.}
-			\Else \Comment{There is a transition from elstic to plastic}
-			\State Determine $r$ via $F(\sigma+r\cdot\Delta\epsilon)=0$
-			\State $\sigma = C_E \cdot r \Delta \epsilon$
-			\State $\Delta \epsilon^p = (1-r)\cdot\Delta\epsilon$ \Comment{$\Delta \epsilon^p$ is the elastoplastic strain increment}
 			\State Call \Call{Elastoplastic return mapping}{$\Delta \epsilon^{ep}$}
+			\Else \Comment{There is a transition from elstic to plastic}
+			\State Determine $r$ via $F(\boldsymbol{\sigma}+r\cdot\Delta\boldsymbol{\epsilon})=0$
+			\State $\boldsymbol{\sigma} = \mathbf{D}_{\mathrm{e}} \cdot r \Delta \boldsymbol{\epsilon}$
+			\State $\Delta \boldsymbol{\epsilon}^{ep} = (1-r)\cdot\Delta\boldsymbol{\epsilon}$ \Comment{$\Delta \boldsymbol{\epsilon}^{ep}$ is the elastoplastic strain increment}
+			\State Call \Call{Elastoplastic return mapping}{$\Delta \boldsymbol{\epsilon}^{ep}$}
 			\EndIf
 			\EndIf
-			\State \Return $\sigma$
+			\State \Return $\boldsymbol{\sigma}$
 		\end{algorithmic}
 	\end{algorithm}
 
 	\begin{algorithm}	
 	\begin{algorithmic}[1]
 		\caption{Elastoplastic return mapping (Convergence of this algorithm needs verification)}
-		\Require Given: $\mathrm{d} \epsilon$, $H(\bar{\epsilon^{p}})$
-		\Ensure  $f(\sigma, H) = 0$		
-		\State  $k=1$, $\sigma^{(n+1, k)}=\sigma^{(n)}+D\mathrm{d}\epsilon$ \Comment{Calculate the trial stress as the begining of the return mapping iteration}
-		\While{$f(\sigma^{(n+1, k)}, H(\bar{\epsilon^{p}}^{(k)})) > 0$}  \Comment{$f=g$ in Association Flow assumption}
-		\State $h=-(\frac{\partial f}{\partial \int |\mathrm{d} \bar{\epsilon^{p}}|}\| \frac{\partial f}{\partial \sigma}\|)^{(k)}$
-		\State $H=h+\frac{\partial f}{\partial \sigma} D \frac{\partial g}{\partial \sigma}$
-		\State $ \mathrm{d}\lambda=\frac{1}{H} \frac{\partial f}{\partial \sigma} D \mathrm{d} \epsilon $
-		\State $\mathrm{d}\epsilon^p = \mathrm{d}\lambda \frac{\partial g}{\partial \sigma}^{(k)} $
-		\State $\bar{\epsilon^{p}}^{(n+1, k)} = \bar{\epsilon^{p}}^{(n+1, k-1)} + \| \mathrm{d}\epsilon^p \| $
-		\State $\sigma^{(n+1, k)}= \sigma^{(n+1, k-1)} - D\mathrm{d}\epsilon^p$
-		\State $k++$
+		\Require The strain increment $\Delta \epsilon$, the hardening function $H(\bar{\epsilon}^{p})$, and the yield function $f(\boldsymbol{\sigma}, H)$
+		\Ensure  $f(\boldsymbol{\sigma}, H) = 0$	
+		\State $f_{tol} = 1\mathrm{e}-2$	
+		\State  $k=1$, $\sigma^{(n+1)}_{k}=\sigma^{(n)}+\mathbf{D}_{\mathrm{e}}\Delta\epsilon$ \Comment{Calculate the trial stress as the begining of the return mapping iteration}
+		
+		\While{$f(\sigma^{(n+1)}_k, H(\bar{\epsilon}_{k}^{p})) > f_{tol}$}  \Comment{$f=g$ in Association Flow assumption}
+			\State $\mathbf{a}_{k}=\mathbf{b}_{k}= \left(\partial f / \partial \boldsymbol{\sigma} \right)_k $
+			\State $B_{k} =\delta \bar{\epsilon}^p /\delta \lambda=\sqrt{2/3}\|\mathbf{a}_{k} \|$
+			\State $A_{k}=-\delta f_k /\delta \bar{\epsilon}_{k}^{p} \cdot B_{k}$
+			\State $\delta \lambda =f_k / (\mathbf{a}_{k}^T \mathbf{D}_{\mathrm{e}} \mathbf{a}_{k}) $
+			\State $\delta \boldsymbol{\sigma}=-f_{k} \mathbf{D}_{\mathrm{e}} \mathbf{b}_{k} /\left(A_{k}+\mathbf{a}_{k}^{\mathrm{T}} \mathbf{D}_{\mathrm{e}} \mathbf{b}_{k}\right)$
+			\State $\delta \bar{\epsilon}^p=f_{k} B_{k} /\left(A_{k}+\mathbf{a}_{k}^{\mathrm{T}} \mathbf{D}_{\mathrm{e}} \mathbf{b}_{k}\right)$
+			\State $\boldsymbol{\sigma}^{(n+1)}_{k+1}=\boldsymbol{\sigma}^{(n+1)}_{k}+\delta \boldsymbol{\sigma}$
+			\State $\bar{\epsilon}_{k+1}^{p}=\bar{\epsilon}_{k}^{p}+\delta \bar{\epsilon}^p$
+			\State $ \boldsymbol{\epsilon}_{k+1}^{p} = \boldsymbol{\epsilon}_{k}^{p} + \mathbf{a}_{k} \delta \lambda $
+			\State $k=k+1$
 		\EndWhile
-		\If{$f(\sigma^{(n+1, k)}, H(\bar{\epsilon^{p}}^{(k)})) < -f_{tolerance}$} \Comment{Avoiding overestimating plasticity}
-		\State \Call{Searching for the right scalar of plastic strain via dichotomy}{$\mathrm{d}\lambda$}
-		\EndIf
-		\State $\mathrm{d}\epsilon^{p} = \mathrm{d} \lambda \cdot \frac{\partial g}{\partial \sigma}^{(k)} $
-		\State $\bar{\epsilon^{p}} = \bar{\epsilon^{p}} + \| \mathrm{d}\epsilon^{p} \| $
-		\State $\sigma = \sigma + D \cdot(\mathrm{d}\epsilon - \mathrm{d}\epsilon^{p} )$
-		\State \Return{$\sigma$} 
+%		\State $\delta\epsilon^{p} = \delta\lambda \cdot \frac{\partial g}{\partial \sigma}^{(k)} $
+%		\State $\bar{\epsilon^{p}} = \bar{\epsilon^{p}} + \| \delta\epsilon^{p} \| $
+%		\State $\sigma = \sigma + D \cdot(\delta\epsilon - \delta\epsilon^{p} )$
+		\State \Return{$\boldsymbol{\sigma}$, $\boldsymbol{\epsilon}_{k+1}^{p}$, $\bar{\epsilon}_{k+1}^{p}$} 
 	\end{algorithmic}
 \end{algorithm}
 
-	\begin{algorithm}	
-	\begin{algorithmic}[1]
-		\caption{Searching for the right scalar of plastic strain via dichotomy}
-		\Require $\mathrm{d}\lambda$
-		\Ensure  $f_{tolerance} < f(\sigma, H) < 0$		
-		\State $r_{min}=0,\  r_{max}=1$
-		\While{ $f(\sigma, H)< -f_{tolerance}\  \mathbf{or}\  f(\sigma, H)> 0$		}
-		\State $r_{mid}=(r_{min}+r_{max})/2$
-		\State $ \mathrm{d}\epsilon^p_{mid} = r_{mid} \mathrm{d}\epsilon^p$
-		\State $\bar{\epsilon^{p}}_{mid} = \bar{\epsilon^{p}} + \| \mathrm{d}\epsilon^p_{mid} \|$
-		\State $H_{mid} = \hat{H}(\bar{\epsilon^{p}}_{mid})$
-		\State $\sigma_{mid}= \sigma_{trial} - D  \mathrm{d}\epsilon^p_{mid}$
-		\State $f_{mid}=\hat{f}(\sigma_{mid}, H_{mid})$
-		\If{$f_{mid}>0$}
-		\State $r_{min} = r_{mid}$
-		\Else
-		 \State $r_{min} = r_{mid}$
-		\EndIf
-		\EndWhile
-		\State \Return{$ \mathrm{d}\epsilon^p_{mid}$} 
-	\end{algorithmic}
-\end{algorithm}
+%	\begin{algorithm}	
+%	\begin{algorithmic}[1]
+%		\caption{Searching for the right scalar of plastic strain via dichotomy}
+%		\Require $\mathrm{d}\lambda$
+%		\Ensure  $f_{tolerance} < f(\sigma, H) < 0$		
+%		\State $r_{min}=0,\  r_{max}=1$
+%		\While{ $f(\sigma, H)< -f_{tolerance}\  \mathbf{or}\  f(\sigma, H)> 0$		}
+%		\State $r_{mid}=(r_{min}+r_{max})/2$
+%		\State $ \mathrm{d}\epsilon^p_{mid} = r_{mid} \mathrm{d}\epsilon^p$
+%		\State $\bar{\epsilon^{p}}_{mid} = \bar{\epsilon^{p}} + \| \mathrm{d}\epsilon^p_{mid} \|$
+%		\State $H_{mid} = \hat{H}(\bar{\epsilon^{p}}_{mid})$
+%		\State $\sigma_{mid}= \sigma_{trial} - D  \mathrm{d}\epsilon^p_{mid}$
+%		\State $f_{mid}=\hat{f}(\sigma_{mid}, H_{mid})$
+%		\If{$f_{mid}>0$}
+%		\State $r_{min} = r_{mid}$
+%		\Else
+%		 \State $r_{min} = r_{mid}$
+%		\EndIf
+%		\EndWhile
+%		\State \Return{$ \mathrm{d}\epsilon^p_{mid}$} 
+%	\end{algorithmic}
+%\end{algorithm}
 
 \end{document}
 

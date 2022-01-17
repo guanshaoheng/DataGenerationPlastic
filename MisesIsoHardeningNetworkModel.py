@@ -1,5 +1,4 @@
 import torch
-from torch import nn
 import numpy as np
 from torch.autograd import Variable
 from torch.autograd.functional import jacobian
@@ -17,39 +16,6 @@ from torch.autograd.functional import jacobian
         Reference:
             [1]
 """
-
-
-class Net(nn.Module):
-    def __init__(self, inputNum=4, outputNum=1, layerList='dmmd', node=10):
-        super(Net, self).__init__()
-        self.inputNum = inputNum
-        self.outputNum = outputNum
-        self.node = node
-        self.layerList = layerList
-        self.layers = torch.nn.ModuleList(self.getInitLayers())
-
-    def getInitLayers(self, ):
-        layers = []
-        num_layers = len(self.layerList)
-        for i in range(num_layers):
-            if i == 0:
-                layers.append(nn.Linear(self.inputNum, self.node))
-            elif i == num_layers-1:
-                layers.append(nn.Linear(self.node, self.outputNum))
-            else:
-                layers.append(nn.Linear(self.node, self.node))
-        return layers
-
-    def forward(self, x):
-        num_layers = len(self.layers)
-        for i, key in enumerate(self.layerList[:-1]):
-            if key == 'd':
-                x = torch.relu(self.layers[i](x))
-            else:
-                x = torch.relu(self.layers[i](x*x))
-        x = self.layers[num_layers - 1](x)
-        return x
-
 
 class ConstitutiveNetwork:
     def __init__(self):
