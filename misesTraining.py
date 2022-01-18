@@ -259,7 +259,7 @@ class modelTrainning:
         else:
             raise ValueError('Please input a right keyword for optimizer selection! (%s) ' % optimizerSTR)
 
-        self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=1000, gamma=0.95)
+        self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=2000, gamma=0.95)
         # self.x_mean, self.x_std, self.y_mean, self.y_std, self.dy_mean, self.dy_std, \
         # self.x_min, self.x_max, self.y_min, self.y_max, self.dy_min, self.dy_max = \
         #     pickle_load('x_mean', 'x_std', 'y_mean', 'y_std', 'dy_mean', 'dy_std',
