@@ -19,13 +19,26 @@ class SSP(nn.Softplus):
 
 
 class Net(nn.Module):
-    def __init__(self, inputNum=4, outputNum=1, layerList='dddmd', node=100):
+    def __init__(self, xmin, xmax, ymin, ymax, device,
+                 activation=SSP(), inputNum=4, outputNum=1, layerList='dddmd', node=100):
         super(Net, self).__init__()
         self.inputNum = inputNum
         self.outputNum = outputNum
         self.node = node
         self.layerList = layerList
         self.layers = torch.nn.ModuleList(self.getInitLayers())
+        self.activation = activation
+        self.xmin, self.xmax, self.ymin, self.ymax = torch.tensor(xmin, dtype=torch.float, device=device), \
+                                                     torch.tensor(xmax, dtype=torch.float, device=device), \
+                                                     torch.tensor(ymin, dtype=torch.float, device=device), \
+                                                     torch.tensor(ymax, dtype=torch.float, device=device)
+
+    def normalization(self, x, xmin, xmax, reverse=False):
+        if reverse:
+            normed = (xmax-xmin)*x+xmin
+        else:
+            normed = (x-xmin)/(xmax-xmin)
+        return normed
 
     def getInitLayers(self, ):
         layers = []
@@ -40,14 +53,18 @@ class Net(nn.Module):
         return layers
 
     def forward(self, x):
+        # normalization
+        x = self.normalization(x, self.xmin, self.xmax)
         num_layers = len(self.layers)
         for i, key in enumerate(self.layerList[:-1]):
             if key == 'd':
-                x = torch.relu(self.layers[i](x))
+                x = self.activation(self.layers[i](x))
             else:
-                x = self.layers[i](x * x)
+                x = self.activation(self.layers[i](x * x))
         x = self.layers[num_layers - 1](x)
-        return x
+        # reverse normalization
+        y = self.normalization(x, self.ymin, self.ymax, reverse=False)
+        return y
 
 
 class NetContrained(nn.Module):
@@ -197,6 +214,14 @@ def dMisesdSig(sig):
     return dfds
 
 
+def dMises2dSig(sig):
+    dfds = np.array([(2. * sig[..., 0] - sig[..., 1]),
+                     (2. * sig[..., 1] - sig[..., 0]),
+                     6. * sig[..., 2]])
+    return dfds
+
+
+
 def findDevice(useGPU=True):
     print()
     print('-' * 80)
@@ -235,10 +260,16 @@ class modelTrainning:
             raise ValueError('Please input a right keyword for optimizer selection! (%s) ' % optimizerSTR)
 
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, step_size=1000, gamma=0.95)
-        self.x_mean, self.x_std, self.y_mean, self.y_std, self.dy_mean, self.dy_std, \
-        self.x_min, self.x_max, self.y_min, self.y_max, self.dy_min, self.dy_max = \
-            pickle_load('x_mean', 'x_std', 'y_mean', 'y_std', 'dy_mean', 'dy_std',
-                        'x_min', 'x_max', 'y_min', 'y_max', 'dy_min', 'dy_max', root_path=self.savedPath)
+        # self.x_mean, self.x_std, self.y_mean, self.y_std, self.dy_mean, self.dy_std, \
+        # self.x_min, self.x_max, self.y_min, self.y_max, self.dy_min, self.dy_max = \
+        #     pickle_load('x_mean', 'x_std', 'y_mean', 'y_std', 'dy_mean', 'dy_std',
+        #                 'x_min', 'x_max', 'y_min', 'y_max', 'dy_min', 'dy_max', root_path=self.savedPath)
+        # self.x_min = torch.tensor(self.x_min, dtype=torch.float, device=self.device)
+        # self.x_max = torch.tensor(self.x_max, dtype=torch.float, device=self.device)
+        # self.y_min = torch.tensor(self.y_min, dtype=torch.float, device=self.device)
+        # self.y_max = torch.tensor(self.y_max, dtype=torch.float, device=self.device)
+        # self.dy_min = torch.tensor(self.dy_min, dtype=torch.float, device=self.device)
+        # self.dy_max = torch.tensor(self.dy_max, dtype=torch.float, device=self.device)
 
     def trainModel(self, x, y, dy):
         startTime = time.time()
@@ -268,9 +299,9 @@ class modelTrainning:
             # dy_normed = torch.tensor(normalize(dy, xmean=self.dy_mean, xstd=self.dy_std),
             #                          dtype=torch.float, requires_grad=True).to(self.device)
         else:
-            x_normed = torch.tensor(x, dtype=torch.float, requires_grad=True).to(self.device)
-            y_normed = torch.tensor(y, dtype=torch.float, requires_grad=True).to(self.device)
-            dy_normed = torch.tensor(dy, dtype=torch.float, requires_grad=True).to(self.device)
+            x_normed = x
+            y_normed = y
+            dy_normed = dy
 
         epoch = 0
         minLoss, trialNum = 1e32, 0
@@ -368,10 +399,10 @@ class Restore:
         self.savedPath = savedPath
         self.normalizationFlag = normalizationFlag
         self.model = torch.load(os.path.join(savedPath, 'entire_model.pt')).to(device)
-        self.x_mean, self.x_std, self.y_mean, self.y_std, self.dy_mean, self.dy_std, \
-        self.x_min, self.x_max, self.y_min, self.y_max, self.dy_min, self.dy_max = \
-            pickle_load('x_mean', 'x_std', 'y_mean', 'y_std', 'dy_mean', 'dy_std',
-                        'x_min', 'x_max', 'y_min', 'y_max', 'dy_min', 'dy_max', root_path=self.savedPath)
+        # self.x_mean, self.x_std, self.y_mean, self.y_std, self.dy_mean, self.dy_std, \
+        # self.x_min, self.x_max, self.y_min, self.y_max, self.dy_min, self.dy_max = \
+        #     pickle_load('x_mean', 'x_std', 'y_mean', 'y_std', 'dy_mean', 'dy_std',
+        #                 'x_min', 'x_max', 'y_min', 'y_max', 'dy_min', 'dy_max', root_path=self.savedPath)
 
     def evaluation(self, x, y, dy):
         y_origin, dy_origin = self.prediction(x)
@@ -380,6 +411,7 @@ class Restore:
         ax = fig.add_subplot(111)
         ax.scatter(y.reshape(-1), y_origin.reshape(-1))
         plt.tight_layout()
+        plt.axis('equal')
         plt.savefig(os.path.join(self.savedPath, 'Prediction.png'), dpi=200)
         plt.close()
 
@@ -387,6 +419,7 @@ class Restore:
         ax = fig.add_subplot(111)
         ax.scatter(dy.reshape(-1), dy_origin.reshape(-1))
         plt.tight_layout()
+        plt.axis('equal')
         plt.savefig(os.path.join(self.savedPath, 'dPrediction.png'), dpi=200)
         plt.close()
 
@@ -456,12 +489,15 @@ def dataReader(root_path, filePath = './MCCData/results', readContent='sig'):
     sig = data[:, :3]
     # mises = data[:, 6:7]
     mises = getMises(sig).reshape(-1, 1)
+    # mises2 = mises*mises
     epsPlastic = data[:, 7:8]
     H = getH(epsPlastic).reshape(-1, 1)
     dHdEps = get_dHdEps(epsPlastic).reshape(-1, 1)
     dmisesdsig = np.array([dMisesdSig(i) for i in sig]).reshape(-1, 3)
+    # dmises2dsig = np.array([dMises2dSig(i) for i in sig]).reshape(-1, 3)
     if 'sig' in readContent:
         saveScalar(x=sig, y=mises, dy=dmisesdsig, root_path=root_path)
+        # return sig, mises, dmisesdsig, mises2, dmises2dsig
         return sig, mises, dmisesdsig
     else:
         saveScalar(x=epsPlastic, y=H, dy=dHdEps, root_path=root_path)
@@ -471,13 +507,17 @@ def dataReader(root_path, filePath = './MCCData/results', readContent='sig'):
 if __name__ == "__main__":
     layerList = 'dmdmd'
     savedPath = os.path.join('misesModel', layerList)
+    functionGeneration = False
+    normalizationFlag = False
+    savedPath += ('_generation' if functionGeneration else '_data')
+    savedPath += ('_scaled' if normalizationFlag else '_Noscaled')
     if not os.path.exists(savedPath):
         os.mkdir(savedPath)
+    if functionGeneration:
+        sig, mises, dmisesdsig = SigGeneration(root_path=savedPath)
+    else:
+        sig, mises, dmisesdsig = dataReader(root_path=savedPath)
 
-    device = findDevice()
-
-    sig, mises, dmisesdsig = dataReader(root_path=savedPath)
-    # sig, mises, dmisesdsig = SigGeneration(root_path=savedPath)
 
     sampleNum = 5000
     index_random = np.random.permutation(range(len(sig)))
@@ -485,9 +525,12 @@ if __name__ == "__main__":
                              mises[index_random[:sampleNum]], dmisesdsig[index_random[:sampleNum]]
 
     # ------------------------------------------------
-    normalizationFlag = True
     # model training
-    misesNet = NetContrained(activation=SSP(), inputNum=3, outputNum=1, layerList=layerList, node=20).to(device=device)
+    device = findDevice()
+    x_min, x_max, y_min, y_max, dy_min, dy_max = \
+        pickle_load('x_min', 'x_max', 'y_min', 'y_max', 'dy_min', 'dy_max', root_path=savedPath)
+    misesNet = Net(xmin=x_min, xmax=x_max, ymin=y_min, ymax=y_max, device=device,
+                   activation=SSP(), inputNum=3, outputNum=1, layerList=layerList, node=20).to(device=device)
     mTrain = modelTrainning(model=misesNet, savedPath=savedPath,
                             device=device, optimizerSTR='adam',
                             normalizationFlag=normalizationFlag,
