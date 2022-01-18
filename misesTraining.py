@@ -534,7 +534,7 @@ if __name__ == "__main__":
     mTrain = modelTrainning(model=misesNet, savedPath=savedPath,
                             device=device, optimizerSTR='adam',
                             normalizationFlag=normalizationFlag,
-                            epochMax=int(1e6), batchSize=0, dyWeight=1./25., patienceNum=50)
+                            epochMax=int(1e6), batchSize=0, dyWeight=4e8, patienceNum=50)
     mTrain.trainModel(x=sig, y=mises, dy=dmisesdsig)
 
     # restore
