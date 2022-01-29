@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from MCCUtil import plotSubFigures, loadingPathReader
 from plotConfiguration2D import plotConfiguration2D
+from misesTraining import Restore, Net, DenseResNet
 
 """
         The constitutive model is under the elastoplastic 
@@ -27,7 +28,17 @@ from plotConfiguration2D import plotConfiguration2D
 
 
 class MisesAssociateFlowIsoHarden:
-    def __init__(self, loadMode='axial'):
+    def __init__(self, loadMode='axial', mode='math'):
+        # ---------------------------------------------------
+        # network initialization if needed
+        self.mode = mode
+        if 'net' in self.mode:
+            self.vonMisesNet = Restore(
+                savedPath=os.path.join('misesModel', 'ResidualNet_Fourier_data_Noscaled'),
+                normalizationFlag=False)
+            self.hardeningNet = Restore(
+                savedPath=os.path.join('HardeningModel', 'mmmmd_Fourier_data_Noscaled'),
+                normalizationFlag=False)
         # ---------------------------------------------------
         # material parameters
         self.youngsModulus = 200e9
@@ -69,8 +80,8 @@ class MisesAssociateFlowIsoHarden:
 
         # ---------------------------------------------------
         # Tolerance
-        self.yieldToleranceNegtive = -1.
-        self.yieldTolerancePositive = 1.
+        self.yieldToleranceNegtive = -1000.
+        self.yieldTolerancePositive = 1000.
 
     def forward(self, path=None, sampleIndex=None):
         if self.loadMode == 'random':
@@ -129,10 +140,16 @@ class MisesAssociateFlowIsoHarden:
                                                  list(self.epsPlasticVector) + [self.yieldValue, iteration]))
         figTitle = 'Mises_%d_%s' % (
         self.iterationNum, self.loadMode + str(sampleIndex) if 'random' in self.loadMode else self.loadMode)
+        if 'net' in self.mode:
+            figTitle += '_net'
         if 'random' in self.loadMode:
             savePath = 'MCCData'
             figTitle = os.path.join('results', figTitle)
-            writeDownPaths(path='./MCCData/results', data=np.array(self.loadHistoryList), sampleIndex=sampleIndex)
+            writeDownPaths(
+                path='./MCCData/results',
+                data=np.array(self.loadHistoryList),
+                sampleIndex=sampleIndex,
+                mode=self.mode)
         else:
             savePath = 'figSav'
             figTitle = os.path.join('MisesBaseline', figTitle)
@@ -148,11 +165,17 @@ class MisesAssociateFlowIsoHarden:
         return yieldValue
 
     def getHardening(self, epsPlastic):
-        hardingValue = self.A * (self.epsilon0 + epsPlastic) ** self.n
+        if 'net' in self.mode:
+            hardingValue = self.hardeningNet.prediction(np.array([[epsPlastic]]))[0, 0]
+        else:
+            hardingValue = self.A * (self.epsilon0 + epsPlastic) ** self.n
         return hardingValue
 
     def getVonMises(self, sig):
-        vonMises = np.sqrt(sig[0] ** 2 - sig[0] * sig[1] + sig[1] ** 2 + 3. * sig[2] ** 2)
+        if 'net' in self.mode:
+            vonMises = self.vonMisesNet.prediction(sig.reshape(1, 3))[0, 0]
+        else:
+            vonMises = np.sqrt(sig[0] ** 2 - sig[0] * sig[1] + sig[1] ** 2 + 3. * sig[2] ** 2)
         # vonMises = np.sqrt((sig[0] - sig[1])**2 + 4. * sig[2] ** 2)
         return vonMises
 
@@ -172,15 +195,21 @@ class MisesAssociateFlowIsoHarden:
         return dEps
 
     def getDiffVectorOfYieldFunction(self, sig, epsPlastic):
-        mises = self.getVonMises(sig)
-        if mises == 0:
-            dfds = np.array([1., 1., np.sqrt(3.)])
-            # dfds = np.array([1, 1, 2])
+        if 'net' not in self.mode:
+            mises = self.getVonMises(sig)
+            if mises == 0:
+                dfds = np.array([1., 1., np.sqrt(3.)])
+                # dfds = np.array([1, 1, 2])
+            else:
+                dfds = np.array([(2. * sig[0] - sig[1]) / 2. / mises,
+                                 (2. * sig[1] - sig[0]) / 2. / mises,
+                                 3. * sig[2] / mises])
+            dfdEps_p = -self.A * self.n * (self.epsilon0 + epsPlastic) ** (self.n - 1.)
         else:
-            dfds = np.array([(2. * sig[0] - sig[1]) / 2. / mises,
-                             (2. * sig[1] - sig[0]) / 2. / mises,
-                             3. * sig[2] / mises])
-        dfdEps_p = -self.A * self.n * (self.epsilon0 + epsPlastic) ** (self.n - 1.)
+            mises, dmises = self.vonMisesNet.prediction2(sig.reshape(1, 3))
+            hardening, dhardening = self.vonMisesNet.prediction2(np.array([[epsPlastic]]))
+            dfds = dmises[0]
+            dfdEps_p = -dhardening[0, 0]
         return dfds, dfdEps_p
 
     def transiformationSplit(self, deps):
@@ -314,7 +343,7 @@ def plotHistory(loadHistory, dim=2, vectorLen=3, figTitle=None, savePath='./figS
     return
 
 
-def writeDownPaths(path, sampleIndex, data):
+def writeDownPaths(path, sampleIndex, data, mode):
     """
     np.array(list(self.sig) + list(self.eps) +
                                                  [self.vonMises, self.epsPlastic, self.hardening] +
@@ -324,7 +353,11 @@ def writeDownPaths(path, sampleIndex, data):
     :param data:
     :return:
     """
-    filePath = os.path.join(path, 'random_%d.dat' % sampleIndex)
+    if 'net' in mode:
+        name = 'random_%d_net.dat' % sampleIndex
+    else:
+        name = 'random_%d.dat' % sampleIndex
+    filePath = os.path.join(path, name)
     np.savetxt(fname=filePath, X=data, fmt='%10.5f', delimiter=',',
                header='sigma_xx, sigma_yy, sigma_xy, epsilon_xx, epsilon_yy, epsilon_xy, ' +
                       'vonMises, epsPlastic, hardening, ' +
@@ -336,6 +369,7 @@ def writeDownPaths(path, sampleIndex, data):
 # load path reader
 if __name__ == '__main__':
     baselineFlag = False
+    mode = 'net'  # math net
     if not baselineFlag:
         # ----------------------------------------
         # training data generation
@@ -345,7 +379,7 @@ if __name__ == '__main__':
         print('\t Path loading ...')
         for i in range(len(loadPathList)):
             print('\t\tPath %d' % i)
-            mises = MisesAssociateFlowIsoHarden(loadMode='random')
+            mises = MisesAssociateFlowIsoHarden(loadMode='random', mode=mode)
             mises.forward(path=loadPathList[i], sampleIndex=i)
     else:
         # ----------------------------------------

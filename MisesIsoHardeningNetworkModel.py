@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from torch.autograd import Variable
 from torch.autograd.functional import jacobian
+from misesTraining import Net
 
 """
         The constitutive model is implemented via torch tensor,
@@ -34,7 +35,10 @@ class ConstitutiveNetwork:
 
         # ----------------------------------
         # net initialization
-        self.yieldFunction = Net(inputNum=4, outputNum=1, layerList='ddmd')
+        misesNet = Net(xmin=x_min, xmax=x_max, ymin=y_min, ymax=y_max, device=device,
+                       activation=nn.Sigmoid(), inputNum=3, outputNum=1, layerList=layerList, node=100,
+                       fourier_features=fourier_features)
+        # self.yieldFunction = Net(inputNum=4, outputNum=1, layerList='ddmd')
 
         # ----------------------------------
         # state

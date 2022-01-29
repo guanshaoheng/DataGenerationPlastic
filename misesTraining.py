@@ -313,7 +313,6 @@ def dMises2dSig(sig):
     return dfds
 
 
-
 def findDevice(useGPU=True):
     print()
     print('-' * 80)
@@ -487,7 +486,7 @@ class modelTrainning:
 
 
 class Restore:
-    def __init__(self, savedPath, device, normalizationFlag=True):
+    def __init__(self, savedPath, device=torch.device('cuda'), normalizationFlag=True):
         self.device = device
         self.savedPath = savedPath
         self.normalizationFlag = normalizationFlag
@@ -523,6 +522,19 @@ class Restore:
         print('fig saved as %s' % fname)
 
     def prediction(self, x):
+        if self.normalizationFlag:
+            # x_normed = torch.tensor(normalize(x, xmean=self.x_mean, xstd=self.x_std),
+            #                         dtype=torch.float, requires_grad=True).to(self.device)
+            x_normed = torch.tensor(minMaxLinear(x, xmin=self.x_min, xmax=self.x_max),
+                                    dtype=torch.float, requires_grad=True).to(self.device)
+        else:
+            x_normed = torch.tensor(x, dtype=torch.float, requires_grad=True).to(self.device)
+
+        y = self.model(x_normed)
+        y_origin = y.cpu().detach().numpy()
+        return y_origin
+
+    def prediction2(self, x):
         if self.normalizationFlag:
             # x_normed = torch.tensor(normalize(x, xmean=self.x_mean, xstd=self.x_std),
             #                         dtype=torch.float, requires_grad=True).to(self.device)
