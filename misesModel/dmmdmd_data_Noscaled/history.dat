@@ -1,0 +1,342 @@
+--------------------------------------------------------------------------------
+2022/01/18  16:01:56
+PatienceNum:	100
+Save path:	misesModel\dmmdmd_data_Noscaled
+Model architecture:	 Net(
+  (layers): ModuleList(
+    (0): Linear(in_features=3, out_features=100, bias=True)
+    (1): Linear(in_features=100, out_features=100, bias=True)
+    (2): Linear(in_features=100, out_features=100, bias=True)
+    (3): Linear(in_features=100, out_features=100, bias=True)
+    (4): Linear(in_features=100, out_features=100, bias=True)
+    (5): Linear(in_features=100, out_features=1, bias=True)
+  )
+  (activation): SSP(beta=1, threshold=20)
+)
+Optimizer:	Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.002
+    lr: 0.002
+    weight_decay: 0
+)
+Number of training samples:	5000
+--------------------------------------------------------------------------------
+Epoch: 0 	 lr: 2.000e-03 	 Loss: 7.748e+00 	 Loss0: 1.256e+17 	 Loss1: 4.092e-01 	 Improved! 	timeConsumed: 7.635e-03 mins
+Epoch: 10 	 lr: 2.000e-03 	 Loss: 3.776e-01 	 Loss0: 3.891e+15 	 Loss1: 6.834e-02 	 Improved! 	timeConsumed: 1.754e-02 mins
+Epoch: 20 	 lr: 2.000e-03 	 Loss: 9.422e-02 	 Loss0: 6.690e+14 	 Loss1: 2.360e-02 	 Improved! 	timeConsumed: 2.753e-02 mins
+Epoch: 30 	 lr: 2.000e-03 	 Loss: 9.268e-02 	 Loss0: 7.856e+14 	 Loss1: 2.045e-02 	 Improved! 	timeConsumed: 3.746e-02 mins
+Epoch: 40 	 lr: 2.000e-03 	 Loss: 3.419e-02 	 Loss0: 7.405e+13 	 Loss1: 1.222e-02 	 Improved! 	timeConsumed: 4.693e-02 mins
+Epoch: 50 	 lr: 2.000e-03 	 Loss: 2.605e-02 	 Loss0: 4.363e+13 	 Loss1: 9.591e-03 	 Improved! 	timeConsumed: 5.640e-02 mins
+Epoch: 60 	 lr: 2.000e-03 	 Loss: 1.719e-02 	 Loss0: 2.238e+13 	 Loss1: 6.466e-03 	 Improved! 	timeConsumed: 6.616e-02 mins
+Epoch: 70 	 lr: 2.000e-03 	 Loss: 2.649e-02 	 Loss0: 1.765e+14 	 Loss1: 6.886e-03 	 Noimproved! in 10 tirals 	timeConsumed: 7.595e-02 mins
+Epoch: 80 	 lr: 2.000e-03 	 Loss: 1.653e-02 	 Loss0: 4.536e+13 	 Loss1: 5.702e-03 	 Improved! 	timeConsumed: 8.519e-02 mins
+Epoch: 90 	 lr: 2.000e-03 	 Loss: 1.604e-02 	 Loss0: 3.607e+13 	 Loss1: 5.705e-03 	 Improved! 	timeConsumed: 9.452e-02 mins
+Epoch: 100 	 lr: 2.000e-03 	 Loss: 1.488e-02 	 Loss0: 3.287e+13 	 Loss1: 5.308e-03 	 Improved! 	timeConsumed: 1.050e-01 mins
+Epoch: 110 	 lr: 2.000e-03 	 Loss: 1.581e-02 	 Loss0: 5.160e+13 	 Loss1: 5.275e-03 	 Noimproved! in 10 tirals 	timeConsumed: 1.146e-01 mins
+Epoch: 120 	 lr: 2.000e-03 	 Loss: 1.590e-02 	 Loss0: 5.137e+13 	 Loss1: 5.318e-03 	 Noimproved! in 20 tirals 	timeConsumed: 1.242e-01 mins
+Epoch: 130 	 lr: 2.000e-03 	 Loss: 1.540e-02 	 Loss0: 3.115e+13 	 Loss1: 5.553e-03 	 Noimproved! in 30 tirals 	timeConsumed: 1.338e-01 mins
+Epoch: 140 	 lr: 2.000e-03 	 Loss: 1.378e-02 	 Loss0: 2.751e+13 	 Loss1: 4.979e-03 	 Improved! 	timeConsumed: 1.433e-01 mins
+Epoch: 150 	 lr: 2.000e-03 	 Loss: 1.783e-02 	 Loss0: 5.185e+13 	 Loss1: 6.087e-03 	 Noimproved! in 10 tirals 	timeConsumed: 1.529e-01 mins
+Epoch: 160 	 lr: 2.000e-03 	 Loss: 1.387e-02 	 Loss0: 2.492e+13 	 Loss1: 5.068e-03 	 Noimproved! in 20 tirals 	timeConsumed: 1.621e-01 mins
+Epoch: 170 	 lr: 2.000e-03 	 Loss: 1.329e-02 	 Loss0: 2.658e+13 	 Loss1: 4.799e-03 	 Improved! 	timeConsumed: 1.717e-01 mins
+Epoch: 180 	 lr: 2.000e-03 	 Loss: 1.611e-02 	 Loss0: 6.637e+13 	 Loss1: 5.078e-03 	 Noimproved! in 10 tirals 	timeConsumed: 1.812e-01 mins
+Epoch: 190 	 lr: 2.000e-03 	 Loss: 2.033e-02 	 Loss0: 1.123e+14 	 Loss1: 5.788e-03 	 Noimproved! in 20 tirals 	timeConsumed: 1.904e-01 mins
+Epoch: 200 	 lr: 2.000e-03 	 Loss: 1.180e-02 	 Loss0: 1.990e+13 	 Loss1: 4.340e-03 	 Improved! 	timeConsumed: 1.997e-01 mins
+Epoch: 210 	 lr: 2.000e-03 	 Loss: 1.305e-02 	 Loss0: 4.458e+13 	 Loss1: 4.314e-03 	 Noimproved! in 10 tirals 	timeConsumed: 2.092e-01 mins
+Epoch: 220 	 lr: 2.000e-03 	 Loss: 1.218e-02 	 Loss0: 2.971e+13 	 Loss1: 4.282e-03 	 Noimproved! in 20 tirals 	timeConsumed: 2.184e-01 mins
+Epoch: 230 	 lr: 2.000e-03 	 Loss: 2.793e-02 	 Loss0: 2.253e+14 	 Loss1: 6.410e-03 	 Noimproved! in 30 tirals 	timeConsumed: 2.279e-01 mins
+Epoch: 240 	 lr: 2.000e-03 	 Loss: 1.436e-02 	 Loss0: 4.593e+13 	 Loss1: 4.813e-03 	 Noimproved! in 40 tirals 	timeConsumed: 2.371e-01 mins
+Epoch: 250 	 lr: 2.000e-03 	 Loss: 1.951e-02 	 Loss0: 1.363e+14 	 Loss1: 4.934e-03 	 Noimproved! in 50 tirals 	timeConsumed: 2.464e-01 mins
+Epoch: 260 	 lr: 2.000e-03 	 Loss: 1.188e-02 	 Loss0: 2.252e+13 	 Loss1: 4.317e-03 	 Noimproved! in 60 tirals 	timeConsumed: 2.556e-01 mins
+Epoch: 270 	 lr: 2.000e-03 	 Loss: 1.122e-02 	 Loss0: 2.089e+13 	 Loss1: 4.085e-03 	 Improved! 	timeConsumed: 2.647e-01 mins
+Epoch: 280 	 lr: 2.000e-03 	 Loss: 1.403e-02 	 Loss0: 3.927e+13 	 Loss1: 4.824e-03 	 Noimproved! in 10 tirals 	timeConsumed: 2.742e-01 mins
+Epoch: 290 	 lr: 2.000e-03 	 Loss: 1.257e-02 	 Loss0: 3.045e+13 	 Loss1: 4.422e-03 	 Noimproved! in 20 tirals 	timeConsumed: 2.835e-01 mins
+Epoch: 300 	 lr: 2.000e-03 	 Loss: 1.130e-02 	 Loss0: 2.528e+13 	 Loss1: 4.024e-03 	 Noimproved! in 30 tirals 	timeConsumed: 2.924e-01 mins
+Epoch: 310 	 lr: 2.000e-03 	 Loss: 1.942e-02 	 Loss0: 1.000e+14 	 Loss1: 5.685e-03 	 Noimproved! in 40 tirals 	timeConsumed: 3.016e-01 mins
+Epoch: 320 	 lr: 2.000e-03 	 Loss: 5.808e-02 	 Loss0: 6.840e+14 	 Loss1: 8.659e-03 	 Noimproved! in 50 tirals 	timeConsumed: 3.110e-01 mins
+Epoch: 330 	 lr: 2.000e-03 	 Loss: 1.223e-02 	 Loss0: 3.007e+13 	 Loss1: 4.294e-03 	 Noimproved! in 60 tirals 	timeConsumed: 3.203e-01 mins
+Epoch: 340 	 lr: 2.000e-03 	 Loss: 1.084e-02 	 Loss0: 1.760e+13 	 Loss1: 4.001e-03 	 Improved! 	timeConsumed: 3.296e-01 mins
+Epoch: 350 	 lr: 2.000e-03 	 Loss: 1.130e-02 	 Loss0: 1.695e+13 	 Loss1: 4.204e-03 	 Noimproved! in 10 tirals 	timeConsumed: 3.393e-01 mins
+Epoch: 360 	 lr: 2.000e-03 	 Loss: 1.305e-02 	 Loss0: 3.898e+13 	 Loss1: 4.432e-03 	 Noimproved! in 20 tirals 	timeConsumed: 3.488e-01 mins
+Epoch: 370 	 lr: 2.000e-03 	 Loss: 1.731e-02 	 Loss0: 1.159e+14 	 Loss1: 4.487e-03 	 Noimproved! in 30 tirals 	timeConsumed: 3.584e-01 mins
+Epoch: 380 	 lr: 2.000e-03 	 Loss: 1.042e-02 	 Loss0: 1.836e+13 	 Loss1: 3.818e-03 	 Improved! 	timeConsumed: 3.680e-01 mins
+Epoch: 390 	 lr: 2.000e-03 	 Loss: 1.418e-02 	 Loss0: 5.045e+13 	 Loss1: 4.643e-03 	 Noimproved! in 10 tirals 	timeConsumed: 3.773e-01 mins
+Epoch: 400 	 lr: 2.000e-03 	 Loss: 1.054e-02 	 Loss0: 1.684e+13 	 Loss1: 3.898e-03 	 Noimproved! in 20 tirals 	timeConsumed: 3.863e-01 mins
+Epoch: 410 	 lr: 2.000e-03 	 Loss: 1.121e-02 	 Loss0: 2.549e+13 	 Loss1: 3.980e-03 	 Noimproved! in 30 tirals 	timeConsumed: 3.956e-01 mins
+Epoch: 420 	 lr: 2.000e-03 	 Loss: 1.151e-02 	 Loss0: 3.419e+13 	 Loss1: 3.914e-03 	 Noimproved! in 40 tirals 	timeConsumed: 4.052e-01 mins
+Epoch: 430 	 lr: 2.000e-03 	 Loss: 1.072e-02 	 Loss0: 2.476e+13 	 Loss1: 3.801e-03 	 Noimproved! in 50 tirals 	timeConsumed: 4.141e-01 mins
+Epoch: 440 	 lr: 2.000e-03 	 Loss: 1.114e-02 	 Loss0: 1.503e+13 	 Loss1: 4.180e-03 	 Noimproved! in 60 tirals 	timeConsumed: 4.236e-01 mins
+Epoch: 450 	 lr: 2.000e-03 	 Loss: 1.269e-02 	 Loss0: 4.963e+13 	 Loss1: 4.057e-03 	 Noimproved! in 70 tirals 	timeConsumed: 4.329e-01 mins
+Epoch: 460 	 lr: 2.000e-03 	 Loss: 1.622e-02 	 Loss0: 8.211e+13 	 Loss1: 4.780e-03 	 Noimproved! in 80 tirals 	timeConsumed: 4.423e-01 mins
+Epoch: 470 	 lr: 2.000e-03 	 Loss: 1.699e-02 	 Loss0: 7.669e+13 	 Loss1: 5.209e-03 	 Noimproved! in 90 tirals 	timeConsumed: 4.515e-01 mins
+Epoch: 480 	 lr: 2.000e-03 	 Loss: 1.446e-02 	 Loss0: 5.600e+13 	 Loss1: 4.637e-03 	 Noimproved! in 100 tirals 	timeConsumed: 4.606e-01 mins
+Epoch: 490 	 lr: 2.000e-03 	 Loss: 1.025e-02 	 Loss0: 1.580e+13 	 Loss1: 3.805e-03 	 Improved! 	timeConsumed: 4.701e-01 mins
+Epoch: 500 	 lr: 2.000e-03 	 Loss: 1.564e-02 	 Loss0: 8.087e+13 	 Loss1: 4.574e-03 	 Noimproved! in 10 tirals 	timeConsumed: 4.807e-01 mins
+Epoch: 510 	 lr: 2.000e-03 	 Loss: 1.191e-02 	 Loss0: 1.969e+13 	 Loss1: 4.393e-03 	 Noimproved! in 20 tirals 	timeConsumed: 4.907e-01 mins
+Epoch: 520 	 lr: 2.000e-03 	 Loss: 1.183e-02 	 Loss0: 3.882e+13 	 Loss1: 3.945e-03 	 Noimproved! in 30 tirals 	timeConsumed: 5.019e-01 mins
+Epoch: 530 	 lr: 2.000e-03 	 Loss: 2.067e-02 	 Loss0: 1.383e+14 	 Loss1: 5.361e-03 	 Noimproved! in 40 tirals 	timeConsumed: 5.126e-01 mins
+Epoch: 540 	 lr: 2.000e-03 	 Loss: 1.039e-02 	 Loss0: 2.080e+13 	 Loss1: 3.751e-03 	 Noimproved! in 50 tirals 	timeConsumed: 5.229e-01 mins
+Epoch: 550 	 lr: 2.000e-03 	 Loss: 1.086e-02 	 Loss0: 2.619e+13 	 Loss1: 3.825e-03 	 Noimproved! in 60 tirals 	timeConsumed: 5.341e-01 mins
+Epoch: 560 	 lr: 2.000e-03 	 Loss: 1.132e-02 	 Loss0: 3.436e+13 	 Loss1: 3.834e-03 	 Noimproved! in 70 tirals 	timeConsumed: 5.445e-01 mins
+Epoch: 570 	 lr: 2.000e-03 	 Loss: 1.012e-02 	 Loss0: 1.509e+13 	 Loss1: 3.766e-03 	 Improved! 	timeConsumed: 5.552e-01 mins
+Epoch: 580 	 lr: 2.000e-03 	 Loss: 1.013e-02 	 Loss0: 2.394e+13 	 Loss1: 3.579e-03 	 Noimproved! in 10 tirals 	timeConsumed: 5.657e-01 mins
+Epoch: 590 	 lr: 2.000e-03 	 Loss: 1.014e-02 	 Loss0: 1.797e+13 	 Loss1: 3.711e-03 	 Noimproved! in 20 tirals 	timeConsumed: 5.763e-01 mins
+Epoch: 600 	 lr: 2.000e-03 	 Loss: 1.036e-02 	 Loss0: 3.153e+13 	 Loss1: 3.506e-03 	 Noimproved! in 30 tirals 	timeConsumed: 5.859e-01 mins
+Epoch: 610 	 lr: 2.000e-03 	 Loss: 1.677e-02 	 Loss0: 9.776e+13 	 Loss1: 4.662e-03 	 Noimproved! in 40 tirals 	timeConsumed: 5.953e-01 mins
+Epoch: 620 	 lr: 2.000e-03 	 Loss: 8.914e-03 	 Loss0: 8.506e+12 	 Loss1: 3.421e-03 	 Improved! 	timeConsumed: 6.061e-01 mins
+Epoch: 630 	 lr: 2.000e-03 	 Loss: 9.283e-03 	 Loss0: 1.176e+13 	 Loss1: 3.500e-03 	 Noimproved! in 10 tirals 	timeConsumed: 6.162e-01 mins
+Epoch: 640 	 lr: 2.000e-03 	 Loss: 1.051e-02 	 Loss0: 2.423e+13 	 Loss1: 3.724e-03 	 Noimproved! in 20 tirals 	timeConsumed: 6.266e-01 mins
+Epoch: 650 	 lr: 2.000e-03 	 Loss: 1.015e-02 	 Loss0: 1.984e+13 	 Loss1: 3.677e-03 	 Noimproved! in 30 tirals 	timeConsumed: 6.374e-01 mins
+Epoch: 660 	 lr: 2.000e-03 	 Loss: 1.078e-02 	 Loss0: 3.263e+13 	 Loss1: 3.651e-03 	 Noimproved! in 40 tirals 	timeConsumed: 6.490e-01 mins
+Epoch: 670 	 lr: 2.000e-03 	 Loss: 9.786e-03 	 Loss0: 2.708e+13 	 Loss1: 3.371e-03 	 Noimproved! in 50 tirals 	timeConsumed: 6.591e-01 mins
+Epoch: 680 	 lr: 2.000e-03 	 Loss: 9.459e-03 	 Loss0: 1.544e+13 	 Loss1: 3.491e-03 	 Noimproved! in 60 tirals 	timeConsumed: 6.696e-01 mins
+Epoch: 690 	 lr: 2.000e-03 	 Loss: 9.685e-03 	 Loss0: 1.437e+13 	 Loss1: 3.606e-03 	 Noimproved! in 70 tirals 	timeConsumed: 6.798e-01 mins
+Epoch: 700 	 lr: 2.000e-03 	 Loss: 8.841e-03 	 Loss0: 1.001e+13 	 Loss1: 3.359e-03 	 Improved! 	timeConsumed: 6.897e-01 mins
+Epoch: 710 	 lr: 2.000e-03 	 Loss: 1.157e-02 	 Loss0: 3.526e+13 	 Loss1: 3.915e-03 	 Noimproved! in 10 tirals 	timeConsumed: 6.994e-01 mins
+Epoch: 720 	 lr: 2.000e-03 	 Loss: 1.095e-02 	 Loss0: 4.175e+13 	 Loss1: 3.523e-03 	 Noimproved! in 20 tirals 	timeConsumed: 7.090e-01 mins
+Epoch: 730 	 lr: 2.000e-03 	 Loss: 1.007e-02 	 Loss0: 2.166e+13 	 Loss1: 3.604e-03 	 Noimproved! in 30 tirals 	timeConsumed: 7.181e-01 mins
+Epoch: 740 	 lr: 2.000e-03 	 Loss: 1.260e-02 	 Loss0: 4.424e+13 	 Loss1: 4.137e-03 	 Noimproved! in 40 tirals 	timeConsumed: 7.276e-01 mins
+Epoch: 750 	 lr: 2.000e-03 	 Loss: 1.171e-02 	 Loss0: 2.973e+13 	 Loss1: 4.090e-03 	 Noimproved! in 50 tirals 	timeConsumed: 7.373e-01 mins
+Epoch: 760 	 lr: 2.000e-03 	 Loss: 9.511e-03 	 Loss0: 1.738e+13 	 Loss1: 3.470e-03 	 Noimproved! in 60 tirals 	timeConsumed: 7.469e-01 mins
+Epoch: 770 	 lr: 2.000e-03 	 Loss: 9.378e-03 	 Loss0: 9.158e+12 	 Loss1: 3.595e-03 	 Noimproved! in 70 tirals 	timeConsumed: 7.566e-01 mins
+Epoch: 780 	 lr: 2.000e-03 	 Loss: 1.092e-02 	 Loss0: 2.684e+13 	 Loss1: 3.836e-03 	 Noimproved! in 80 tirals 	timeConsumed: 7.660e-01 mins
+Epoch: 790 	 lr: 2.000e-03 	 Loss: 9.487e-03 	 Loss0: 1.299e+13 	 Loss1: 3.556e-03 	 Noimproved! in 90 tirals 	timeConsumed: 7.757e-01 mins
+Epoch: 800 	 lr: 2.000e-03 	 Loss: 9.803e-03 	 Loss0: 1.070e+13 	 Loss1: 3.734e-03 	 Noimproved! in 100 tirals 	timeConsumed: 7.852e-01 mins
+Epoch: 810 	 lr: 2.000e-03 	 Loss: 1.207e-02 	 Loss0: 4.803e+13 	 Loss1: 3.840e-03 	 Noimproved! in 110 tirals 	timeConsumed: 7.949e-01 mins
+Epoch: 820 	 lr: 2.000e-03 	 Loss: 9.890e-03 	 Loss0: 2.224e+13 	 Loss1: 3.518e-03 	 Noimproved! in 120 tirals 	timeConsumed: 8.042e-01 mins
+Epoch: 830 	 lr: 2.000e-03 	 Loss: 8.411e-03 	 Loss0: 9.855e+12 	 Loss1: 3.189e-03 	 Improved! 	timeConsumed: 8.140e-01 mins
+Epoch: 840 	 lr: 2.000e-03 	 Loss: 8.167e-03 	 Loss0: 7.243e+12 	 Loss1: 3.147e-03 	 Improved! 	timeConsumed: 8.243e-01 mins
+Epoch: 850 	 lr: 2.000e-03 	 Loss: 1.296e-02 	 Loss0: 4.154e+13 	 Loss1: 4.341e-03 	 Noimproved! in 10 tirals 	timeConsumed: 8.349e-01 mins
+Epoch: 860 	 lr: 2.000e-03 	 Loss: 1.069e-02 	 Loss0: 2.963e+13 	 Loss1: 3.682e-03 	 Noimproved! in 20 tirals 	timeConsumed: 8.447e-01 mins
+Epoch: 870 	 lr: 2.000e-03 	 Loss: 1.224e-02 	 Loss0: 4.482e+13 	 Loss1: 3.980e-03 	 Noimproved! in 30 tirals 	timeConsumed: 8.557e-01 mins
+Epoch: 880 	 lr: 2.000e-03 	 Loss: 1.376e-02 	 Loss0: 2.167e+13 	 Loss1: 5.094e-03 	 Noimproved! in 40 tirals 	timeConsumed: 8.657e-01 mins
+Epoch: 890 	 lr: 2.000e-03 	 Loss: 9.367e-03 	 Loss0: 1.953e+13 	 Loss1: 3.366e-03 	 Noimproved! in 50 tirals 	timeConsumed: 8.760e-01 mins
+Epoch: 900 	 lr: 2.000e-03 	 Loss: 1.269e-02 	 Loss0: 5.244e+13 	 Loss1: 3.996e-03 	 Noimproved! in 60 tirals 	timeConsumed: 8.865e-01 mins
+Epoch: 910 	 lr: 2.000e-03 	 Loss: 1.015e-02 	 Loss0: 1.758e+13 	 Loss1: 3.725e-03 	 Noimproved! in 70 tirals 	timeConsumed: 8.965e-01 mins
+Epoch: 920 	 lr: 2.000e-03 	 Loss: 8.812e-03 	 Loss0: 8.261e+12 	 Loss1: 3.385e-03 	 Noimproved! in 80 tirals 	timeConsumed: 9.071e-01 mins
+Epoch: 930 	 lr: 2.000e-03 	 Loss: 8.902e-03 	 Loss0: 1.067e+13 	 Loss1: 3.370e-03 	 Noimproved! in 90 tirals 	timeConsumed: 9.174e-01 mins
+Epoch: 940 	 lr: 2.000e-03 	 Loss: 1.085e-02 	 Loss0: 3.352e+13 	 Loss1: 3.663e-03 	 Noimproved! in 100 tirals 	timeConsumed: 9.279e-01 mins
+Epoch: 950 	 lr: 2.000e-03 	 Loss: 8.781e-03 	 Loss0: 1.335e+13 	 Loss1: 3.262e-03 	 Noimproved! in 110 tirals 	timeConsumed: 9.391e-01 mins
+Epoch: 960 	 lr: 2.000e-03 	 Loss: 8.208e-03 	 Loss0: 1.207e+13 	 Loss1: 3.058e-03 	 Noimproved! in 120 tirals 	timeConsumed: 9.501e-01 mins
+Epoch: 970 	 lr: 2.000e-03 	 Loss: 3.102e-02 	 Loss0: 2.983e+14 	 Loss1: 6.076e-03 	 Noimproved! in 130 tirals 	timeConsumed: 9.603e-01 mins
+Epoch: 980 	 lr: 2.000e-03 	 Loss: 1.142e-02 	 Loss0: 3.075e+13 	 Loss1: 3.954e-03 	 Noimproved! in 140 tirals 	timeConsumed: 9.704e-01 mins
+Epoch: 990 	 lr: 2.000e-03 	 Loss: 8.937e-03 	 Loss0: 7.949e+12 	 Loss1: 3.443e-03 	 Noimproved! in 150 tirals 	timeConsumed: 9.804e-01 mins
+Epoch: 1000 	 lr: 2.000e-03 	 Loss: 1.089e-02 	 Loss0: 4.836e+13 	 Loss1: 3.354e-03 	 Noimproved! in 160 tirals 	timeConsumed: 9.903e-01 mins
+Epoch: 1010 	 lr: 2.000e-03 	 Loss: 8.162e-03 	 Loss0: 1.256e+13 	 Loss1: 3.029e-03 	 Improved! 	timeConsumed: 1.001e+00 mins
+Epoch: 1020 	 lr: 2.000e-03 	 Loss: 1.097e-02 	 Loss0: 3.299e+13 	 Loss1: 3.720e-03 	 Noimproved! in 10 tirals 	timeConsumed: 1.013e+00 mins
+Epoch: 1030 	 lr: 2.000e-03 	 Loss: 1.229e-02 	 Loss0: 3.958e+13 	 Loss1: 4.113e-03 	 Noimproved! in 20 tirals 	timeConsumed: 1.023e+00 mins
+Epoch: 1040 	 lr: 2.000e-03 	 Loss: 1.355e-02 	 Loss0: 4.951e+13 	 Loss1: 4.406e-03 	 Noimproved! in 30 tirals 	timeConsumed: 1.033e+00 mins
+Epoch: 1050 	 lr: 2.000e-03 	 Loss: 1.542e-02 	 Loss0: 7.366e+13 	 Loss1: 4.642e-03 	 Noimproved! in 40 tirals 	timeConsumed: 1.043e+00 mins
+Epoch: 1060 	 lr: 2.000e-03 	 Loss: 1.161e-02 	 Loss0: 2.355e+13 	 Loss1: 4.187e-03 	 Noimproved! in 50 tirals 	timeConsumed: 1.052e+00 mins
+Epoch: 1070 	 lr: 2.000e-03 	 Loss: 1.269e-02 	 Loss0: 4.181e+13 	 Loss1: 4.226e-03 	 Noimproved! in 60 tirals 	timeConsumed: 1.062e+00 mins
+Epoch: 1080 	 lr: 2.000e-03 	 Loss: 1.215e-02 	 Loss0: 3.107e+13 	 Loss1: 4.242e-03 	 Noimproved! in 70 tirals 	timeConsumed: 1.073e+00 mins
+Epoch: 1090 	 lr: 2.000e-03 	 Loss: 8.717e-03 	 Loss0: 1.355e+13 	 Loss1: 3.232e-03 	 Noimproved! in 80 tirals 	timeConsumed: 1.082e+00 mins
+Epoch: 1100 	 lr: 2.000e-03 	 Loss: 8.477e-03 	 Loss0: 1.328e+13 	 Loss1: 3.141e-03 	 Noimproved! in 90 tirals 	timeConsumed: 1.091e+00 mins
+Epoch: 1110 	 lr: 2.000e-03 	 Loss: 1.222e-02 	 Loss0: 2.818e+13 	 Loss1: 4.330e-03 	 Noimproved! in 100 tirals 	timeConsumed: 1.101e+00 mins
+Epoch: 1120 	 lr: 2.000e-03 	 Loss: 9.163e-03 	 Loss0: 1.814e+13 	 Loss1: 3.313e-03 	 Noimproved! in 110 tirals 	timeConsumed: 1.111e+00 mins
+Epoch: 1130 	 lr: 2.000e-03 	 Loss: 9.520e-03 	 Loss0: 2.681e+13 	 Loss1: 3.269e-03 	 Noimproved! in 120 tirals 	timeConsumed: 1.120e+00 mins
+Epoch: 1140 	 lr: 2.000e-03 	 Loss: 1.098e-02 	 Loss0: 2.931e+13 	 Loss1: 3.806e-03 	 Noimproved! in 130 tirals 	timeConsumed: 1.130e+00 mins
+Epoch: 1150 	 lr: 2.000e-03 	 Loss: 1.034e-02 	 Loss0: 2.778e+13 	 Loss1: 3.581e-03 	 Noimproved! in 140 tirals 	timeConsumed: 1.140e+00 mins
+Epoch: 1160 	 lr: 2.000e-03 	 Loss: 1.258e-02 	 Loss0: 6.705e+13 	 Loss1: 3.636e-03 	 Noimproved! in 150 tirals 	timeConsumed: 1.149e+00 mins
+Epoch: 1170 	 lr: 2.000e-03 	 Loss: 9.275e-03 	 Loss0: 1.615e+13 	 Loss1: 3.402e-03 	 Noimproved! in 160 tirals 	timeConsumed: 1.159e+00 mins
+Epoch: 1180 	 lr: 2.000e-03 	 Loss: 9.839e-03 	 Loss0: 1.638e+13 	 Loss1: 3.625e-03 	 Noimproved! in 170 tirals 	timeConsumed: 1.168e+00 mins
+Epoch: 1190 	 lr: 2.000e-03 	 Loss: 1.083e-02 	 Loss0: 2.751e+13 	 Loss1: 3.783e-03 	 Noimproved! in 180 tirals 	timeConsumed: 1.178e+00 mins
+Epoch: 1200 	 lr: 2.000e-03 	 Loss: 1.012e-02 	 Loss0: 2.478e+13 	 Loss1: 3.556e-03 	 Noimproved! in 190 tirals 	timeConsumed: 1.187e+00 mins
+Epoch: 1210 	 lr: 2.000e-03 	 Loss: 9.839e-03 	 Loss0: 2.261e+13 	 Loss1: 3.490e-03 	 Noimproved! in 200 tirals 	timeConsumed: 1.198e+00 mins
+Epoch: 1220 	 lr: 2.000e-03 	 Loss: 9.782e-03 	 Loss0: 1.857e+13 	 Loss1: 3.554e-03 	 Noimproved! in 210 tirals 	timeConsumed: 1.208e+00 mins
+Epoch: 1230 	 lr: 2.000e-03 	 Loss: 9.821e-03 	 Loss0: 2.104e+13 	 Loss1: 3.516e-03 	 Noimproved! in 220 tirals 	timeConsumed: 1.218e+00 mins
+Epoch: 1240 	 lr: 2.000e-03 	 Loss: 9.840e-03 	 Loss0: 2.563e+13 	 Loss1: 3.424e-03 	 Noimproved! in 230 tirals 	timeConsumed: 1.229e+00 mins
+Epoch: 1250 	 lr: 2.000e-03 	 Loss: 9.805e-03 	 Loss0: 2.195e+13 	 Loss1: 3.490e-03 	 Noimproved! in 240 tirals 	timeConsumed: 1.239e+00 mins
+Epoch: 1260 	 lr: 2.000e-03 	 Loss: 1.609e-02 	 Loss0: 8.408e+13 	 Loss1: 4.684e-03 	 Noimproved! in 250 tirals 	timeConsumed: 1.250e+00 mins
+Epoch: 1270 	 lr: 2.000e-03 	 Loss: 1.168e-02 	 Loss0: 6.016e+13 	 Loss1: 3.419e-03 	 Noimproved! in 260 tirals 	timeConsumed: 1.259e+00 mins
+Epoch: 1280 	 lr: 2.000e-03 	 Loss: 1.094e-02 	 Loss0: 4.193e+13 	 Loss1: 3.516e-03 	 Noimproved! in 270 tirals 	timeConsumed: 1.277e+00 mins
+Epoch: 1290 	 lr: 2.000e-03 	 Loss: 9.060e-03 	 Loss0: 1.344e+13 	 Loss1: 3.373e-03 	 Noimproved! in 280 tirals 	timeConsumed: 1.292e+00 mins
+Epoch: 1300 	 lr: 2.000e-03 	 Loss: 1.020e-02 	 Loss0: 3.176e+13 	 Loss1: 3.437e-03 	 Noimproved! in 290 tirals 	timeConsumed: 1.307e+00 mins
+Epoch: 1310 	 lr: 2.000e-03 	 Loss: 8.747e-03 	 Loss0: 1.932e+13 	 Loss1: 3.119e-03 	 Noimproved! in 300 tirals 	timeConsumed: 1.318e+00 mins
+Epoch: 1320 	 lr: 2.000e-03 	 Loss: 1.318e-02 	 Loss0: 4.476e+13 	 Loss1: 4.360e-03 	 Noimproved! in 310 tirals 	timeConsumed: 1.328e+00 mins
+Epoch: 1330 	 lr: 2.000e-03 	 Loss: 9.146e-03 	 Loss0: 1.174e+13 	 Loss1: 3.445e-03 	 Noimproved! in 320 tirals 	timeConsumed: 1.338e+00 mins
+Epoch: 1340 	 lr: 2.000e-03 	 Loss: 1.046e-02 	 Loss0: 2.889e+13 	 Loss1: 3.603e-03 	 Noimproved! in 330 tirals 	timeConsumed: 1.347e+00 mins
+Epoch: 1350 	 lr: 2.000e-03 	 Loss: 1.230e-02 	 Loss0: 6.379e+13 	 Loss1: 3.591e-03 	 Noimproved! in 340 tirals 	timeConsumed: 1.357e+00 mins
+Epoch: 1360 	 lr: 2.000e-03 	 Loss: 1.258e-02 	 Loss0: 7.230e+13 	 Loss1: 3.521e-03 	 Noimproved! in 350 tirals 	timeConsumed: 1.366e+00 mins
+Epoch: 1370 	 lr: 2.000e-03 	 Loss: 1.015e-02 	 Loss0: 2.766e+13 	 Loss1: 3.507e-03 	 Noimproved! in 360 tirals 	timeConsumed: 1.375e+00 mins
+Epoch: 1380 	 lr: 2.000e-03 	 Loss: 8.637e-03 	 Loss0: 8.671e+12 	 Loss1: 3.306e-03 	 Noimproved! in 370 tirals 	timeConsumed: 1.385e+00 mins
+Epoch: 1390 	 lr: 2.000e-03 	 Loss: 1.009e-02 	 Loss0: 1.739e+13 	 Loss1: 3.705e-03 	 Noimproved! in 380 tirals 	timeConsumed: 1.394e+00 mins
+Epoch: 1400 	 lr: 2.000e-03 	 Loss: 1.915e-02 	 Loss0: 1.408e+14 	 Loss1: 4.691e-03 	 Noimproved! in 390 tirals 	timeConsumed: 1.404e+00 mins
+Epoch: 1410 	 lr: 2.000e-03 	 Loss: 9.730e-03 	 Loss0: 1.790e+13 	 Loss1: 3.548e-03 	 Noimproved! in 400 tirals 	timeConsumed: 1.414e+00 mins
+Epoch: 1420 	 lr: 2.000e-03 	 Loss: 9.097e-03 	 Loss0: 1.320e+13 	 Loss1: 3.393e-03 	 Noimproved! in 410 tirals 	timeConsumed: 1.424e+00 mins
+Epoch: 1430 	 lr: 2.000e-03 	 Loss: 1.850e-02 	 Loss0: 1.420e+14 	 Loss1: 4.403e-03 	 Noimproved! in 420 tirals 	timeConsumed: 1.433e+00 mins
+Epoch: 1440 	 lr: 2.000e-03 	 Loss: 1.004e-02 	 Loss0: 2.180e+13 	 Loss1: 3.588e-03 	 Noimproved! in 430 tirals 	timeConsumed: 1.443e+00 mins
+Epoch: 1450 	 lr: 2.000e-03 	 Loss: 1.001e-02 	 Loss0: 3.677e+13 	 Loss1: 3.251e-03 	 Noimproved! in 440 tirals 	timeConsumed: 1.453e+00 mins
+Epoch: 1460 	 lr: 2.000e-03 	 Loss: 1.387e-02 	 Loss0: 6.160e+13 	 Loss1: 4.273e-03 	 Noimproved! in 450 tirals 	timeConsumed: 1.462e+00 mins
+Epoch: 1470 	 lr: 2.000e-03 	 Loss: 8.398e-03 	 Loss0: 1.376e+13 	 Loss1: 3.099e-03 	 Noimproved! in 460 tirals 	timeConsumed: 1.472e+00 mins
+Epoch: 1480 	 lr: 2.000e-03 	 Loss: 7.950e-03 	 Loss0: 8.404e+12 	 Loss1: 3.034e-03 	 Improved! 	timeConsumed: 1.482e+00 mins
+Epoch: 1490 	 lr: 2.000e-03 	 Loss: 9.877e-03 	 Loss0: 1.600e+13 	 Loss1: 3.648e-03 	 Noimproved! in 10 tirals 	timeConsumed: 1.491e+00 mins
+Epoch: 1500 	 lr: 2.000e-03 	 Loss: 1.518e-02 	 Loss0: 1.177e+14 	 Loss1: 3.586e-03 	 Noimproved! in 20 tirals 	timeConsumed: 1.501e+00 mins
+Epoch: 1510 	 lr: 2.000e-03 	 Loss: 1.177e-02 	 Loss0: 5.249e+13 	 Loss1: 3.622e-03 	 Noimproved! in 30 tirals 	timeConsumed: 1.510e+00 mins
+Epoch: 1520 	 lr: 2.000e-03 	 Loss: 9.889e-03 	 Loss0: 9.544e+12 	 Loss1: 3.793e-03 	 Noimproved! in 40 tirals 	timeConsumed: 1.520e+00 mins
+Epoch: 1530 	 lr: 2.000e-03 	 Loss: 1.321e-02 	 Loss0: 7.937e+13 	 Loss1: 3.621e-03 	 Noimproved! in 50 tirals 	timeConsumed: 1.529e+00 mins
+Epoch: 1540 	 lr: 2.000e-03 	 Loss: 1.013e-02 	 Loss0: 2.898e+13 	 Loss1: 3.471e-03 	 Noimproved! in 60 tirals 	timeConsumed: 1.539e+00 mins
+Epoch: 1550 	 lr: 2.000e-03 	 Loss: 8.890e-03 	 Loss0: 1.524e+13 	 Loss1: 3.265e-03 	 Noimproved! in 70 tirals 	timeConsumed: 1.548e+00 mins
+Epoch: 1560 	 lr: 2.000e-03 	 Loss: 1.534e-02 	 Loss0: 1.164e+14 	 Loss1: 3.678e-03 	 Noimproved! in 80 tirals 	timeConsumed: 1.558e+00 mins
+Epoch: 1570 	 lr: 2.000e-03 	 Loss: 1.293e-02 	 Loss0: 8.199e+13 	 Loss1: 3.453e-03 	 Noimproved! in 90 tirals 	timeConsumed: 1.567e+00 mins
+Epoch: 1580 	 lr: 2.000e-03 	 Loss: 1.956e-02 	 Loss0: 1.832e+14 	 Loss1: 3.941e-03 	 Noimproved! in 100 tirals 	timeConsumed: 1.577e+00 mins
+Epoch: 1590 	 lr: 2.000e-03 	 Loss: 1.004e-02 	 Loss0: 2.677e+13 	 Loss1: 3.480e-03 	 Noimproved! in 110 tirals 	timeConsumed: 1.586e+00 mins
+Epoch: 1600 	 lr: 2.000e-03 	 Loss: 1.071e-02 	 Loss0: 3.121e+13 	 Loss1: 3.657e-03 	 Noimproved! in 120 tirals 	timeConsumed: 1.596e+00 mins
+Epoch: 1610 	 lr: 2.000e-03 	 Loss: 1.116e-02 	 Loss0: 2.271e+13 	 Loss1: 4.021e-03 	 Noimproved! in 130 tirals 	timeConsumed: 1.605e+00 mins
+Epoch: 1620 	 lr: 2.000e-03 	 Loss: 1.115e-02 	 Loss0: 2.428e+13 	 Loss1: 3.983e-03 	 Noimproved! in 140 tirals 	timeConsumed: 1.614e+00 mins
+Epoch: 1630 	 lr: 2.000e-03 	 Loss: 9.696e-03 	 Loss0: 2.190e+13 	 Loss1: 3.447e-03 	 Noimproved! in 150 tirals 	timeConsumed: 1.624e+00 mins
+Epoch: 1640 	 lr: 2.000e-03 	 Loss: 1.011e-02 	 Loss0: 3.962e+13 	 Loss1: 3.229e-03 	 Noimproved! in 160 tirals 	timeConsumed: 1.634e+00 mins
+Epoch: 1650 	 lr: 2.000e-03 	 Loss: 9.821e-03 	 Loss0: 2.326e+13 	 Loss1: 3.468e-03 	 Noimproved! in 170 tirals 	timeConsumed: 1.643e+00 mins
+Epoch: 1660 	 lr: 2.000e-03 	 Loss: 9.599e-03 	 Loss0: 1.098e+13 	 Loss1: 3.644e-03 	 Noimproved! in 180 tirals 	timeConsumed: 1.653e+00 mins
+Epoch: 1670 	 lr: 2.000e-03 	 Loss: 9.136e-03 	 Loss0: 6.505e+12 	 Loss1: 3.555e-03 	 Noimproved! in 190 tirals 	timeConsumed: 1.662e+00 mins
+Epoch: 1680 	 lr: 2.000e-03 	 Loss: 1.238e-02 	 Loss0: 3.110e+13 	 Loss1: 4.334e-03 	 Noimproved! in 200 tirals 	timeConsumed: 1.671e+00 mins
+Epoch: 1690 	 lr: 2.000e-03 	 Loss: 8.455e-03 	 Loss0: 4.018e+12 	 Loss1: 3.333e-03 	 Noimproved! in 210 tirals 	timeConsumed: 1.681e+00 mins
+Epoch: 1700 	 lr: 2.000e-03 	 Loss: 8.908e-03 	 Loss0: 1.020e+13 	 Loss1: 3.382e-03 	 Noimproved! in 220 tirals 	timeConsumed: 1.690e+00 mins
+Epoch: 1710 	 lr: 2.000e-03 	 Loss: 8.455e-03 	 Loss0: 9.108e+12 	 Loss1: 3.223e-03 	 Noimproved! in 230 tirals 	timeConsumed: 1.700e+00 mins
+Epoch: 1720 	 lr: 2.000e-03 	 Loss: 9.853e-03 	 Loss0: 2.181e+13 	 Loss1: 3.513e-03 	 Noimproved! in 240 tirals 	timeConsumed: 1.710e+00 mins
+Epoch: 1730 	 lr: 2.000e-03 	 Loss: 1.174e-02 	 Loss0: 6.068e+13 	 Loss1: 3.431e-03 	 Noimproved! in 250 tirals 	timeConsumed: 1.721e+00 mins
+Epoch: 1740 	 lr: 2.000e-03 	 Loss: 9.320e-03 	 Loss0: 1.389e+13 	 Loss1: 3.469e-03 	 Noimproved! in 260 tirals 	timeConsumed: 1.731e+00 mins
+Epoch: 1750 	 lr: 2.000e-03 	 Loss: 1.141e-02 	 Loss0: 6.459e+13 	 Loss1: 3.215e-03 	 Noimproved! in 270 tirals 	timeConsumed: 1.741e+00 mins
+Epoch: 1760 	 lr: 2.000e-03 	 Loss: 8.212e-03 	 Loss0: 1.512e+13 	 Loss1: 2.994e-03 	 Noimproved! in 280 tirals 	timeConsumed: 1.751e+00 mins
+Epoch: 1770 	 lr: 2.000e-03 	 Loss: 9.758e-03 	 Loss0: 2.850e+13 	 Loss1: 3.329e-03 	 Noimproved! in 290 tirals 	timeConsumed: 1.762e+00 mins
+Epoch: 1780 	 lr: 2.000e-03 	 Loss: 8.625e-03 	 Loss0: 1.367e+13 	 Loss1: 3.192e-03 	 Noimproved! in 300 tirals 	timeConsumed: 1.771e+00 mins
+Epoch: 1790 	 lr: 2.000e-03 	 Loss: 2.201e-02 	 Loss0: 1.895e+14 	 Loss1: 4.792e-03 	 Noimproved! in 310 tirals 	timeConsumed: 1.781e+00 mins
+Epoch: 1800 	 lr: 2.000e-03 	 Loss: 1.059e-02 	 Loss0: 2.496e+13 	 Loss1: 3.741e-03 	 Noimproved! in 320 tirals 	timeConsumed: 1.791e+00 mins
+Epoch: 1810 	 lr: 2.000e-03 	 Loss: 9.885e-03 	 Loss0: 1.667e+13 	 Loss1: 3.637e-03 	 Noimproved! in 330 tirals 	timeConsumed: 1.800e+00 mins
+Epoch: 1820 	 lr: 2.000e-03 	 Loss: 1.047e-02 	 Loss0: 3.584e+13 	 Loss1: 3.459e-03 	 Noimproved! in 340 tirals 	timeConsumed: 1.811e+00 mins
+Epoch: 1830 	 lr: 2.000e-03 	 Loss: 1.060e-02 	 Loss0: 1.496e+13 	 Loss1: 3.965e-03 	 Noimproved! in 350 tirals 	timeConsumed: 1.821e+00 mins
+Epoch: 1840 	 lr: 2.000e-03 	 Loss: 1.079e-02 	 Loss0: 3.222e+13 	 Loss1: 3.665e-03 	 Noimproved! in 360 tirals 	timeConsumed: 1.831e+00 mins
+Epoch: 1850 	 lr: 2.000e-03 	 Loss: 1.109e-02 	 Loss0: 3.108e+13 	 Loss1: 3.811e-03 	 Noimproved! in 370 tirals 	timeConsumed: 1.841e+00 mins
+Epoch: 1860 	 lr: 2.000e-03 	 Loss: 1.120e-02 	 Loss0: 3.431e+13 	 Loss1: 3.787e-03 	 Noimproved! in 380 tirals 	timeConsumed: 1.851e+00 mins
+Epoch: 1870 	 lr: 2.000e-03 	 Loss: 1.100e-02 	 Loss0: 3.070e+13 	 Loss1: 3.782e-03 	 Noimproved! in 390 tirals 	timeConsumed: 1.861e+00 mins
+Epoch: 1880 	 lr: 2.000e-03 	 Loss: 9.789e-03 	 Loss0: 1.618e+13 	 Loss1: 3.609e-03 	 Noimproved! in 400 tirals 	timeConsumed: 1.872e+00 mins
+Epoch: 1890 	 lr: 2.000e-03 	 Loss: 9.481e-03 	 Loss0: 2.546e+13 	 Loss1: 3.283e-03 	 Noimproved! in 410 tirals 	timeConsumed: 1.882e+00 mins
+Epoch: 1900 	 lr: 2.000e-03 	 Loss: 8.231e-03 	 Loss0: 9.722e+12 	 Loss1: 3.118e-03 	 Noimproved! in 420 tirals 	timeConsumed: 1.892e+00 mins
+Epoch: 1910 	 lr: 2.000e-03 	 Loss: 1.116e-02 	 Loss0: 4.087e+13 	 Loss1: 3.629e-03 	 Noimproved! in 430 tirals 	timeConsumed: 1.902e+00 mins
+Epoch: 1920 	 lr: 2.000e-03 	 Loss: 9.007e-03 	 Loss0: 1.520e+13 	 Loss1: 3.313e-03 	 Noimproved! in 440 tirals 	timeConsumed: 1.915e+00 mins
+Epoch: 1930 	 lr: 2.000e-03 	 Loss: 8.285e-03 	 Loss0: 1.701e+13 	 Loss1: 2.982e-03 	 Noimproved! in 450 tirals 	timeConsumed: 1.925e+00 mins
+Epoch: 1940 	 lr: 2.000e-03 	 Loss: 9.035e-03 	 Loss0: 2.024e+13 	 Loss1: 3.216e-03 	 Noimproved! in 460 tirals 	timeConsumed: 1.935e+00 mins
+Epoch: 1950 	 lr: 2.000e-03 	 Loss: 1.249e-02 	 Loss0: 6.939e+13 	 Loss1: 3.545e-03 	 Noimproved! in 470 tirals 	timeConsumed: 1.946e+00 mins
+Epoch: 1960 	 lr: 2.000e-03 	 Loss: 9.030e-03 	 Loss0: 1.557e+13 	 Loss1: 3.315e-03 	 Noimproved! in 480 tirals 	timeConsumed: 1.956e+00 mins
+Epoch: 1970 	 lr: 2.000e-03 	 Loss: 1.069e-02 	 Loss0: 2.508e+13 	 Loss1: 3.780e-03 	 Noimproved! in 490 tirals 	timeConsumed: 1.966e+00 mins
+Epoch: 1980 	 lr: 2.000e-03 	 Loss: 8.667e-03 	 Loss0: 2.045e+13 	 Loss1: 3.062e-03 	 Noimproved! in 500 tirals 	timeConsumed: 1.976e+00 mins
+Epoch: 1990 	 lr: 2.000e-03 	 Loss: 1.468e-02 	 Loss0: 2.891e+13 	 Loss1: 5.313e-03 	 Noimproved! in 510 tirals 	timeConsumed: 1.986e+00 mins
+Epoch: 2000 	 lr: 1.900e-03 	 Loss: 7.824e-03 	 Loss0: 9.181e+12 	 Loss1: 2.966e-03 	 Improved! 	timeConsumed: 1.995e+00 mins
+Epoch: 2010 	 lr: 1.900e-03 	 Loss: 7.380e-03 	 Loss0: 6.164e+12 	 Loss1: 2.851e-03 	 Improved! 	timeConsumed: 2.005e+00 mins
+Epoch: 2020 	 lr: 1.900e-03 	 Loss: 1.027e-02 	 Loss0: 2.595e+13 	 Loss1: 3.590e-03 	 Noimproved! in 10 tirals 	timeConsumed: 2.015e+00 mins
+Epoch: 2030 	 lr: 1.900e-03 	 Loss: 9.245e-03 	 Loss0: 1.585e+13 	 Loss1: 3.396e-03 	 Noimproved! in 20 tirals 	timeConsumed: 2.024e+00 mins
+Epoch: 2040 	 lr: 1.900e-03 	 Loss: 9.760e-03 	 Loss0: 2.689e+13 	 Loss1: 3.365e-03 	 Noimproved! in 30 tirals 	timeConsumed: 2.034e+00 mins
+Epoch: 2050 	 lr: 1.900e-03 	 Loss: 7.520e-03 	 Loss0: 7.130e+12 	 Loss1: 2.887e-03 	 Noimproved! in 40 tirals 	timeConsumed: 2.043e+00 mins
+Epoch: 2060 	 lr: 1.900e-03 	 Loss: 1.007e-02 	 Loss0: 1.521e+13 	 Loss1: 3.742e-03 	 Noimproved! in 50 tirals 	timeConsumed: 2.053e+00 mins
+Epoch: 2070 	 lr: 1.900e-03 	 Loss: 8.510e-03 	 Loss0: 1.605e+13 	 Loss1: 3.094e-03 	 Noimproved! in 60 tirals 	timeConsumed: 2.063e+00 mins
+Epoch: 2080 	 lr: 1.900e-03 	 Loss: 1.043e-02 	 Loss0: 3.314e+13 	 Loss1: 3.500e-03 	 Noimproved! in 70 tirals 	timeConsumed: 2.073e+00 mins
+Epoch: 2090 	 lr: 1.900e-03 	 Loss: 1.005e-02 	 Loss0: 3.172e+13 	 Loss1: 3.376e-03 	 Noimproved! in 80 tirals 	timeConsumed: 2.083e+00 mins
+Epoch: 2100 	 lr: 1.900e-03 	 Loss: 1.021e-02 	 Loss0: 1.941e+13 	 Loss1: 3.711e-03 	 Noimproved! in 90 tirals 	timeConsumed: 2.092e+00 mins
+Epoch: 2110 	 lr: 1.900e-03 	 Loss: 1.033e-02 	 Loss0: 3.546e+13 	 Loss1: 3.410e-03 	 Noimproved! in 100 tirals 	timeConsumed: 2.107e+00 mins
+Epoch: 2120 	 lr: 1.900e-03 	 Loss: 2.037e-02 	 Loss0: 1.870e+14 	 Loss1: 4.184e-03 	 Noimproved! in 110 tirals 	timeConsumed: 2.117e+00 mins
+Epoch: 2130 	 lr: 1.900e-03 	 Loss: 9.520e-03 	 Loss0: 2.311e+13 	 Loss1: 3.350e-03 	 Noimproved! in 120 tirals 	timeConsumed: 2.126e+00 mins
+Epoch: 2140 	 lr: 1.900e-03 	 Loss: 7.952e-03 	 Loss0: 8.838e+12 	 Loss1: 3.025e-03 	 Noimproved! in 130 tirals 	timeConsumed: 2.136e+00 mins
+Epoch: 2150 	 lr: 1.900e-03 	 Loss: 8.681e-03 	 Loss0: 2.220e+13 	 Loss1: 3.030e-03 	 Noimproved! in 140 tirals 	timeConsumed: 2.147e+00 mins
+Epoch: 2160 	 lr: 1.900e-03 	 Loss: 1.297e-02 	 Loss0: 6.326e+13 	 Loss1: 3.875e-03 	 Noimproved! in 150 tirals 	timeConsumed: 2.157e+00 mins
+Epoch: 2170 	 lr: 1.900e-03 	 Loss: 9.178e-03 	 Loss0: 8.249e+12 	 Loss1: 3.534e-03 	 Noimproved! in 160 tirals 	timeConsumed: 2.167e+00 mins
+Epoch: 2180 	 lr: 1.900e-03 	 Loss: 1.086e-02 	 Loss0: 3.453e+13 	 Loss1: 3.645e-03 	 Noimproved! in 170 tirals 	timeConsumed: 2.177e+00 mins
+Epoch: 2190 	 lr: 1.900e-03 	 Loss: 7.453e-03 	 Loss0: 1.052e+13 	 Loss1: 2.787e-03 	 Noimproved! in 180 tirals 	timeConsumed: 2.188e+00 mins
+Epoch: 2200 	 lr: 1.900e-03 	 Loss: 1.261e-02 	 Loss0: 4.231e+13 	 Loss1: 4.184e-03 	 Noimproved! in 190 tirals 	timeConsumed: 2.198e+00 mins
+Epoch: 2210 	 lr: 1.900e-03 	 Loss: 8.409e-03 	 Loss0: 1.821e+13 	 Loss1: 3.007e-03 	 Noimproved! in 200 tirals 	timeConsumed: 2.208e+00 mins
+Epoch: 2220 	 lr: 1.900e-03 	 Loss: 8.344e-03 	 Loss0: 1.724e+13 	 Loss1: 3.001e-03 	 Noimproved! in 210 tirals 	timeConsumed: 2.219e+00 mins
+Epoch: 2230 	 lr: 1.900e-03 	 Loss: 1.418e-02 	 Loss0: 8.294e+13 	 Loss1: 3.936e-03 	 Noimproved! in 220 tirals 	timeConsumed: 2.229e+00 mins
+Epoch: 2240 	 lr: 1.900e-03 	 Loss: 1.382e-02 	 Loss0: 9.257e+13 	 Loss1: 3.584e-03 	 Noimproved! in 230 tirals 	timeConsumed: 2.239e+00 mins
+Epoch: 2250 	 lr: 1.900e-03 	 Loss: 8.560e-03 	 Loss0: 2.234e+13 	 Loss1: 2.978e-03 	 Noimproved! in 240 tirals 	timeConsumed: 2.251e+00 mins
+Epoch: 2260 	 lr: 1.900e-03 	 Loss: 7.226e-03 	 Loss0: 6.636e+12 	 Loss1: 2.779e-03 	 Improved! 	timeConsumed: 2.262e+00 mins
+Epoch: 2270 	 lr: 1.900e-03 	 Loss: 8.557e-03 	 Loss0: 1.044e+13 	 Loss1: 3.235e-03 	 Noimproved! in 10 tirals 	timeConsumed: 2.272e+00 mins
+Epoch: 2280 	 lr: 1.900e-03 	 Loss: 2.100e-02 	 Loss0: 1.503e+14 	 Loss1: 5.236e-03 	 Noimproved! in 20 tirals 	timeConsumed: 2.284e+00 mins
+Epoch: 2290 	 lr: 1.900e-03 	 Loss: 9.873e-03 	 Loss0: 2.585e+13 	 Loss1: 3.433e-03 	 Noimproved! in 30 tirals 	timeConsumed: 2.294e+00 mins
+Epoch: 2300 	 lr: 1.900e-03 	 Loss: 6.761e-03 	 Loss0: 4.344e+12 	 Loss1: 2.641e-03 	 Improved! 	timeConsumed: 2.307e+00 mins
+Epoch: 2310 	 lr: 1.900e-03 	 Loss: 7.539e-03 	 Loss0: 9.087e+12 	 Loss1: 2.853e-03 	 Noimproved! in 10 tirals 	timeConsumed: 2.317e+00 mins
+Epoch: 2320 	 lr: 1.900e-03 	 Loss: 9.386e-03 	 Loss0: 1.797e+13 	 Loss1: 3.407e-03 	 Noimproved! in 20 tirals 	timeConsumed: 2.327e+00 mins
+Epoch: 2330 	 lr: 1.900e-03 	 Loss: 9.184e-03 	 Loss0: 1.358e+13 	 Loss1: 3.420e-03 	 Noimproved! in 30 tirals 	timeConsumed: 2.338e+00 mins
+Epoch: 2340 	 lr: 1.900e-03 	 Loss: 8.711e-03 	 Loss0: 1.225e+13 	 Loss1: 3.258e-03 	 Noimproved! in 40 tirals 	timeConsumed: 2.348e+00 mins
+Epoch: 2350 	 lr: 1.900e-03 	 Loss: 8.330e-03 	 Loss0: 1.007e+13 	 Loss1: 3.151e-03 	 Noimproved! in 50 tirals 	timeConsumed: 2.358e+00 mins
+Epoch: 2360 	 lr: 1.900e-03 	 Loss: 9.756e-03 	 Loss0: 3.476e+13 	 Loss1: 3.193e-03 	 Noimproved! in 60 tirals 	timeConsumed: 2.369e+00 mins
+Epoch: 2370 	 lr: 1.900e-03 	 Loss: 1.099e-02 	 Loss0: 3.587e+13 	 Loss1: 3.668e-03 	 Noimproved! in 70 tirals 	timeConsumed: 2.378e+00 mins
+Epoch: 2380 	 lr: 1.900e-03 	 Loss: 9.118e-03 	 Loss0: 1.598e+13 	 Loss1: 3.342e-03 	 Noimproved! in 80 tirals 	timeConsumed: 2.389e+00 mins
+Epoch: 2390 	 lr: 1.900e-03 	 Loss: 8.452e-03 	 Loss0: 1.547e+13 	 Loss1: 3.083e-03 	 Noimproved! in 90 tirals 	timeConsumed: 2.399e+00 mins
+Epoch: 2400 	 lr: 1.900e-03 	 Loss: 8.753e-03 	 Loss0: 2.138e+13 	 Loss1: 3.077e-03 	 Noimproved! in 100 tirals 	timeConsumed: 2.409e+00 mins
+Epoch: 2410 	 lr: 1.900e-03 	 Loss: 7.991e-03 	 Loss0: 1.493e+13 	 Loss1: 2.909e-03 	 Noimproved! in 110 tirals 	timeConsumed: 2.419e+00 mins
+Epoch: 2420 	 lr: 1.900e-03 	 Loss: 8.225e-03 	 Loss0: 1.499e+13 	 Loss1: 3.002e-03 	 Noimproved! in 120 tirals 	timeConsumed: 2.429e+00 mins
+Epoch: 2430 	 lr: 1.900e-03 	 Loss: 8.502e-03 	 Loss0: 2.002e+13 	 Loss1: 3.005e-03 	 Noimproved! in 130 tirals 	timeConsumed: 2.439e+00 mins
+Epoch: 2440 	 lr: 1.900e-03 	 Loss: 8.755e-03 	 Loss0: 1.450e+13 	 Loss1: 3.227e-03 	 Noimproved! in 140 tirals 	timeConsumed: 2.449e+00 mins
+Epoch: 2450 	 lr: 1.900e-03 	 Loss: 1.061e-02 	 Loss0: 4.439e+13 	 Loss1: 3.328e-03 	 Noimproved! in 150 tirals 	timeConsumed: 2.459e+00 mins
+Epoch: 2460 	 lr: 1.900e-03 	 Loss: 8.046e-03 	 Loss0: 9.523e+12 	 Loss1: 3.048e-03 	 Noimproved! in 160 tirals 	timeConsumed: 2.468e+00 mins
+Epoch: 2470 	 lr: 1.900e-03 	 Loss: 6.927e-03 	 Loss0: 4.884e+12 	 Loss1: 2.696e-03 	 Noimproved! in 170 tirals 	timeConsumed: 2.479e+00 mins
+Epoch: 2480 	 lr: 1.900e-03 	 Loss: 8.337e-03 	 Loss0: 2.144e+13 	 Loss1: 2.907e-03 	 Noimproved! in 180 tirals 	timeConsumed: 2.498e+00 mins
+Epoch: 2490 	 lr: 1.900e-03 	 Loss: 1.539e-02 	 Loss0: 8.565e+13 	 Loss1: 4.369e-03 	 Noimproved! in 190 tirals 	timeConsumed: 2.513e+00 mins
+Epoch: 2500 	 lr: 1.900e-03 	 Loss: 8.505e-03 	 Loss0: 8.157e+12 	 Loss1: 3.264e-03 	 Noimproved! in 200 tirals 	timeConsumed: 2.523e+00 mins
+Epoch: 2510 	 lr: 1.900e-03 	 Loss: 8.832e-03 	 Loss0: 1.086e+13 	 Loss1: 3.337e-03 	 Noimproved! in 210 tirals 	timeConsumed: 2.548e+00 mins
+Epoch: 2520 	 lr: 1.900e-03 	 Loss: 8.609e-03 	 Loss0: 5.121e+12 	 Loss1: 3.371e-03 	 Noimproved! in 220 tirals 	timeConsumed: 2.559e+00 mins
+Epoch: 2530 	 lr: 1.900e-03 	 Loss: 9.283e-03 	 Loss0: 1.414e+13 	 Loss1: 3.448e-03 	 Noimproved! in 230 tirals 	timeConsumed: 2.574e+00 mins
+Epoch: 2540 	 lr: 1.900e-03 	 Loss: 8.765e-03 	 Loss0: 1.098e+13 	 Loss1: 3.307e-03 	 Noimproved! in 240 tirals 	timeConsumed: 2.596e+00 mins
+Epoch: 2550 	 lr: 1.900e-03 	 Loss: 1.033e-02 	 Loss0: 3.572e+13 	 Loss1: 3.406e-03 	 Noimproved! in 250 tirals 	timeConsumed: 2.608e+00 mins
+Epoch: 2560 	 lr: 1.900e-03 	 Loss: 8.135e-03 	 Loss0: 1.094e+13 	 Loss1: 3.053e-03 	 Noimproved! in 260 tirals 	timeConsumed: 2.618e+00 mins
+Epoch: 2570 	 lr: 1.900e-03 	 Loss: 8.690e-03 	 Loss0: 2.680e+13 	 Loss1: 2.934e-03 	 Noimproved! in 270 tirals 	timeConsumed: 2.628e+00 mins
+Epoch: 2580 	 lr: 1.900e-03 	 Loss: 7.998e-03 	 Loss0: 5.984e+12 	 Loss1: 3.105e-03 	 Noimproved! in 280 tirals 	timeConsumed: 2.639e+00 mins
+Epoch: 2590 	 lr: 1.900e-03 	 Loss: 8.461e-03 	 Loss0: 1.078e+13 	 Loss1: 3.189e-03 	 Noimproved! in 290 tirals 	timeConsumed: 2.652e+00 mins
+Epoch: 2600 	 lr: 1.900e-03 	 Loss: 7.518e-03 	 Loss0: 7.032e+12 	 Loss1: 2.889e-03 	 Noimproved! in 300 tirals 	timeConsumed: 2.673e+00 mins
+Epoch: 2610 	 lr: 1.900e-03 	 Loss: 8.031e-03 	 Loss0: 1.310e+13 	 Loss1: 2.965e-03 	 Noimproved! in 310 tirals 	timeConsumed: 2.684e+00 mins
+Epoch: 2620 	 lr: 1.900e-03 	 Loss: 8.962e-03 	 Loss0: 1.934e+13 	 Loss1: 3.206e-03 	 Noimproved! in 320 tirals 	timeConsumed: 2.706e+00 mins
+Epoch: 2630 	 lr: 1.900e-03 	 Loss: 8.641e-03 	 Loss0: 1.166e+13 	 Loss1: 3.242e-03 	 Noimproved! in 330 tirals 	timeConsumed: 2.717e+00 mins
+Epoch: 2640 	 lr: 1.900e-03 	 Loss: 1.040e-02 	 Loss0: 4.453e+13 	 Loss1: 3.239e-03 	 Noimproved! in 340 tirals 	timeConsumed: 2.732e+00 mins
+Epoch: 2650 	 lr: 1.900e-03 	 Loss: 7.010e-03 	 Loss0: 4.017e+12 	 Loss1: 2.748e-03 	 Noimproved! in 350 tirals 	timeConsumed: 2.753e+00 mins
+Epoch: 2660 	 lr: 1.900e-03 	 Loss: 8.526e-03 	 Loss0: 1.157e+13 	 Loss1: 3.198e-03 	 Noimproved! in 360 tirals 	timeConsumed: 2.762e+00 mins
+Epoch: 2670 	 lr: 1.900e-03 	 Loss: 9.432e-03 	 Loss0: 3.934e+13 	 Loss1: 2.962e-03 	 Noimproved! in 370 tirals 	timeConsumed: 2.772e+00 mins
+Epoch: 2680 	 lr: 1.900e-03 	 Loss: 7.511e-03 	 Loss0: 7.414e+12 	 Loss1: 2.878e-03 	 Noimproved! in 380 tirals 	timeConsumed: 2.781e+00 mins
+Epoch: 2690 	 lr: 1.900e-03 	 Loss: 1.107e-02 	 Loss0: 2.083e+13 	 Loss1: 4.027e-03 	 Noimproved! in 390 tirals 	timeConsumed: 2.791e+00 mins
+Epoch: 2700 	 lr: 1.900e-03 	 Loss: 8.251e-03 	 Loss0: 1.209e+13 	 Loss1: 3.075e-03 	 Noimproved! in 400 tirals 	timeConsumed: 2.803e+00 mins
+Epoch: 2710 	 lr: 1.900e-03 	 Loss: 7.987e-03 	 Loss0: 1.030e+13 	 Loss1: 3.007e-03 	 Noimproved! in 410 tirals 	timeConsumed: 2.826e+00 mins
+Epoch: 2720 	 lr: 1.900e-03 	 Loss: 8.183e-03 	 Loss0: 2.012e+13 	 Loss1: 2.873e-03 	 Noimproved! in 420 tirals 	timeConsumed: 2.853e+00 mins
+Epoch: 2730 	 lr: 1.900e-03 	 Loss: 9.841e-03 	 Loss0: 2.334e+13 	 Loss1: 3.474e-03 	 Noimproved! in 430 tirals 	timeConsumed: 2.866e+00 mins
+Epoch: 2740 	 lr: 1.900e-03 	 Loss: 1.204e-02 	 Loss0: 3.036e+13 	 Loss1: 4.213e-03 	 Noimproved! in 440 tirals 	timeConsumed: 2.894e+00 mins
+Epoch: 2750 	 lr: 1.900e-03 	 Loss: 8.243e-03 	 Loss0: 1.211e+13 	 Loss1: 3.072e-03 	 Noimproved! in 450 tirals 	timeConsumed: 2.904e+00 mins
+Epoch: 2760 	 lr: 1.900e-03 	 Loss: 9.579e-03 	 Loss0: 1.541e+13 	 Loss1: 3.540e-03 	 Noimproved! in 460 tirals 	timeConsumed: 2.914e+00 mins
+Epoch: 2770 	 lr: 1.900e-03 	 Loss: 8.805e-03 	 Loss0: 1.142e+13 	 Loss1: 3.314e-03 	 Noimproved! in 470 tirals 	timeConsumed: 2.933e+00 mins
+Epoch: 2780 	 lr: 1.900e-03 	 Loss: 9.945e-03 	 Loss0: 3.338e+13 	 Loss1: 3.299e-03 	 Noimproved! in 480 tirals 	timeConsumed: 2.945e+00 mins
+Epoch: 2790 	 lr: 1.900e-03 	 Loss: 9.469e-03 	 Loss0: 2.149e+13 	 Loss1: 3.364e-03 	 Noimproved! in 490 tirals 	timeConsumed: 2.957e+00 mins
+Epoch: 2800 	 lr: 1.900e-03 	 Loss: 7.936e-03 	 Loss0: 1.205e+13 	 Loss1: 2.949e-03 	 Noimproved! in 500 tirals 	timeConsumed: 2.972e+00 mins
+Epoch: 2810 	 lr: 1.900e-03 	 Loss: 7.452e-03 	 Loss0: 7.983e+12 	 Loss1: 2.841e-03 	 Noimproved! in 510 tirals 	timeConsumed: 2.996e+00 mins
+Epoch: 2820 	 lr: 1.900e-03 	 Loss: 9.208e-03 	 Loss0: 3.461e+13 	 Loss1: 2.974e-03 	 Noimproved! in 520 tirals 	timeConsumed: 3.007e+00 mins
+Epoch: 2830 	 lr: 1.900e-03 	 Loss: 7.806e-03 	 Loss0: 5.355e+12 	 Loss1: 3.041e-03 	 Noimproved! in 530 tirals 	timeConsumed: 3.017e+00 mins
+Epoch: 2840 	 lr: 1.900e-03 	 Loss: 8.135e-03 	 Loss0: 1.349e+13 	 Loss1: 2.998e-03 	 Noimproved! in 540 tirals 	timeConsumed: 3.027e+00 mins
+Epoch: 2850 	 lr: 1.900e-03 	 Loss: 7.703e-03 	 Loss0: 8.409e+12 	 Loss1: 2.933e-03 	 Noimproved! in 550 tirals 	timeConsumed: 3.038e+00 mins
+Epoch: 2860 	 lr: 1.900e-03 	 Loss: 7.482e-03 	 Loss0: 1.619e+13 	 Loss1: 2.675e-03 	 Noimproved! in 560 tirals 	timeConsumed: 3.048e+00 mins
+Epoch: 2870 	 lr: 1.900e-03 	 Loss: 9.588e-03 	 Loss0: 2.715e+13 	 Loss1: 3.289e-03 	 Noimproved! in 570 tirals 	timeConsumed: 3.058e+00 mins
+Epoch: 2880 	 lr: 1.900e-03 	 Loss: 8.348e-03 	 Loss0: 1.913e+13 	 Loss1: 2.962e-03 	 Noimproved! in 580 tirals 	timeConsumed: 3.084e+00 mins
+Epoch: 2890 	 lr: 1.900e-03 	 Loss: 7.632e-03 	 Loss0: 1.464e+13 	 Loss1: 2.770e-03 	 Noimproved! in 590 tirals 	timeConsumed: 3.099e+00 mins
+Epoch: 2900 	 lr: 1.900e-03 	 Loss: 8.686e-03 	 Loss0: 1.020e+13 	 Loss1: 3.292e-03 	 Noimproved! in 600 tirals 	timeConsumed: 3.110e+00 mins
+Epoch: 2910 	 lr: 1.900e-03 	 Loss: 1.142e-02 	 Loss0: 2.887e+13 	 Loss1: 3.992e-03 	 Noimproved! in 610 tirals 	timeConsumed: 3.121e+00 mins
+Epoch: 2920 	 lr: 1.900e-03 	 Loss: 8.603e-03 	 Loss0: 1.975e+13 	 Loss1: 3.051e-03 	 Noimproved! in 620 tirals 	timeConsumed: 3.138e+00 mins
+Epoch: 2930 	 lr: 1.900e-03 	 Loss: 7.173e-03 	 Loss0: 1.032e+13 	 Loss1: 2.678e-03 	 Noimproved! in 630 tirals 	timeConsumed: 3.157e+00 mins
+Epoch: 2940 	 lr: 1.900e-03 	 Loss: 9.046e-03 	 Loss0: 2.694e+13 	 Loss1: 3.075e-03 	 Noimproved! in 640 tirals 	timeConsumed: 3.170e+00 mins
+Epoch: 2950 	 lr: 1.900e-03 	 Loss: 7.768e-03 	 Loss0: 1.557e+13 	 Loss1: 2.805e-03 	 Noimproved! in 650 tirals 	timeConsumed: 3.179e+00 mins
+Epoch: 2960 	 lr: 1.900e-03 	 Loss: 7.508e-03 	 Loss0: 8.581e+12 	 Loss1: 2.851e-03 	 Noimproved! in 660 tirals 	timeConsumed: 3.189e+00 mins
+Epoch: 2970 	 lr: 1.900e-03 	 Loss: 7.536e-03 	 Loss0: 1.110e+13 	 Loss1: 2.807e-03 	 Noimproved! in 670 tirals 	timeConsumed: 3.198e+00 mins
+Epoch: 2980 	 lr: 1.900e-03 	 Loss: 8.331e-03 	 Loss0: 2.020e+13 	 Loss1: 2.932e-03 	 Noimproved! in 680 tirals 	timeConsumed: 3.209e+00 mins
+Epoch: 2990 	 lr: 1.900e-03 	 Loss: 8.819e-03 	 Loss0: 1.634e+13 	 Loss1: 3.213e-03 	 Noimproved! in 690 tirals 	timeConsumed: 3.219e+00 mins
+Epoch: 3000 	 lr: 1.900e-03 	 Loss: 7.956e-03 	 Loss0: 1.211e+13 	 Loss1: 2.955e-03 	 Noimproved! in 700 tirals 	timeConsumed: 3.229e+00 mins
+Epoch: 3010 	 lr: 1.900e-03 	 Loss: 8.713e-03 	 Loss0: 1.676e+13 	 Loss1: 3.161e-03 	 Noimproved! in 710 tirals 	timeConsumed: 3.240e+00 mins
+Epoch: 3020 	 lr: 1.900e-03 	 Loss: 8.336e-03 	 Loss0: 2.439e+13 	 Loss1: 2.843e-03 	 Noimproved! in 720 tirals 	timeConsumed: 3.250e+00 mins
+Epoch: 3030 	 lr: 1.900e-03 	 Loss: 1.050e-02 	 Loss0: 5.131e+13 	 Loss1: 3.133e-03 	 Noimproved! in 730 tirals 	timeConsumed: 3.260e+00 mins
+Epoch: 3040 	 lr: 1.900e-03 	 Loss: 7.508e-03 	 Loss0: 1.154e+13 	 Loss1: 2.787e-03 	 Noimproved! in 740 tirals 	timeConsumed: 3.270e+00 mins
+Epoch: 3050 	 lr: 1.900e-03 	 Loss: 7.915e-03 	 Loss0: 1.306e+13 	 Loss1: 2.918e-03 	 Noimproved! in 750 tirals 	timeConsumed: 3.284e+00 mins
+Epoch: 3060 	 lr: 1.900e-03 	 Loss: 1.103e-02 	 Loss0: 3.489e+13 	 Loss1: 3.706e-03 	 Noimproved! in 760 tirals 	timeConsumed: 3.294e+00 mins
+Epoch: 3070 	 lr: 1.900e-03 	 Loss: 9.209e-03 	 Loss0: 2.370e+13 	 Loss1: 3.211e-03 	 Noimproved! in 770 tirals 	timeConsumed: 3.303e+00 mins
+Epoch: 3080 	 lr: 1.900e-03 	 Loss: 8.621e-03 	 Loss0: 9.360e+12 	 Loss1: 3.284e-03 	 Noimproved! in 780 tirals 	timeConsumed: 3.313e+00 mins
+Epoch: 3090 	 lr: 1.900e-03 	 Loss: 8.038e-03 	 Loss0: 1.571e+13 	 Loss1: 2.911e-03 	 Noimproved! in 790 tirals 	timeConsumed: 3.325e+00 mins
+Epoch: 3100 	 lr: 1.900e-03 	 Loss: 9.248e-03 	 Loss0: 2.619e+13 	 Loss1: 3.173e-03 	 Noimproved! in 800 tirals 	timeConsumed: 3.338e+00 mins
+Epoch: 3110 	 lr: 1.900e-03 	 Loss: 1.036e-02 	 Loss0: 4.257e+13 	 Loss1: 3.267e-03 	 Noimproved! in 810 tirals 	timeConsumed: 3.348e+00 mins
+Epoch: 3120 	 lr: 1.900e-03 	 Loss: 7.702e-03 	 Loss0: 1.439e+13 	 Loss1: 2.803e-03 	 Noimproved! in 820 tirals 	timeConsumed: 3.358e+00 mins
+Epoch: 3130 	 lr: 1.900e-03 	 Loss: 7.386e-03 	 Loss0: 6.599e+12 	 Loss1: 2.844e-03 	 Noimproved! in 830 tirals 	timeConsumed: 3.368e+00 mins
+Epoch: 3140 	 lr: 1.900e-03 	 Loss: 7.646e-03 	 Loss0: 1.082e+13 	 Loss1: 2.858e-03 	 Noimproved! in 840 tirals 	timeConsumed: 3.379e+00 mins
+Epoch: 3150 	 lr: 1.900e-03 	 Loss: 8.452e-03 	 Loss0: 1.313e+13 	 Loss1: 3.134e-03 	 Noimproved! in 850 tirals 	timeConsumed: 3.389e+00 mins

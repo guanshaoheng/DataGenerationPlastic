@@ -1,0 +1,46 @@
+--------------------------------------------------------------------------------
+2022/01/18  13:55:18
+PatienceNum:	50
+Save path:	misesModel\dddd_data_Noscaled
+Model architecture:	 Net(
+  (layers): ModuleList(
+    (0): Linear(in_features=9, out_features=20, bias=True)
+    (1): Linear(in_features=20, out_features=20, bias=True)
+    (2): Linear(in_features=20, out_features=20, bias=True)
+    (3): Linear(in_features=20, out_features=1, bias=True)
+  )
+  (activation): SSP(beta=1, threshold=20)
+)
+Optimizer:	Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.002
+    lr: 0.002
+    weight_decay: 0
+)
+Number of training samples:	5000
+--------------------------------------------------------------------------------
+Epoch: 0 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Improved! 	timeConsumed: 5.568e-03 mins
+Epoch: 10 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 10 tirals 	timeConsumed: 1.554e-02 mins
+Epoch: 20 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 20 tirals 	timeConsumed: 2.543e-02 mins
+Epoch: 30 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 30 tirals 	timeConsumed: 3.535e-02 mins
+Epoch: 40 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 40 tirals 	timeConsumed: 4.526e-02 mins
+Epoch: 50 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 50 tirals 	timeConsumed: 5.532e-02 mins
+Epoch: 60 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 60 tirals 	timeConsumed: 6.527e-02 mins
+Epoch: 70 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 70 tirals 	timeConsumed: 7.478e-02 mins
+Epoch: 80 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 80 tirals 	timeConsumed: 8.417e-02 mins
+Epoch: 90 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 90 tirals 	timeConsumed: 9.388e-02 mins
+Epoch: 100 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 100 tirals 	timeConsumed: 1.038e-01 mins
+Epoch: 110 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 110 tirals 	timeConsumed: 1.136e-01 mins
+Epoch: 120 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 120 tirals 	timeConsumed: 1.234e-01 mins
+Epoch: 130 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 130 tirals 	timeConsumed: 1.335e-01 mins
+Epoch: 140 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 140 tirals 	timeConsumed: 1.433e-01 mins
+Epoch: 150 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 150 tirals 	timeConsumed: 1.531e-01 mins
+Epoch: 160 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 160 tirals 	timeConsumed: 1.621e-01 mins
+Epoch: 170 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 170 tirals 	timeConsumed: 1.715e-01 mins
+Epoch: 180 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 180 tirals 	timeConsumed: 1.815e-01 mins
+Epoch: 190 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 190 tirals 	timeConsumed: 1.914e-01 mins
+Epoch: 200 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 200 tirals 	timeConsumed: 2.018e-01 mins
+Epoch: 210 	 lr: 2.000e-03 	 Loss: 1.637e+17 	 Loss0: 1.637e+17 	 Loss1: 4.143e-01 	 Noimproved! in 210 tirals 	timeConsumed: 2.123e-01 mins

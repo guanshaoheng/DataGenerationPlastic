@@ -2,61 +2,71 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 
 
 class GuanssianRandomPath:
     """
         Used for random loading path generation via Gaussian Process method
     """
-    def __init__(self, curlDegree, amplitudeValue, showFlag=False, generatingNum=0, maxEpsilonLimitation=0.8):
+    def __init__(self, curlDegree, amplitudeValue, showFlag=False, maxEpsilonLimitation=0.8,
+                 numberPerSamples=3, numberOfPoints=1000, meanValue=-1e5):
         self.seed = 10001
         np.random.seed(self.seed)
 
         self.showFlag = showFlag
-        self.generatingNum = generatingNum
         self.maxEpsilonLimitation = maxEpsilonLimitation
-        self.numberOfPoints = 1000
-        self.numberOfFuncutions = 3
+        self.numberOfPoints = numberOfPoints
+        self.numberOfFuncutions = numberPerSamples
 
         self.curlDegree = curlDegree  # 1~5
         self.amplitudeValue = amplitudeValue  # generally 0.25
         self.amplitude = np.linspace(0, self.amplitudeValue, int(self.numberOfPoints))
-        self.x = self.curlDegree*np.linspace(0, 1., self.numberOfPoints)[:, np.newaxis]
-        self.meanValue = -0.
+        self.meanValue = -meanValue
+        self.x = np.abs(self.meanValue)*self.curlDegree*np.linspace(0, 1., self.numberOfPoints)[:, np.newaxis]
         self.cov = self.CovarienceMatrix(self.x, self.x)*self.amplitude
 
         self.y = np.random.multivariate_normal(mean=np.ones(self.numberOfPoints)*self.meanValue,
                                                cov=self.cov,
                                                size=self.numberOfFuncutions)
+
+        self.confiningPreussure = []
         if self.showFlag:
             self.plotPaths()
             self.plotCovarianceMatrix(kernel=self.cov, curl=self.curlDegree)
 
-        if self.generatingNum > 0:
-            self.generation()
+        # if self.generatingNum > 0:
+        #     self.generation()
 
-    def generation(self):
+    def generation(self, generatingNum):
         print()
         print('='*80)
         print('\t Loading path generation ...')
         i = 0
         numSample = 0
-        while numSample < self.generatingNum:
+        while numSample < generatingNum:
             print('\t\tPath random % d seed %d' % (numSample, i))
             self.seed = i
             np.random.seed(self.seed)
-            self.y = np.random.multivariate_normal(mean=np.ones(self.numberOfPoints)*self.meanValue,
-                                               cov=self.cov,
-                                               size=self.numberOfFuncutions)
+            self.y = np.random.multivariate_normal(
+                mean=np.ones(self.numberOfPoints)*self.meanValue,
+                cov=self.cov,
+                size=self.numberOfFuncutions)
             maxEpsilon = np.max(np.abs(self.y))
-            if maxEpsilon > self.maxEpsilonLimitation:
+            if maxEpsilon > self.maxEpsilonLimitation and self.numberOfFuncutions == 3:
                 i += 1
                 continue
             else:
-                # self.plotPaths(path='MCCData')
-                self.writeDownPaths(numSample)
+                if self.numberOfFuncutions == 3:
+                    self.plotPaths(path='MCCData')
+                    self.writeDownPaths(numSample)
+                else:
+                    self.plotPaths(path='ConfiningPressure')
+                    self.confiningPreussure.append(self.y.T)
                 i += 1
                 numSample += 1
+        if self.numberOfFuncutions == 1:
+            self.writeDownPaths(numSample)
 
     def CovarienceMatrix(self, x, y):
         """
@@ -76,10 +86,21 @@ class GuanssianRandomPath:
     def plotCovarianceMatrix(self, kernel, curl):
         numberOfticksInFigure = 11
         interval = int(len(kernel)/numberOfticksInFigure)
-        ax = sns.heatmap(kernel, xticklabels=interval, yticklabels=interval, cmap="YlGnBu")
+        # interval = np.linspace(0.001, 1., 1000)
+        # x_tick = interval
+        # y_tick = interval
+        # data = kernel
+        # pd_data = pd.DataFrame(data, index=y_tick, columns=x_tick)
+        # ax = sns.heatmap(pd_data, xticklabels=50, cmap="YlGnBu")
+        ax = sns.heatmap(kernel, xticklabels=[], yticklabels=[], cmap="YlGnBu")
         plt.title('Degree of curl = %.2f' % curl)
+
         plt.tight_layout()
-        plt.savefig('./figSav/CovariabceHeatMap_curl%d.png' % curl, dpi=200)
+        if self.numberOfFuncutions == 3:
+            plt.savefig('./figSav/CovariabceHeatMap_curl%d_new.png' % curl, dpi=200)
+        else:
+            plt.savefig('./ConfiningPressure/CovariabceHeatMap_curl%d_new.png' % curl, dpi=200)
+        plt.close()
 
     def plotPaths(self, path='figSav'):
         # Plot the sampled functions
@@ -101,11 +122,17 @@ class GuanssianRandomPath:
         plt.close()
 
     def writeDownPaths(self, numSample):
-        filePath = './MCCData/path_%d.dat' % numSample
-        np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header='epsilon_xx, epsilon_yy, epsilon_xy')
+        if self.numberOfFuncutions == 3:
+            filePath = './MCCData/path_%d.dat' % numSample
+            np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header='epsilon_xx, epsilon_yy, epsilon_xy')
+        elif self.numberOfFuncutions == 1:
+            filePath = './ConfiningPressure/ConfiningPressurePath.dat'
+            np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header=' '.join(['%d' % i for i in range(numSample)]))
 
 
-gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.15, generatingNum=50)  # generally 1~5, 0.25
-
+if __name__ == "__main__":
+    gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.15, showFlag=True, numberPerSamples=3, meanValue=-1e5,
+                                   numberOfPoints=100)  # generally 1~5, 0.25
+    gaussian.generation(generatingNum=1)
 
 

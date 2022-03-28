@@ -1,0 +1,183 @@
+--------------------------------------------------------------------------------
+2022/01/17  16:46:39
+PatienceNum:	20
+Save path:	misesModel\ddmdmd
+Model architecture:	 Net(
+  (layers): ModuleList(
+    (0): Linear(in_features=3, out_features=100, bias=True)
+    (1): Linear(in_features=100, out_features=100, bias=True)
+    (2): Linear(in_features=100, out_features=100, bias=True)
+    (3): Linear(in_features=100, out_features=100, bias=True)
+    (4): Linear(in_features=100, out_features=100, bias=True)
+    (5): Linear(in_features=100, out_features=1, bias=True)
+  )
+)
+Optimizer:	NAdam (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    lr: 0.002
+    momentum_decay: 0.004
+    weight_decay: 0
+)
+Number of training samples:	1000
+--------------------------------------------------------------------------------
+Epoch: 0 	 Error: 3.790e-01 	 Improved! 	timeConsumed: 3.500e-02 mins
+Epoch: 1000 	 Error: 7.045e-03 	 Improved! 	timeConsumed: 1.177e-01 mins
+Epoch: 2000 	 Error: 6.869e-03 	 Improved! 	timeConsumed: 1.983e-01 mins
+Epoch: 3000 	 Error: 6.195e-03 	 Improved! 	timeConsumed: 2.786e-01 mins
+Epoch: 4000 	 Error: 6.060e-03 	 Improved! 	timeConsumed: 3.593e-01 mins
+Epoch: 5000 	 Error: 6.031e-03 	 Improved! 	timeConsumed: 4.388e-01 mins
+Epoch: 6000 	 Error: 5.874e-03 	 Improved! 	timeConsumed: 5.183e-01 mins
+Epoch: 7000 	 Error: 5.109e-03 	 Improved! 	timeConsumed: 5.991e-01 mins
+Epoch: 8000 	 Error: 4.970e-03 	 Improved! 	timeConsumed: 6.797e-01 mins
+Epoch: 9000 	 Error: 4.903e-03 	 Improved! 	timeConsumed: 7.589e-01 mins
+Epoch: 10000 	 Error: 4.812e-03 	 Improved! 	timeConsumed: 8.392e-01 mins
+Epoch: 11000 	 Error: 4.092e-03 	 Improved! 	timeConsumed: 9.212e-01 mins
+Epoch: 12000 	 Error: 3.720e-03 	 Improved! 	timeConsumed: 1.001e+00 mins
+Epoch: 13000 	 Error: 3.450e-03 	 Improved! 	timeConsumed: 1.082e+00 mins
+Epoch: 14000 	 Error: 3.021e-03 	 Improved! 	timeConsumed: 1.163e+00 mins
+Epoch: 15000 	 Error: 3.052e-03 	 Noimproved! in 1000 tirals 	timeConsumed: 1.247e+00 mins
+Epoch: 16000 	 Error: 3.104e-03 	 Noimproved! in 2000 tirals 	timeConsumed: 1.325e+00 mins
+Epoch: 17000 	 Error: 2.304e-03 	 Improved! 	timeConsumed: 1.404e+00 mins
+Epoch: 18000 	 Error: 2.186e-03 	 Improved! 	timeConsumed: 1.484e+00 mins
+Epoch: 19000 	 Error: 2.758e-03 	 Noimproved! in 1000 tirals 	timeConsumed: 1.564e+00 mins
+Epoch: 20000 	 Error: 2.223e-03 	 Noimproved! in 2000 tirals 	timeConsumed: 1.645e+00 mins
+Epoch: 21000 	 Error: 2.092e-03 	 Improved! 	timeConsumed: 1.727e+00 mins
+Epoch: 22000 	 Error: 1.993e-03 	 Improved! 	timeConsumed: 1.807e+00 mins
+Epoch: 23000 	 Error: 1.597e-03 	 Improved! 	timeConsumed: 1.888e+00 mins
+Epoch: 24000 	 Error: 1.628e-03 	 Noimproved! in 1000 tirals 	timeConsumed: 1.970e+00 mins
+Epoch: 25000 	 Error: 1.244e-03 	 Improved! 	timeConsumed: 2.051e+00 mins
+Epoch: 26000 	 Error: 1.436e-03 	 Noimproved! in 1000 tirals 	timeConsumed: 2.133e+00 mins
+Epoch: 27000 	 Error: 1.170e-03 	 Improved! 	timeConsumed: 2.212e+00 mins
+Epoch: 28000 	 Error: 1.118e-03 	 Improved! 	timeConsumed: 2.293e+00 mins
+Epoch: 29000 	 Error: 1.185e-03 	 Noimproved! in 1000 tirals 	timeConsumed: 2.375e+00 mins
+Epoch: 30000 	 Error: 1.088e-03 	 Improved! 	timeConsumed: 2.454e+00 mins
+Epoch: 31000 	 Error: 1.026e-03 	 Improved! 	timeConsumed: 2.535e+00 mins
+Epoch: 32000 	 Error: 9.024e-04 	 Improved! 	timeConsumed: 2.617e+00 mins
+Epoch: 33000 	 Error: 1.012e-03 	 Noimproved! in 1000 tirals 	timeConsumed: 2.697e+00 mins
+Epoch: 34000 	 Error: 8.743e-04 	 Improved! 	timeConsumed: 2.780e+00 mins
+Epoch: 35000 	 Error: 8.761e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 2.862e+00 mins
+Epoch: 36000 	 Error: 8.623e-04 	 Improved! 	timeConsumed: 2.941e+00 mins
+Epoch: 37000 	 Error: 8.367e-04 	 Improved! 	timeConsumed: 3.023e+00 mins
+Epoch: 38000 	 Error: 8.295e-04 	 Improved! 	timeConsumed: 3.104e+00 mins
+Epoch: 39000 	 Error: 7.936e-04 	 Improved! 	timeConsumed: 3.184e+00 mins
+Epoch: 40000 	 Error: 8.301e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 3.265e+00 mins
+Epoch: 41000 	 Error: 7.903e-04 	 Improved! 	timeConsumed: 3.347e+00 mins
+Epoch: 42000 	 Error: 6.656e-04 	 Improved! 	timeConsumed: 3.430e+00 mins
+Epoch: 43000 	 Error: 7.090e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 3.510e+00 mins
+Epoch: 44000 	 Error: 8.121e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 3.591e+00 mins
+Epoch: 45000 	 Error: 7.789e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 3.670e+00 mins
+Epoch: 46000 	 Error: 6.135e-04 	 Improved! 	timeConsumed: 3.752e+00 mins
+Epoch: 47000 	 Error: 6.944e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 3.832e+00 mins
+Epoch: 48000 	 Error: 7.494e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 3.911e+00 mins
+Epoch: 49000 	 Error: 5.601e-04 	 Improved! 	timeConsumed: 3.991e+00 mins
+Epoch: 50000 	 Error: 5.206e-04 	 Improved! 	timeConsumed: 4.082e+00 mins
+Epoch: 51000 	 Error: 5.746e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 4.164e+00 mins
+Epoch: 52000 	 Error: 6.372e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 4.245e+00 mins
+Epoch: 53000 	 Error: 5.996e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 4.327e+00 mins
+Epoch: 54000 	 Error: 4.940e-04 	 Improved! 	timeConsumed: 4.407e+00 mins
+Epoch: 55000 	 Error: 7.174e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 4.488e+00 mins
+Epoch: 56000 	 Error: 7.672e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 4.567e+00 mins
+Epoch: 57000 	 Error: 4.923e-04 	 Improved! 	timeConsumed: 4.648e+00 mins
+Epoch: 58000 	 Error: 6.333e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 4.731e+00 mins
+Epoch: 59000 	 Error: 5.683e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 4.812e+00 mins
+Epoch: 60000 	 Error: 9.750e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 4.892e+00 mins
+Epoch: 61000 	 Error: 7.640e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 4.974e+00 mins
+Epoch: 62000 	 Error: 4.929e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 5.064e+00 mins
+Epoch: 63000 	 Error: 5.657e-04 	 Noimproved! in 6000 tirals 	timeConsumed: 5.144e+00 mins
+Epoch: 64000 	 Error: 4.935e-04 	 Noimproved! in 7000 tirals 	timeConsumed: 5.224e+00 mins
+Epoch: 65000 	 Error: 4.529e-04 	 Improved! 	timeConsumed: 5.303e+00 mins
+Epoch: 66000 	 Error: 5.079e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 5.384e+00 mins
+Epoch: 67000 	 Error: 5.969e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 5.460e+00 mins
+Epoch: 68000 	 Error: 4.475e-04 	 Improved! 	timeConsumed: 5.546e+00 mins
+Epoch: 69000 	 Error: 4.388e-04 	 Improved! 	timeConsumed: 5.628e+00 mins
+Epoch: 70000 	 Error: 4.377e-04 	 Improved! 	timeConsumed: 5.710e+00 mins
+Epoch: 71000 	 Error: 4.168e-04 	 Improved! 	timeConsumed: 5.792e+00 mins
+Epoch: 72000 	 Error: 4.895e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 5.876e+00 mins
+Epoch: 73000 	 Error: 3.838e-04 	 Improved! 	timeConsumed: 5.958e+00 mins
+Epoch: 74000 	 Error: 4.790e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 6.041e+00 mins
+Epoch: 75000 	 Error: 3.398e-04 	 Improved! 	timeConsumed: 6.125e+00 mins
+Epoch: 76000 	 Error: 4.046e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 6.207e+00 mins
+Epoch: 77000 	 Error: 4.170e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 6.289e+00 mins
+Epoch: 78000 	 Error: 4.008e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 6.371e+00 mins
+Epoch: 79000 	 Error: 5.790e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 6.451e+00 mins
+Epoch: 80000 	 Error: 3.390e-04 	 Improved! 	timeConsumed: 6.534e+00 mins
+Epoch: 81000 	 Error: 8.101e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 6.617e+00 mins
+Epoch: 82000 	 Error: 3.985e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 6.696e+00 mins
+Epoch: 83000 	 Error: 3.428e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 6.777e+00 mins
+Epoch: 84000 	 Error: 3.719e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 6.859e+00 mins
+Epoch: 85000 	 Error: 4.539e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 6.939e+00 mins
+Epoch: 86000 	 Error: 3.283e-04 	 Improved! 	timeConsumed: 7.020e+00 mins
+Epoch: 87000 	 Error: 4.120e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 7.102e+00 mins
+Epoch: 88000 	 Error: 3.516e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 7.183e+00 mins
+Epoch: 89000 	 Error: 3.467e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 7.265e+00 mins
+Epoch: 90000 	 Error: 3.459e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 7.348e+00 mins
+Epoch: 91000 	 Error: 3.505e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 7.431e+00 mins
+Epoch: 92000 	 Error: 3.336e-04 	 Noimproved! in 6000 tirals 	timeConsumed: 7.513e+00 mins
+Epoch: 93000 	 Error: 3.908e-04 	 Noimproved! in 7000 tirals 	timeConsumed: 7.596e+00 mins
+Epoch: 94000 	 Error: 3.740e-04 	 Noimproved! in 8000 tirals 	timeConsumed: 7.677e+00 mins
+Epoch: 95000 	 Error: 4.350e-04 	 Noimproved! in 9000 tirals 	timeConsumed: 7.759e+00 mins
+Epoch: 96000 	 Error: 3.024e-04 	 Improved! 	timeConsumed: 7.835e+00 mins
+Epoch: 97000 	 Error: 3.279e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 7.914e+00 mins
+Epoch: 98000 	 Error: 3.856e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 7.997e+00 mins
+Epoch: 99000 	 Error: 4.110e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 8.079e+00 mins
+Epoch: 100000 	 Error: 3.218e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 8.162e+00 mins
+Epoch: 101000 	 Error: 3.695e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 8.244e+00 mins
+Epoch: 102000 	 Error: 3.024e-04 	 Noimproved! in 6000 tirals 	timeConsumed: 8.327e+00 mins
+Epoch: 103000 	 Error: 3.502e-04 	 Noimproved! in 7000 tirals 	timeConsumed: 8.409e+00 mins
+Epoch: 104000 	 Error: 3.942e-04 	 Noimproved! in 8000 tirals 	timeConsumed: 8.491e+00 mins
+Epoch: 105000 	 Error: 3.095e-04 	 Noimproved! in 9000 tirals 	timeConsumed: 8.574e+00 mins
+Epoch: 106000 	 Error: 4.483e-04 	 Noimproved! in 10000 tirals 	timeConsumed: 8.656e+00 mins
+Epoch: 107000 	 Error: 3.509e-04 	 Noimproved! in 11000 tirals 	timeConsumed: 8.739e+00 mins
+Epoch: 108000 	 Error: 4.064e-04 	 Noimproved! in 12000 tirals 	timeConsumed: 8.819e+00 mins
+Epoch: 109000 	 Error: 3.843e-04 	 Noimproved! in 13000 tirals 	timeConsumed: 8.900e+00 mins
+Epoch: 110000 	 Error: 3.402e-04 	 Noimproved! in 14000 tirals 	timeConsumed: 8.981e+00 mins
+Epoch: 111000 	 Error: 2.620e-04 	 Improved! 	timeConsumed: 9.061e+00 mins
+Epoch: 112000 	 Error: 3.295e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 9.141e+00 mins
+Epoch: 113000 	 Error: 2.818e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 9.222e+00 mins
+Epoch: 114000 	 Error: 3.097e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 9.302e+00 mins
+Epoch: 115000 	 Error: 3.797e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 9.382e+00 mins
+Epoch: 116000 	 Error: 2.700e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 9.463e+00 mins
+Epoch: 117000 	 Error: 2.812e-04 	 Noimproved! in 6000 tirals 	timeConsumed: 9.546e+00 mins
+Epoch: 118000 	 Error: 3.291e-04 	 Noimproved! in 7000 tirals 	timeConsumed: 9.628e+00 mins
+Epoch: 119000 	 Error: 2.440e-04 	 Improved! 	timeConsumed: 9.711e+00 mins
+Epoch: 120000 	 Error: 2.441e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 9.793e+00 mins
+Epoch: 121000 	 Error: 2.715e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 9.873e+00 mins
+Epoch: 122000 	 Error: 3.440e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 9.955e+00 mins
+Epoch: 123000 	 Error: 2.737e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 1.004e+01 mins
+Epoch: 124000 	 Error: 2.292e-04 	 Improved! 	timeConsumed: 1.012e+01 mins
+Epoch: 125000 	 Error: 4.060e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 1.020e+01 mins
+Epoch: 126000 	 Error: 2.697e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 1.028e+01 mins
+Epoch: 127000 	 Error: 2.659e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 1.036e+01 mins
+Epoch: 128000 	 Error: 4.472e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 1.044e+01 mins
+Epoch: 129000 	 Error: 2.551e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 1.052e+01 mins
+Epoch: 130000 	 Error: 3.435e-04 	 Noimproved! in 6000 tirals 	timeConsumed: 1.060e+01 mins
+Epoch: 131000 	 Error: 2.536e-04 	 Noimproved! in 7000 tirals 	timeConsumed: 1.068e+01 mins
+Epoch: 132000 	 Error: 2.023e-04 	 Improved! 	timeConsumed: 1.076e+01 mins
+Epoch: 133000 	 Error: 2.805e-04 	 Noimproved! in 1000 tirals 	timeConsumed: 1.084e+01 mins
+Epoch: 134000 	 Error: 2.527e-04 	 Noimproved! in 2000 tirals 	timeConsumed: 1.092e+01 mins
+Epoch: 135000 	 Error: 2.094e-04 	 Noimproved! in 3000 tirals 	timeConsumed: 1.100e+01 mins
+Epoch: 136000 	 Error: 2.520e-04 	 Noimproved! in 4000 tirals 	timeConsumed: 1.108e+01 mins
+Epoch: 137000 	 Error: 2.480e-04 	 Noimproved! in 5000 tirals 	timeConsumed: 1.116e+01 mins
+Epoch: 138000 	 Error: 2.610e-04 	 Noimproved! in 6000 tirals 	timeConsumed: 1.124e+01 mins
+Epoch: 139000 	 Error: 2.547e-04 	 Noimproved! in 7000 tirals 	timeConsumed: 1.133e+01 mins
+Epoch: 140000 	 Error: 2.830e-04 	 Noimproved! in 8000 tirals 	timeConsumed: 1.141e+01 mins
+Epoch: 141000 	 Error: 6.711e-04 	 Noimproved! in 9000 tirals 	timeConsumed: 1.149e+01 mins
+Epoch: 142000 	 Error: 2.033e-04 	 Noimproved! in 10000 tirals 	timeConsumed: 1.157e+01 mins
+Epoch: 143000 	 Error: 3.223e-04 	 Noimproved! in 11000 tirals 	timeConsumed: 1.165e+01 mins
+Epoch: 144000 	 Error: 2.347e-04 	 Noimproved! in 12000 tirals 	timeConsumed: 1.174e+01 mins
+Epoch: 145000 	 Error: 2.252e-04 	 Noimproved! in 13000 tirals 	timeConsumed: 1.182e+01 mins
+Epoch: 146000 	 Error: 2.926e-04 	 Noimproved! in 14000 tirals 	timeConsumed: 1.190e+01 mins
+Epoch: 147000 	 Error: 2.192e-04 	 Noimproved! in 15000 tirals 	timeConsumed: 1.198e+01 mins
+Epoch: 148000 	 Error: 2.765e-04 	 Noimproved! in 16000 tirals 	timeConsumed: 1.207e+01 mins
+Epoch: 149000 	 Error: 3.904e-04 	 Noimproved! in 17000 tirals 	timeConsumed: 1.215e+01 mins
+Epoch: 150000 	 Error: 2.223e-04 	 Noimproved! in 18000 tirals 	timeConsumed: 1.223e+01 mins
+Epoch: 151000 	 Error: 2.758e-04 	 Noimproved! in 19000 tirals 	timeConsumed: 1.231e+01 mins
+Epoch: 152000 	 Error: 3.072e-04 	 Noimproved! in 20000 tirals 	timeConsumed: 1.240e+01 mins
+Epoch: 153000 	 Error: 2.568e-04 	 Noimproved! in 21000 tirals 	timeConsumed: 1.248e+01 mins
+
+--------------------------------------------------------------------------------
+Training Ended till trialNum: 21 >= patienceNum 20
+Epoch: 153000 	 Error: 2.568e-04 	 Noimproved! in 21000 tirals
+timeConsumed: 12.477 mins 
