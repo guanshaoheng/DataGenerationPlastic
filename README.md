@@ -48,19 +48,19 @@ There model is implemented under the guidance according to the paper (https://ww
 
 ### Resualts of the undrained compression
 
-e_0        |  Loading results
+e_0       |p0 |  Loading results
 :-------------------------:|:-------------------------------:
- 0.700, p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.700_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
- 0.747, p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.747_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
- 0.794, p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.794_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
- 0.841, p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.841_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
- 0.888, p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.888_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
- 0.935, p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.935_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+ 0.700 | p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.700_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+ 0.747 |  p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.747_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+ 0.794 |  p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.794_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+ 0.841 |  p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.841_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+ 0.888 |  p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.888_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+ 0.935 |  p0=1000kPa|<img src="CSUHresults\undrained_voidratio/Toyoura_e0_0.935_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
 
 
-e_0        |  Loading results
+e_0     | p0    |  Loading results
 :-------------------------:|:-------------------------------:
-  0.833, p0=100 kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_100.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
-  0.833, p0=1000kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
-  0.833, p0=2000kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_2000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
-  0.833, p0=3000kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_3000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+  0.833 |  p0=100 kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_100.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+  0.833 | p0=1000kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_1000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+  0.833 | p0=2000kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_2000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
+  0.833 |  p0=3000kPa|<img src="CSUHresults\undrained_pressure/Toyoura_e0_0.833_p0_3000.000kPa.png" alt="Undrained loading display" height="200" title="Undrained loading display"> 
