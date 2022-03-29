@@ -1,5 +1,6 @@
 # Data Generation
 - This repository is used to generate the training data for our upcoming physics-constrained neural network training.
+- Guassian process is involved for random loading path generation.
 - There 3 kinds of the elastoplastic model implemented here. 1. the model based on von-mises stress, iso-tropic exponential hardening and associated flow rule, 2. the modified Cam-Clay model, 3. the CSUH model.
 
 ## Gaussian process
