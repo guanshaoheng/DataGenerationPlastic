@@ -23,7 +23,10 @@ class GuanssianRandomPath:
         self.amplitudeValue = amplitudeValue  # generally 0.25
         self.amplitude = np.linspace(0, self.amplitudeValue, int(self.numberOfPoints))
         self.meanValue = -meanValue
-        self.x = np.abs(self.meanValue)*self.curlDegree*np.linspace(0, 1., self.numberOfPoints)[:, np.newaxis]
+        if meanValue!=0:
+            self.x = np.abs(self.meanValue)*self.curlDegree*np.linspace(0, 1., self.numberOfPoints)[:, np.newaxis]
+        else:
+            self.x = self.curlDegree*np.linspace(0, 1., self.numberOfPoints)[:, np.newaxis]
         self.cov = self.CovarienceMatrix(self.x, self.x)*self.amplitude
 
         self.y = np.random.multivariate_normal(mean=np.ones(self.numberOfPoints)*self.meanValue,
@@ -38,7 +41,7 @@ class GuanssianRandomPath:
         # if self.generatingNum > 0:
         #     self.generation()
 
-    def generation(self, generatingNum):
+    def generation(self, generatingNum, path):
         print()
         print('='*80)
         print('\t Loading path generation ...')
@@ -58,15 +61,15 @@ class GuanssianRandomPath:
                 continue
             else:
                 if self.numberOfFuncutions == 3:
-                    self.plotPaths(path='MCCData')
-                    self.writeDownPaths(numSample)
+                    self.plotPaths(path=path)
+                    self.writeDownPaths(numSample, self.curlDegree)
                 else:
-                    self.plotPaths(path='ConfiningPressure')
+                    self.plotPaths(path=path)
                     self.confiningPreussure.append(self.y.T)
                 i += 1
                 numSample += 1
         if self.numberOfFuncutions == 1:
-            self.writeDownPaths(numSample)
+            self.writeDownPaths(numSample, curlDegree=self.curlDegree)
 
     def CovarienceMatrix(self, x, y):
         """
@@ -121,18 +124,25 @@ class GuanssianRandomPath:
         plt.savefig(os.path.join(path, figName), dpi=200)
         plt.close()
 
-    def writeDownPaths(self, numSample):
+    def writeDownPaths(self, numSample, curlDegree):
         if self.numberOfFuncutions == 3:
-            filePath = './MCCData/path_%d.dat' % numSample
+            filePath = './vonmisesPaths/path_curlDegree%d_%d.dat' % (numSample, curlDegree)
             np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header='epsilon_xx, epsilon_yy, epsilon_xy')
         elif self.numberOfFuncutions == 1:
-            filePath = './ConfiningPressure/ConfiningPressurePath.dat'
+            filePath = './ConfiningPressure/ConfiningPressurePath_curlDegree%d.dat' % curlDegree
             np.savetxt(fname=filePath, X=self.y.T, fmt='%10.5f', delimiter=',', header=' '.join(['%d' % i for i in range(numSample)]))
 
 
 if __name__ == "__main__":
-    gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.15, showFlag=True, numberPerSamples=3, meanValue=-1e5,
-                                   numberOfPoints=100)  # generally 1~5, 0.25
-    gaussian.generation(generatingNum=1)
+    # confining pressure generation
+    # gaussian = GuanssianRandomPath(curlDegree=2, amplitudeValue=0.15, showFlag=True, numberPerSamples=3, meanValue=-1e5,
+    #                                numberOfPoints=100)  # generally 1~5, 0.25
+    # gaussian.generation(generatingNum=10, path='ConfiningPressure')
+
+    # loading path for von-mises model
+    for curlDegree in range(1, 6):
+        gaussian = GuanssianRandomPath(curlDegree=curlDegree, amplitudeValue=0.15, showFlag=True, numberPerSamples=3, meanValue=0.0,
+                                       numberOfPoints=1000)  # generally 1~5, 0.25
+        gaussian.generation(generatingNum=200, path='vonmisesPaths')
 
 
